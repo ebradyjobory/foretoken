@@ -1,15 +1,28 @@
-<h1>Main Menu</h1>
+<% @page_title = "Main Menu" %>
 
-<p>Welcome <%= @current_user.name  %></p>
-<p>You have <%= pluralize(@current_user.projects.size, 'project') %></p>
-<% @current_user.projects.each do |project| %>
-	<p><%= link_to project.name, :controller => 'forecast', :action => 'index', :project_id => project.id %>
-		<%= link_to 'Edit', {:controller => 'project', :action => 'edit', :id => project.id } %>
-		<%= link_to 'Delete', {:controller => 'project', :action => 'delete', :id => project.id } %>
-<%end%>	
 
+<div class="main-menu col-md-5">
+	<h1>Main Menu</h1>
+
+	<p>Welcome <%= @current_user.name  %>
+	<p>You have <%= pluralize(@current_user.projects.size, 'project') %></p>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+			  <th>Project Name</th>
+			</tr>
+		</thead>
+		</tbody>
+			<% @current_user.projects.each do |project| %>
+			  <tr>
+			    <td><%= link_to project.name, :controller => 'forecast', :action => 'index', :project_id => project.id %></td>
+				<td><%= link_to 'Edit', {:controller => 'project', :action => 'edit', :id => project.id }, :class=>"btn btn-success" %></td>
+				<td><%= link_to 'Delete', {:controller => 'project', :action => 'delete', :id => project.id }, :class=>"btn btn-danger" %></td>
+			  </tr>
+			<%end%>	
+		</tbody>
+    </table>
 <div>
-	<%= link_to "Create new project", :controller => 'project', :action => 'new', :user_id => @current_user.id %>
-	<%= link_to "Logout", :action => 'logout' %>
+	<%= link_to("Create new project", {:controller => 'project', :action => 'new', :user_id => @current_user.id}, :class => "btn btn-primary") %>
 </div>
 

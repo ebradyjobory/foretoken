@@ -1,6 +1,7 @@
 class ProjectController < ApplicationController
 
-	before_action :set_user
+	before_action :confirm_logged_in
+  before_action :set_user
 
   def index
   	@projects = @user.projects

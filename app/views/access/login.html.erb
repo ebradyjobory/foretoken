@@ -1,21 +1,17 @@
+<% @page_title = "Login" %>
+
+<div class="col-md-12 signin">
 <h1>Login</h1>
-<div>
-	<%= form_tag(:action => 'attempt_login') do |f| %>
-		<table>
-			<tbody>
-				<tr>
-					<td><%= label_tag(:profile_name) %></td>
-					<td><%= text_field_tag(:profile_name) %></td>
-				</tr>
-				<tr>
-					<td><%= label_tag(:password) %></td>
-					<td><%= password_field_tag(:password) %></td>
-				</tr>
-				<tr>
-					<td><%= submit_tag('Log In') %></td>
-				</tr>
-			</tbody>
-		</table>
+	<%= form_tag(:action => 'attempt_login', :class => "form-horizontal") do |f| %>
+				<div class="form-group">
+					<%= label_tag(:profile_name, "Username", :class=>"control-label") %>
+					<%= text_field_tag(:profile_name) %>
+				</div>
+				<div class="form-group">
+					<td><%= label_tag(:password) %>
+					<td><%= password_field_tag(:password, :class=>"control-label") %>
+				</div>
+			        <%= submit_tag('Log In', :class => "btn btn-primary") %>
 	<%end%>
-	<%= link_to 'Sign Up', :controller => 'user', :action => 'new' %>
+	<%= link_to 'Sign Up', {:controller => 'user', :action => 'new'}, :class => "btn btn-success" %>
 </div>

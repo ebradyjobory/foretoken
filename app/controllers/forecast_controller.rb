@@ -1,6 +1,8 @@
 class ForecastController < ApplicationController
 
+  before_action :confirm_logged_in
 	before_action :set_project
+  before_action :check_value, :only => [:index]
 
   def index
   	@forecasts = @project.forecasts
@@ -166,10 +168,15 @@ class ForecastController < ApplicationController
   	end	
   end
 
+  def check_value
+    if @project.forecasts.empty?
+      redirect_to(:action => 'new', :project_id => @project.id)
+    end
+  end
+
   def params_forecast
   	params.require(:forecast).permit(:year, :value)	
   end
-
 
 
 

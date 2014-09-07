@@ -2,6 +2,10 @@ class Forecast < ActiveRecord::Base
 
 	belongs_to :project
 
+	validates :year, :presence => true
+	validates :value, :presence => true
+
+
 	def project_forecast
 		@forecast_data = Forecast.where(:project_id => project_id)	
 	end

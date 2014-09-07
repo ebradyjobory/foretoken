@@ -1,6 +1,7 @@
 class FutureController < ApplicationController
 
-	before_action :set_project
+	before_action :confirm_logged_in
+  before_action :set_project
 
   def index
   	@futures = @project.futures

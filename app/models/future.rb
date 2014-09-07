@@ -2,6 +2,9 @@ class Future < ActiveRecord::Base
 
 	belongs_to :project
 
+	validates :future_year, :presence => true
+
+
 	def to_be_forcasted
 	    Future.where(:project_id => project.id)
 	end
