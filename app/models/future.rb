@@ -3,29 +3,28 @@ class Future < ActiveRecord::Base
 	belongs_to :project
 
 	def to_be_forcasted
-		to_be_forcasted = Future.where(:project_id => project.id)
+	    Future.where(:project_id => project.id)
 	end
 
 	def project_forecast
 		@forecast_data = Forecast.where(:project_id => project_id)	
 	end
 
-	def self.values
-		values = []
-		to_be_forcasted.each do |i|
-			values << i.forcasted
-		end
-		values	
-	end
+	# def self.values
+	# 	values = []
+	# 	to_be_forcasted.each do |i|
+	# 		values << i.forcasted
+	# 	end
+	# 	values	
+	# end
 
-	def self.future_years
-		years = []
-		to_be_forcasted.each do |i|
-			years << i.future_year
-		end
-		years	
-	end
-
+	# def self.future_years
+	# 	years = []
+	# 	to_be_forcasted.each do |i|
+	# 		years << i.future_year
+	# 	end
+	# 	years	
+	# end
 
 	def mean
 		values = []

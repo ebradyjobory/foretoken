@@ -10,34 +10,6 @@ class Forecast < ActiveRecord::Base
 		@future_data = Future.where(:project_id => project_id)
 	end
 
-	def self.total_values
-		actual_values = []
-	    forecasted_values = []
-	    input_data = Forecast.all
-	    future_data = Future.all
-		input_data.each do |i|
-			actual_values << i.value
-		end
-		future_data.each do |i|
-			forecasted_values << i.forecasted
-		end
-		total_values = actual_values + forecasted_values
-	end
-
-	def self.total_years
-		years = []
-		future_years = []
-		input_data = Forecast.all
-		input_data.each do |i|
-			years << i.year
-		end
-		futures = Future.all
-		futures.each do |j|
-			future_years << j.future_year
-		end
-		total_years = years + future_years
-	end
-
 	def self.regression
 		values = []
 		input_data = Forecast.all 

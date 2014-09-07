@@ -50,6 +50,9 @@
 
 <%= link_to("New", {:controller => 'future', :action => 'new', :project_id => @project.id }) %>
 
+
+
+<!-- Chat Area -->
 <script>
 $(document).ready(function() {
     var chart1 = new Highcharts.Chart({
@@ -60,7 +63,7 @@ $(document).ready(function() {
             text: 'Data Input'
         },
         xAxis: {
-            categories: <%= Forecast.total_years.each { |i| i.inspect } %>,
+            categories: <%= @total_years.each {|i| i.inspect}  %>,
             title: {
               text: "Time"
                 },
@@ -72,10 +75,10 @@ $(document).ready(function() {
         },
         series: [{
             name: "Input",
-            data: <%= Forecast.total_values.each { |i| i.inspect} %>
+            data: <%= @total_values.each { |i| i.inspect} %>
           }, {
             name: "Regression Line",
-            data: <%= Forecast.regression.each { |i| i.inspect} %>
+            data: <%= @regression.each { |i| i.inspect} %>
         }]
     });
 });
