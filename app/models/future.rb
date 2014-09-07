@@ -6,13 +6,13 @@ class Future < ActiveRecord::Base
 		to_be_forcasted = Future.all
 	end
 
-	def self.revenues
-		revenues = []
+	def self.values
+		values = []
 		futures = Future.all
 		futures.each do |i|
-			revenues << i.forcasted
+			values << i.forcasted
 		end
-		revenues	
+		values	
 	end
 
 	def self.future_years
@@ -27,15 +27,15 @@ class Future < ActiveRecord::Base
 
 	def mean
 		forecasts = Forecast.all
-		revenues = []
+		values = []
 
 		forecasts.each do |i|
-			revenues << i.revenue
+			values << i.value
 		end		
 		
 		sum = 0
-		revenues.each { |i| sum += i }	
-		mean = sum / revenues.length
+		values.each { |i| sum += i }	
+		mean = sum / values.length
 	end
 
 	def tbar
@@ -96,7 +96,7 @@ class Future < ActiveRecord::Base
 			# time = id
 	end
 
-	def forcasted
+	def forecasted
 		b0 + (b1 * time)
 	end
 

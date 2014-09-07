@@ -1,3 +1,4 @@
+<h1>Input Data to Start Forecasting </h1>
 <%= form_for(:forecast, :url => { :action => 'create', :project_id => @project.id }) do |f| %>
 
 	<%= render(:partial => 'form', :locals => {:f => f }) %>

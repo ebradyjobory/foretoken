@@ -1,3 +1,118 @@
+
+<%= link_to('Back to Main Menu', :controller => 'access', :action => 'index') %>
+<table>
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Data</th>
+          <th>Time(t)</th>
+          <th>X - Xbar</th>
+          <th>t - tbar</th>
+          <th>(X - Xbar)(t - tbar)</th>
+          <th>(t - tbar)^2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @forecasts.each do |forecast| %>
+          <tr>
+            <td><%= forecast.year %></td>
+            <td><%= forecast.value %></td>
+            <td><%= forecast.time %></td>
+            <td><%= forecast.xxbar %></td>
+            <td><%= forecast.ttbar %></td>
+            <td><%= forecast.xxbar_ttbar %></td>
+            <td><%= forecast.ttbar_sq %></td>
+            <td><%= link_to("Edit", {:action => 'edit', :id => forecast.id, :project_id => @project.id }) %></td>
+			<td><%= link_to("Delete", {:action => 'delete', :id => forecast.id, :project_id => @project.id}) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+<div class="col-md-12 regression">
+  <h3>Regression Results</h3>
+  <p>Your Simple Linear Regression equation: <strong>  m = <%= @b0 %> + ( <%= @b1 %> ) t</strong></p>
+</div>
+ <div class="col-md-10">
+    <p>The regression of this data <i>R Squared</i>:  <strong><%= @r2 %>%</strong> of total variation explained by regression (higher R Squared = better fit) </p>
+ </div>
+
+<% @project.futures.each do |future| %>
+
+<%= future.future_year %>
+<%= future.forecasted %>
+<%= future.time %>
+<%= link_to("Edit", {:controller => 'future', :action => 'edit', :id => future.id, :project_id => @project.id }) %>
+<%= link_to("Delete", {:controller => 'future', :action => 'delete', :id => future.id, :project_id => @project.id}) %>
+
+<%end%>
+
+<%= link_to("New", {:controller => 'future', :action => 'new', :project_id => @project.id }) %>
+
+<script>
+$(document).ready(function() {
+    var chart1 = new Highcharts.Chart({
+        chart: {
+            renderTo: 'chart-input',
+        },
+        title: {
+            text: 'Data Input'
+        },
+        xAxis: {
+            categories: <%= Forecast.total_years.each { |i| i.inspect } %>,
+            title: {
+              text: "Time"
+                },
+               },   
+        yAxis: {
+            title: {
+                text: 'Data'
+            }
+        },
+        series: [{
+            name: "Input",
+            data: <%= Forecast.total_values.each { |i| i.inspect} %>
+          }, {
+            name: "Regression Line",
+            data: <%= Forecast.regression.each { |i| i.inspect} %>
+        }]
+    });
+});
+</script>
+
+<div class="output-area">
+  <h2 class="col-md-10 output-area">Output Chart</h2>
+  <div id="chart-input", class="col-md-10"></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <% @forecasts.each do |forecast| %>
 
 <%= forecast.year %>

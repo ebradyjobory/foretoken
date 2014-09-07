@@ -7,18 +7,18 @@ class Forecast < ActiveRecord::Base
 		future_data = Future.all
 	end
 
-	def self.total_revenues
-		actual_revenues = []
-	    forecasted_revenues = []
+	def self.total_values
+		actual_values = []
+	    forecasted_values = []
 	    input_data = Forecast.all
 	    future_data = Future.all
 		input_data.each do |i|
-			actual_revenues << i.revenue
+			actual_values << i.value
 		end
 		future_data.each do |i|
-			forecasted_revenues << i.forcasted
+			forecasted_values << i.forecasted
 		end
-		total_revenues = actual_revenues + forecasted_revenues
+		total_values = actual_values + forecasted_values
 	end
 
 	def self.total_years
@@ -36,14 +36,14 @@ class Forecast < ActiveRecord::Base
 	end
 
 	def self.regression
-		revenues = []
+		values = []
 		input_data = Forecast.all 
 		input_data.each do |i|
-			revenues << i.revenue
+			values << i.value
 		end		
 		sum = 0
-		revenues.each { |i| sum += i }	
-		mean = sum / revenues.length
+		values.each { |i| sum += i }	
+		mean = sum / values.length
 
 		sum2 = 0
 		ids = []
@@ -76,18 +76,18 @@ class Forecast < ActiveRecord::Base
 
 
 	def mean
-		revenues = []
+		values = []
 		input_data = Forecast.all
 		input_data.each do |i|
-			revenues << i.revenue
+			values << i.value
 		end		
 		sum = 0
-		revenues.each { |i| sum += i }	
-		mean = sum / revenues.length
+		values.each { |i| sum += i }	
+		mean = sum / values.length
 	end
 
 	def xxbar
-		revenue.to_f - mean.to_f
+		value.to_f - mean.to_f
 	end
 
 	def timer(i)
@@ -146,7 +146,7 @@ class Forecast < ActiveRecord::Base
 	end
 
 	def x_xhatsq
-		(revenue - xhat)**2
+		(value - xhat)**2
 	end
 
 	def xhat_xbarsq
@@ -154,7 +154,7 @@ class Forecast < ActiveRecord::Base
 	end
 
 	def x_xbarsq
-		(revenue - mean)**2	
+		(value - mean)**2	
 	end
 
 

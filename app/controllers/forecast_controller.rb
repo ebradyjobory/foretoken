@@ -5,10 +5,14 @@ class ForecastController < ApplicationController
   def index
   	@forecasts = @project.forecasts
 
+    if @forecasts.empty?
+      render(:controller => 'forecast', :action => 'new',
+             :project => @project.id)
+    else
      sum = 0
      @forecasts.each do |i|
-     @revenue = i.revenue
-     sum += @revenue
+     @value = i.value
+     sum += @value
      end
      @mean = sum / @forecasts.length # mean
 
@@ -61,7 +65,7 @@ class ForecastController < ApplicationController
      @r2 = 1 - (@sse / @sst)
      # @current_project = Project.find(params[:id])
      # @current_forecasts = @current_project.forecasts
-     end
+    end
   end
 
   def new
@@ -87,7 +91,8 @@ class ForecastController < ApplicationController
     @forecast = Forecast.find(params[:id])
     if @forecast.update_attributes(params_forecast)
       flash[:notice] = "Forecast updated successfully."
-      redirect_to(:action => 'index', :id => @forecast.id, :project_id => @project.id)
+      redirect_to(:action => 'index', :id => @forecast.id, 
+                  :project_id => @project.id)
     else
       render('edit')
     end
