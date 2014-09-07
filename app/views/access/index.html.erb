@@ -1,0 +1,15 @@
+<h1>Main Menu</h1>
+
+<p>Welcome <%= @current_user.name  %></p>
+<p>You have <%= pluralize(@current_user.projects.size, 'project') %></p>
+<% @current_user.projects.each do |project| %>
+	<p><%= link_to project.name, :controller => 'forecast', :action => 'index', :project_id => project.id %>
+		<%= link_to 'Edit', '#',:class => "btn btn-success" %>
+		<%= link_to 'Delete', '#', method: :delete, :class => "btn btn-danger", data: { confirm: 'Are you sure?' } %>
+<%end%>	
+
+<div>
+	<%= link_to "Create new project",  '#' %>
+	<%= link_to "Logout", :action => 'logout' %>
+</div>
+

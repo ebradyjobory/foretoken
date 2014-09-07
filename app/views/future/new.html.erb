@@ -1,0 +1,5 @@
+<%= form_for(:future, :url => { :action => 'create', :project_id => @project.id }) do |f| %>
+
+	<%= render(:partial => 'form', :locals => {:f => f }) %>
+	<%= submit_tag('Create New Data') %>
+<%end%>

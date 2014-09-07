@@ -1,0 +1,20 @@
+<% @forecasts.each do |forecast| %>
+
+<%= forecast.year %>
+<%= link_to("Edit", {:action => 'edit', :id => forecast.id, :project_id => @project.id }) %>
+<%= link_to("Delete", {:action => 'delete', :id => forecast.id, :project_id => @project.id}) %>
+
+<%end%>
+
+<%= link_to("New", {:action => 'new', :project_id => @project.id }) %>
+
+
+<% @project.futures.each do |future| %>
+
+<%= future.future_year %>
+<%= link_to("Edit", {:controller => 'future', :action => 'edit', :id => future.id, :project_id => @project.id }) %>
+<%= link_to("Delete", {:controller => 'future', :action => 'delete', :id => future.id, :project_id => @project.id}) %>
+
+<%end%>
+
+<%= link_to("New", {:controller => 'future', :action => 'new', :project_id => @project.id }) %>
