@@ -3,13 +3,16 @@ class Future < ActiveRecord::Base
 	belongs_to :project
 
 	def to_be_forcasted
-		to_be_forcasted = Future.all
+		to_be_forcasted = Future.where(:project_id => project.id)
+	end
+
+	def project_forecast
+		@forecast_data = Forecast.where(:project_id => project_id)	
 	end
 
 	def self.values
 		values = []
-		futures = Future.all
-		futures.each do |i|
+		to_be_forcasted.each do |i|
 			values << i.forcasted
 		end
 		values	
@@ -17,8 +20,7 @@ class Future < ActiveRecord::Base
 
 	def self.future_years
 		years = []
-		futures = Future.all
-		futures.each do |i|
+		to_be_forcasted.each do |i|
 			years << i.future_year
 		end
 		years	
@@ -26,13 +28,10 @@ class Future < ActiveRecord::Base
 
 
 	def mean
-		forecasts = Forecast.all
 		values = []
-
-		forecasts.each do |i|
+		project_forecast.each do |i|
 			values << i.value
 		end		
-		
 		sum = 0
 		values.each { |i| sum += i }	
 		mean = sum / values.length
@@ -42,8 +41,7 @@ class Future < ActiveRecord::Base
 		sum = 0
 		ids = []
 		total = 0
-		forecasts = Forecast.all		
-		forecasts.each do |i|
+		project_forecast.each do |i|
 			ids << i.id
 		end
 		ids.each do |k|
@@ -55,8 +53,7 @@ class Future < ActiveRecord::Base
 	def b1
 		sum1 = 0
 		sum2 = 0
-		forecasts = Forecast.all
-		forecasts.each do |i|
+		project_forecast.each do |i|
 			sum1 += (i.xxbar_ttbar)
 			sum2 += (i.ttbar_sq)
 		end
@@ -69,20 +66,17 @@ class Future < ActiveRecord::Base
 
 
 	def last_entry_year
-		forecasts = Forecast.all
-		last_entry = forecasts.last
+		last_entry = project_forecast.last
 		last_entry_year = last_entry.year
 	end	
 
 	def last_entry_year_id
-		forecasts = Forecast.all
-		last_entry = forecasts.last
+		last_entry = project_forecast.last
 		last_entry_year_id = last_entry.id	
 	end
 
 	def timer(i)
-		forecasts = Forecast.all
-		last_entry = forecasts.last
+		last_entry = project_forecast.last
 		time_on_last_item = last_entry.time
 		timer = to_be_forcasted.index(i) + 1 + time_on_last_item
 	end

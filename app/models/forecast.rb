@@ -2,9 +2,12 @@ class Forecast < ActiveRecord::Base
 
 	belongs_to :project
 
-	def input_data
-		input_data = Forecast.all
-		future_data = Future.all
+	def project_forecast
+		@forecast_data = Forecast.where(:project_id => project_id)	
+	end
+
+	def project_future
+		@future_data = Future.where(:project_id => project_id)
 	end
 
 	def self.total_values
@@ -77,8 +80,7 @@ class Forecast < ActiveRecord::Base
 
 	def mean
 		values = []
-		input_data = Forecast.all
-		input_data.each do |i|
+		project_forecast.each do |i|
 			values << i.value
 		end		
 		sum = 0
@@ -91,21 +93,18 @@ class Forecast < ActiveRecord::Base
 	end
 
 	def timer(i)
-		input_data = Forecast.all
-		input_data.index(i) + 1
+		project_forecast.index(i) + 1
 	end
 
 	def time
-		input_data = Forecast.all
-		timer(input_data.find(id))
+		timer(project_forecast.find(id))
 	end
 
 	def tbar
 		sum = 0
 		ids = []
 		total = 0	
-		input_data = Forecast.all	
-		input_data.each do |i|
+		project_forecast.each do |i|
 			ids << i.id
 		end
 		ids.each do |k|
@@ -129,8 +128,7 @@ class Forecast < ActiveRecord::Base
 	def b1
 		sum1 = 0
 		sum2 = 0
-		input_data = Forecast.all
-		input_data.each do |i|
+		project_forecast.each do |i|
 			sum1 += (i.xxbar_ttbar)
 			sum2 += (i.ttbar_sq)
 		end
