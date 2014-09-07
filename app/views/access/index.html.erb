@@ -4,12 +4,12 @@
 <p>You have <%= pluralize(@current_user.projects.size, 'project') %></p>
 <% @current_user.projects.each do |project| %>
 	<p><%= link_to project.name, :controller => 'forecast', :action => 'index', :project_id => project.id %>
-		<%= link_to 'Edit', '#',:class => "btn btn-success" %>
-		<%= link_to 'Delete', '#', method: :delete, :class => "btn btn-danger", data: { confirm: 'Are you sure?' } %>
+		<%= link_to 'Edit', {:controller => 'project', :action => 'edit', :id => project.id } %>
+		<%= link_to 'Delete', {:controller => 'project', :action => 'delete', :id => project.id } %>
 <%end%>	
 
 <div>
-	<%= link_to "Create new project",  '#' %>
+	<%= link_to "Create new project", :controller => 'project', :action => 'new', :user_id => @current_user.id %>
 	<%= link_to "Logout", :action => 'logout' %>
 </div>
 

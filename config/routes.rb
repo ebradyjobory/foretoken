@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  get 'project/index'
+
+  get 'project/new'
+
+  get 'project/edit'
+
+  get 'project/delete'
+
   get 'future/index'
 
   get 'future/new'

@@ -1,0 +1,6 @@
+<h1>Insert Project Name</h1>
+<%= form_for(:project, :url => { :action => 'create', :user_id => @user.id }) do |f| %>
+
+	<%= render(:partial => 'form', :locals => {:f => f }) %>
+	<%= submit_tag('Create New Project') %>
+<%end%>
