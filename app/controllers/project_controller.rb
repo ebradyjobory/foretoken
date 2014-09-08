@@ -15,7 +15,7 @@ class ProjectController < ApplicationController
   	@project = Project.new(project_params)
   	if @project.save
   		@user.projects << @project
-  		flash[:notice] = "Project was created successfully"
+  		flash[:notice] = "Project was created successfully. Click on the new project to start forecasting."
   		redirect_to(:controller => 'access', :action => 'index')
   	else
   		render('new')

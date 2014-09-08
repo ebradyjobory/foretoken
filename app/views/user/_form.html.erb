@@ -1,4 +1,5 @@
 <%= error_messages_for(@user) %>
+<%= flash[:notice] %>
 
 <div>
   <%= f.label :first_name %><br>
@@ -19,4 +20,8 @@
 <div>
   <%= f.label :password %><br>
   <%= f.password_field :password %>
+</div>
+<div>
+  <%= f.label :password_confirmation %><br>
+  <%= f.password_field :password_confirmation %>
 </div>

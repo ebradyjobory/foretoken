@@ -2,6 +2,6 @@
 <%= form_for(:project, :url => { :action => 'create', :user_id => @user.id }) do |f| %>
 
 	<%= render(:partial => 'form', :locals => {:f => f }) %>
-	
+	<br>
 	<%= submit_tag('Create New Project', :class => "btn btn-primary") %>
 <%end%>

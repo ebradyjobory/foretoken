@@ -2,5 +2,6 @@
 <%= form_for(:forecast, :url => { :action => 'create', :project_id => @project.id }) do |f| %>
 
 	<%= render(:partial => 'form', :locals => {:f => f }) %>
-	<%= submit_tag('Create New Data') %>
+	<br>
+	<%= submit_tag('Create New Data', :class => "btn btn-primary") %>
 <%end%>

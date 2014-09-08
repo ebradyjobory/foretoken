@@ -1,7 +1,9 @@
 <% @page_title = "Main Menu" %>
 
 
+
 <div class="main-menu col-md-5">
+
 	<h1>Main Menu</h1>
 
 	<p>Welcome <%= @current_user.name  %>
@@ -15,14 +17,13 @@
 		</tbody>
 			<% @current_user.projects.each do |project| %>
 			  <tr>
-			    <td><%= link_to project.name, :controller => 'forecast', :action => 'index', :project_id => project.id %></td>
+			    <td><%= link_to project.name, {:controller => 'forecast', :action => 'index', :project_id => project.id}, :class => "btn btn-default col-md-10" %></td>
 				<td><%= link_to 'Edit', {:controller => 'project', :action => 'edit', :id => project.id }, :class=>"btn btn-success" %></td>
 				<td><%= link_to 'Delete', {:controller => 'project', :action => 'delete', :id => project.id }, :class=>"btn btn-danger" %></td>
 			  </tr>
 			<%end%>	
 		</tbody>
     </table>
-<div>
-	<%= link_to("Create new project", {:controller => 'project', :action => 'new', :user_id => @current_user.id}, :class => "btn btn-primary") %>
+    <%= link_to("Create new project", {:controller => 'project', :action => 'new', :user_id => @current_user.id}, :class => "btn btn-primary") %>
 </div>
 

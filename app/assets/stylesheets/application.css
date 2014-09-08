@@ -26,3 +26,11 @@
  	margin-bottom: 50px;
  }
 
+ .signin {
+ 	text-align: center;
+ }
+
+ .login_btn, .signup_btn {
+ 	width: 230px;
+ }
+

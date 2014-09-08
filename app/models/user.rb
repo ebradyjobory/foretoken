@@ -8,8 +8,13 @@ class User < ActiveRecord::Base
 
 	validates :first_name, presence: true
 	validates :last_name, presence: true
-	validates :profile_name, presence: true, :uniqueness => true
+	validates :profile_name, presence: true, :uniqueness => true, 
+			  :format => {
+			  with: /\A[a-zA-Z0-9_\-]+\z/,
+			  message: 'Must be formatted correctly.'
+			  }
 	validates :password, presence: true
+	validates :password_confirmation, presence: true
 	validates :email, :presence => true,
                     :length => { :maximum => 100 },
                     :format => EMAIL_REGEX,

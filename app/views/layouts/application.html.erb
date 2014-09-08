@@ -25,6 +25,11 @@
 </nav>
      <div class="container">
       <div class="row">
+      <% if !flash[:notice].blank? %>
+        <div class="alert alert-success">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
 	     <%= yield %>
 	  </div>
 	</div>

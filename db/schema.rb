@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140906222411) do
+ActiveRecord::Schema.define(version: 20140907232812) do
 
   create_table "forecasts", force: true do |t|
     t.integer  "year"
@@ -43,14 +43,15 @@ ActiveRecord::Schema.define(version: 20140906222411) do
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "first_name",      limit: 50
-    t.string   "last_name",       limit: 50
-    t.string   "profile_name",    limit: 25
+    t.string   "first_name",            limit: 50
+    t.string   "last_name",             limit: 50
+    t.string   "profile_name",          limit: 25
     t.string   "email"
     t.string   "password_digest"
     t.string   "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "password_confirmation"
   end
 
 end
