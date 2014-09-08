@@ -1,27 +1,28 @@
 <%= error_messages_for(@user) %>
 <%= flash[:notice] %>
-
-<div>
-  <%= f.label :first_name %><br>
-  <%= f.text_field :first_name %>
-</div>
-<div>
-  <%= f.label :last_name %><br>
-  <%= f.text_field :last_name %>
-</div>
-<div>
-  <%= f.label :profile_name %><br>
-  <%= f.text_field :profile_name %>
-</div>
-<div>
-  <%= f.label :email %><br>
-  <%= f.text_field :email %>
-</div>
-<div>
-  <%= f.label :password %><br>
-  <%= f.password_field :password %>
-</div>
-<div>
-  <%= f.label :password_confirmation %><br>
-  <%= f.password_field :password_confirmation %>
+<div class="col-md-12">
+  <div class="form-group">
+    <%= f.label :first_name %><br>
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="form-group">
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="form-group">
+    <%= f.label :profile_name %><br>
+    <%= f.text_field :profile_name %>
+  </div>
+  <div class="form-group">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="form-group">
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+  </div>
+  <div class="form-group">
+    <%= f.label :password_confirmation %><br>
+    <%= f.password_field :password_confirmation %>
+  </div>
 </div>

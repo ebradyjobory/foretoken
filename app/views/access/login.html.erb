@@ -1,7 +1,7 @@
 <% @page_title = "Login" %>
 
 <div class="col-md-12 signin">
-<h1>Login</h1>
+	<h1>Login</h1>
 	<%= form_tag(:action => 'attempt_login', :class => "form-horizontal") do |f| %>
 		<div class="form-group">
 			<%= label_tag(:profile_name, "Username") %>
@@ -11,7 +11,7 @@
 			<td><%= label_tag(:password, "Password") %>
 			<td><%= password_field_tag(:password) %>
 		</div>
-	        <%= submit_tag('Log In', :class => "btn btn-primary login_btn") %>
+		<%= submit_tag('Log In', :class => "btn btn-primary login_btn") %>
 	<%end%>
 	<%= link_to 'Sign Up', {:controller => 'user', :action => 'new'}, :class => "btn btn-success signup_btn" %>
 </div>

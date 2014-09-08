@@ -14,23 +14,34 @@
  *= require_self
  */
 
- .main-menu {
+.main-menu {
  	margin: 10px auto;
  }
 
- table {
+table {
  	align: left;
  }
 
- .back {
+.back {
  	margin-bottom: 50px;
  }
 
- .signin {
+.signin {
  	text-align: center;
+ 	margin: 50px 0 0 -20px;
  }
 
- .login_btn, .signup_btn {
+.signup {
+	margin-top: 40px;
+	text-align: center;
+}
+
+.signup_field {
+	margin-bottom: 10px;
+}
+
+.login_btn, .signup_btn {
  	width: 230px;
+ 	margin-top: 10px;
  }
 

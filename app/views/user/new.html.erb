@@ -1,5 +1,11 @@
-<%= form_for(:user, :url => { :action => 'create'}) do |f| %>
-	<%= render(:partial => 'form', :locals => {:f => f }) %>
-	<br>
-	<%= submit_tag('Sign Up', :class => "btn btn-primary") %>
-<%end%>
+
+<div class="col-md-12 signup">
+	<%= form_for(:user, :url => { :action => 'create'}) do |f| %>
+
+		<%= render(:partial => 'form', :locals => {:f => f }) %>
+
+		<%= submit_tag('Sign Up', :class => "btn btn-primary signup_btn") %>
+		
+	<%end%>
+
+</div>
