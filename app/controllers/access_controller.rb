@@ -6,7 +6,7 @@ class AccessController < ApplicationController
   def index
   	@users = User.all
     @users.each do |user|
-    	@current_user = user if user.profile_name == session[:profile_name] 
+    @current_user = user if user.id == session[:user_id] 
 	end
   end
 
@@ -34,7 +34,7 @@ class AccessController < ApplicationController
   def logout
   	session[:user_id] = nil
     session[:profile_name] = nil
-    flash[:notice] = "Logged out"
+    flash[:notice] = "Logged out. Visit us again!"
     redirect_to(:action => "login")	
   end
 

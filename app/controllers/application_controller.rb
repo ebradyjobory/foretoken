@@ -16,6 +16,15 @@ class ApplicationController < ActionController::Base
   	end	
   end
 
+  def current_user
+    users = User.all
+    users.each do |user|
+    @current_user = user if user.id == session[:user_id] 
+   end
+  end
+
+  
+
 
   
 end

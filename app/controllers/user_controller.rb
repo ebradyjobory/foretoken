@@ -20,9 +20,17 @@ class UserController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(params_user)
+      flash[:notice] = "User information was updated successfully"
+      redirect_to(:controller => 'access', :action => 'index')
+    else
+      render('edit')
+    end
   end
 
   def delete

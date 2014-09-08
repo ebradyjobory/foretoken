@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
 
+  # resources :projects, :forecasts, :futures, :users, :projects, :access
+
+
+  # namespace :users do
+  #   resources :projects
+  # end
+
+  # namespace :projects do 
+  #   resources :forecasts, :futures
+  # end
+
+
   get 'project/index'
 
   get 'project/new'
