@@ -14,44 +14,6 @@ class Forecast < ActiveRecord::Base
 		@future_data = Future.where(:project_id => project_id)
 	end
 
-	# def self.regression
-	# 	values = []
-	# 	input_data = Forecast.all 
-	# 	input_data.each do |i|
-	# 		values << i.value
-	# 	end		
-	# 	sum = 0
-	# 	values.each { |i| sum += i }	
-	# 	mean = sum / values.length
-
-	# 	sum2 = 0
-	# 	ids = []
-	# 	total = 0		
-	# 	input_data.each do |i|
-	# 		ids << i.id
-	# 	end
-	# 	ids.each do |k|
-	# 		sum2 += k
-	# 	end	
-	# 	tbar = sum2 / ids.length
-
-	# 	sum3 = 0
-	# 	sum4 = 0
-	# 	input_data.each do |i|
-	# 		sum3 += (i.xxbar_ttbar)
-	# 		sum4 += (i.ttbar_sq)
-	# 	end
-	# 	b1 = sum3 / sum4
-	# 	b0 = mean  - (b1*tbar)
-	# 	regression = []
-	# 	t = 1
-	# 	while t <= input_data.size
-	# 		regression <<  b0 + (b1*t)
-	# 		t += 1
-	# 	end
-	# 	regression	
-	# end
-
 	def mean
 		values = []
 		project_forecast.each do |i|
@@ -129,5 +91,35 @@ class Forecast < ActiveRecord::Base
 	end
 
 
+	#calculating R^2
+	def sse
+	 sum_sse = 0
+     project_forecast.each do |i|
+     sum_sse += i.x_xhatsq
+     end
+     @sse = sum_sse # SSE	
+	end
+	
+	def ssr
+	 sum_ssr = 0
+     project_forecast.each do |i|
+     sum_ssr += i.xhat_xbarsq
+     end
+     @ssr = sum_ssr # SSR
+	end
+
+	def sst
+	 sum_sst = 0
+     project_forecast.each do |i|
+     sum_sst += i.x_xbarsq
+     end
+     @sst = sum_sst # SST 	
+	end 
+     
+    def r2
+      # Calculating R^2 ( R^2 = 1 - (SSE / SST))
+      1 - (sse / sst)	
+    end 
+    
 
 end
