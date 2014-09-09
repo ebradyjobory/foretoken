@@ -21,11 +21,11 @@
             <tr>
               <td><%= forecast.year %></td>
               <td><%= forecast.value %></td>
-             <!--  <td><%= forecast.time %></td>
+              <!-- <td><%= forecast.time %></td>
               <td><%= forecast.xxbar %></td>
               <td><%= forecast.ttbar %></td>
               <td><%= forecast.xxbar_ttbar %></td>
-              <td><%= forecast.ttbar_sq %></td> -->
+              <td><%= forecast.ttbar_sq %></td>  -->
               <td><%= link_to("Edit", {:action => 'edit', :id => forecast.id, :project_id => @project.id }, :class=>"btn btn-success") %></td>
   			      <td><%= link_to("Delete", {:action => 'delete', :id => forecast.id, :project_id => @project.id}, :class=>"btn btn-danger") %></td>
             </tr>
