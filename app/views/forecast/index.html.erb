@@ -58,6 +58,7 @@
       <% @project.futures.each do |future| %>
       <tr>
         <td><%= future.future_year %></td>
+        <td><%= future.time %></td>
         <td><%= number_with_precision(future.forecasted, :precision => 2) %></td>
         <!--<%= future.time %>-->
         <td><%= link_to("Edit", {:controller => 'future', :action => 'edit', :id => future.id, :project_id => @project.id }, :class=>"btn btn-success") %></td>

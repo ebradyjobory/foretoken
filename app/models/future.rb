@@ -10,7 +10,7 @@ class Future < ActiveRecord::Base
 	end
 
 	def project_forecast
-		@forecast_data = Forecast.where(:project_id => project_id)	
+		Forecast.where(:project_id => project_id)	
 	end
 
 	# def self.values
@@ -36,7 +36,7 @@ class Future < ActiveRecord::Base
 		end		
 		sum = 0
 		values.each { |i| sum += i }	
-		mean = sum / values.length
+		mean = sum.to_f / values.length
 	end
 
 	def tbar
@@ -67,29 +67,31 @@ class Future < ActiveRecord::Base
 	end
 
 
-	def last_entry_year
-		last_entry = project_forecast.last
-		last_entry_year = last_entry.year
+	def last_entry_year_time
+		project_forecast.last.time
 	end	
+
+	def first_future_year
+		future_years = []
+		to_be_forcasted.each do |i|
+			future_years << i.future_year
+		end
+		future_years[0]
+	end
 
 	def last_entry_year_id
 		last_entry = project_forecast.last
 		last_entry_year_id = last_entry.id	
 	end
 
-	def timer(i)
-		last_entry = project_forecast.last
-		time_on_last_item = last_entry.time
-		timer = to_be_forcasted.index(i) + 1 + time_on_last_item
+	def timer(i) # i = 1877
+		years_diff = i - project_forecast.last.year 
+		timer = last_entry_year_time + years_diff
 	end
 		
 
-	def time
-		timer(to_be_forcasted.find(id))
-			# futures = Future.all
-			# years_diff = future_year - last_entry_year
-			# id = last_entry_year_id + years_diff
-			# time = id
+	def time   
+		timer(to_be_forcasted.find(id).future_year)	# return a data input	
 	end
 
 	def forecasted
