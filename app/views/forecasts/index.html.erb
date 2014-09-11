@@ -39,10 +39,10 @@
 <!-- *********** Regression results -->  
 <div class="col-md-12">
   <h3>Regression Results</h3>
-  <p>Your Simple Linear Regression equation: <strong>  m = <%= @b0 %> + ( <%= @b1 %> ) t</strong></p>
+  <p>Your Simple Linear Regression equation: <strong>  m = <%= number_with_precision(@b0, :precision => 2) %> + ( <%= @b1 %> ) t</strong></p>
 </div>
  <div class="col-md-12">
-    <p>The regression of this data <i>R Squared</i>:  <strong><%= @r2 %>%</strong> of total variation explained by regression (higher R Squared = better fit) </p>
+    <p>The regression of this data <i>R Squared</i>:  <strong><%= number_with_precision(@r2, :precision => 2) %>%</strong> of total variation explained by regression (higher R Squared = better fit) </p>
  </div>
 <!-- *********** Forecasted data input -->  
 <% if @project.futures.empty? %>
