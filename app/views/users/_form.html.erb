@@ -1,5 +1,8 @@
 <%= error_messages_for(@user) %>
-<%= flash[:notice] %>
+
+
+<%= form_for @user do |f| %>
+
 <div class="col-md-12">
   <div class="form-group">
     <%= f.label :first_name %><br>
@@ -25,4 +28,7 @@
     <%= f.label :password_confirmation %><br>
     <%= f.password_field :password_confirmation %>
   </div>
+  <%= f.button :submit %>
 </div>
+
+<%end%>

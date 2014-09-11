@@ -1,12 +1,15 @@
-class ForecastController < ApplicationController
+class ForecastsController < ApplicationController
 
   before_action :confirm_logged_in
 	before_action :set_project
   before_action :check_value, :only => [:index]
 
   def index
-  	@forecasts = @project.forecasts
-    @futures = @project.futures
+    @forecasts = Forecast.where(:project_id => @project.id)
+  	# @forecasts = @project.forecasts
+    @futures = Future.where(:project_id => @project.id)
+
+    @current_user = User.find(session[:user_id])
 
     if @forecasts.empty?
       render(:controller => 'forecast', :action => 'new',
@@ -69,15 +72,18 @@ class ForecastController < ApplicationController
   end
 
   def new
-  	@forecast = Forecast.new(:project_id => @project.id)
+    @project = Project.find(params[:project_id])
+    @forecast = @project.forecasts.new
   end
 
   def create
-  	@forecast = Forecast.new(params_forecast)
+    @project = Project.find(params[:project_id])
+    @forecast = @project.forecasts.new(params_forecast)
   	if @forecast.save
-  		@project.forecasts << @forecast
+  		 # @project.forecasts << @forecast
   		flash[:notice] = "Forecast was created successfully"
-  		redirect_to(:action => 'index', :project_id => @project.id)
+  		redirect_to user_project_forecasts_path(:user_id => session[:user_id],  
+                                              :project_id => @project.id)
   	else
   		render('new')
   	end
@@ -91,8 +97,7 @@ class ForecastController < ApplicationController
     @forecast = Forecast.find(params[:id])
     if @forecast.update_attributes(params_forecast)
       flash[:notice] = "Forecast updated successfully."
-      redirect_to(:action => 'index', :id => @forecast.id, 
-                  :project_id => @project.id)
+      redirect_to user_project_forecasts_path(@forecast.project.user.id, @forecast.project.id)
     else
       render('edit')
     end

@@ -1,8 +1,0 @@
-<%= form_for(:project, :url => {:action => 'update', :id => @project.id}) do |f| %>
-
-	<%= render(:partial => "form", :locals => {:f => f}) %>
-	<br>
-	<%= submit_tag("Update Project", :class => "btn btn-primary") %>
-
-<% end %>
-</div>

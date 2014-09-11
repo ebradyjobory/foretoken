@@ -13,5 +13,5 @@
 		</div>
 		<%= submit_tag('Log In', :class => "btn btn-primary login_btn") %>
 	<%end%>
-	<%= link_to 'Sign Up', {:controller => 'user', :action => 'new'}, :class => "btn btn-success signup_btn" %>
+	<%= link_to 'Sign Up', new_user_path, :class => "btn btn-success signup_btn" %>
 </div>

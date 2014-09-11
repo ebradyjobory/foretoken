@@ -1,4 +1,4 @@
-class ProjectController < ApplicationController
+class ProjectsController < ApplicationController
 
 	before_action :confirm_logged_in
   before_action :set_user
@@ -16,7 +16,7 @@ class ProjectController < ApplicationController
   	if @project.save
   		@user.projects << @project
   		flash[:notice] = "Project was created successfully. Click on the new project to start forecasting."
-  		redirect_to(:controller => 'access', :action => 'index')
+  		redirect_to(:controller => 'access', :action => 'index', :user_id => session[:user_id])
   	else
   		render('new')
   	end
@@ -30,7 +30,7 @@ class ProjectController < ApplicationController
     @project = Project.find(params[:id])
     if @project.update_attributes(project_params)
       flash[:notice] = "Project updated successfully."
-      redirect_to(:controller => 'access', :action => 'index')
+      redirect_to(:controller => 'access', :action => 'index', :user_id => session[:user_id])
     else
       render('edit')
     end
@@ -42,8 +42,8 @@ class ProjectController < ApplicationController
 
   def destroy
     @project = Project.find(params[:id]).destroy
-    flash[:notice] = "Project destroyed successfully."
-    redirect_to(:controller => 'access', :action => 'index')
+    flash[:notice] = "Project deleted successfully."
+    redirect_to(:controller => 'access', :action => 'index', :user_id => session[:user_id])
   end
 
 

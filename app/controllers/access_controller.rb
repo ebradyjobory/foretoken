@@ -4,10 +4,10 @@ class AccessController < ApplicationController
 
 
   def index
-  	@users = User.all
-    @users.each do |user|
-    @current_user = user if user.id == session[:user_id] 
-	end
+  	@user = User.find(session[:user_id])
+    # @users.each do |user|
+    # @current_user = user if user.id == session[:user_id] 
+	# end
   end
 
   def login
@@ -24,7 +24,7 @@ class AccessController < ApplicationController
       session[:user_id] = authorized_user.id
       session[:profile_name] = authorized_user.profile_name
       flash[:notice] = "You are now logged in."
-      redirect_to(:action => 'index')
+      redirect_to(:action => 'index', :user_id => session[:user_id])
     else # if authorized_user was false
       flash[:notice] = "Invalid profile name/password."
       redirect_to(:action => 'login')

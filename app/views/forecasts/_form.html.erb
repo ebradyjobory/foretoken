@@ -1,3 +1,6 @@
+
+<%= form_for [@project, @forecast] do |f| %>
+
 <div>
   <%= f.label :year %><br>
   <%= f.text_field :year %>
@@ -6,4 +9,7 @@
   <%= f.label :value %><br>
   <%= f.text_field :value %>
 </div>
+<%= f.button :submit %>
+
+<%end%>
 

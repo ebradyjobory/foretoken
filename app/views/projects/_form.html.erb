@@ -1,0 +1,12 @@
+<%= error_messages_for(@project) %>
+<%= flash[:notice] %>
+
+<%= form_for [@user, @project] do |f| %>
+	<div>
+	  <%= f.label :name, "Project Name" %><br>
+	  <%= f.text_field :name %>
+	</div>
+
+	 <%= f.button :submit %>
+ <%end%>
+

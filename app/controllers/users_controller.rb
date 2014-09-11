@@ -1,8 +1,9 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
 
   before_action :confirm_logged_in, :except => [:new, :create]
 
   def index
+    @users = User.all
   end
 
   def new
@@ -13,7 +14,7 @@ class UserController < ApplicationController
     @user = User.new(params_user)
     if @user.save
       flash[:notice] = "User was created successfully"
-      redirect_to(:controller => 'access', :action => 'index')
+      redirect_to(:controller => 'access', :action => 'index', :user_id => @user.id)
     else
       render('new')
     end   

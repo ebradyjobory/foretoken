@@ -1,7 +1,7 @@
 <% @page_title = "Forecasting" %>
 
 <div class="col-md-12 back">
-  <%= link_to('Back to Main Menu', {:controller => 'access', :action => 'index'}, :class => "btn btn-default") %>
+  <%= link_to('Back to Main Menu', access_index_path, :class => "btn btn-default") %>
 </div>
 <div class="col-md-5">
   <table class="table table-hover">
@@ -26,14 +26,14 @@
               <td><%= forecast.ttbar %></td>
               <td><%= forecast.xxbar_ttbar %></td>
               <td><%= forecast.ttbar_sq %></td>  -->
-              <td><%= link_to("Edit", {:action => 'edit', :id => forecast.id, :project_id => @project.id }, :class=>"btn btn-success") %></td>
+              <td><%= link_to "Edit", edit_user_project_forecast_path(:user_id => @current_user.id, :project_id => forecast.project.id, :id => forecast.id), :class=>"btn btn-success" %></td>
   			      <td><%= link_to("Delete", {:action => 'delete', :id => forecast.id, :project_id => @project.id}, :class=>"btn btn-danger") %></td>
             </tr>
           <% end %>
         </tbody>
   </table>
    <div>
-      <%= link_to("Add New Data", { :action => 'new', :project_id => @project.id }, :class => "btn btn-primary") %>
+      <%= link_to("Add New Data", new_user_project_forecast_path(:user_id => @project.user.id, :project_id => @project.id), :class => "btn btn-primary") %>
     </div>
 </div>
     

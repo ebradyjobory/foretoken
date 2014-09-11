@@ -1,34 +1,44 @@
 Rails.application.routes.draw do
 
-  # resources :projects, :forecasts, :futures, :users, :projects, :access
+  resources :users do
+    resources :projects do
+      resources :forecasts
+      resources :futures
+    end 
+  end
 
+  resources :projects do
+    resources :forecasts
+    resources :futures
+  end
 
-  # namespace :users do
-  #   resources :projects
-  # end
+  resources :forecasts
+  resources :futures
 
-  # namespace :projects do 
-  #   resources :forecasts, :futures
-  # end
+  resources :access, :only => [:index, :login]
 
+ 
 
-  get 'project/index'
+  # get 'access/index'
+  
+  # get 'project/index'
 
-  get 'project/new'
+  # get 'project/new'
 
-  get 'project/edit'
+  # get 'project/edit'
 
-  get 'project/delete'
+  # get 'project/delete'
 
-  get 'future/index'
+  # get 'future/index'
 
-  get 'future/new'
+  # get 'future/new'
 
-  get 'future/edit'
+  # get 'future/edit'
 
-  get 'future/delete'
+  # get 'future/delete'
 
   get '/', to: 'access#login'
+
   match ':controller(/:action(/:id))', :via => [:get, :post] 
 
   # The priority is based upon order of creation: first created -> highest priority.
