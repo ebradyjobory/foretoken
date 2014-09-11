@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   # get 'future/delete'
 
   get '/', to: 'access#login'
+  get 'access/logout'
 
   match ':controller(/:action(/:id))', :via => [:get, :post] 
 

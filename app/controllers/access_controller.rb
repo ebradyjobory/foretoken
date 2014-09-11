@@ -5,9 +5,6 @@ class AccessController < ApplicationController
 
   def index
   	@user = User.find(session[:user_id])
-    # @users.each do |user|
-    # @current_user = user if user.id == session[:user_id] 
-	# end
   end
 
   def login

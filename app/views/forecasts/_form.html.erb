@@ -1,15 +1,17 @@
+<%= error_messages_for(@forecast) %>
 
 <%= form_for [@project, @forecast] do |f| %>
 
-<div>
-  <%= f.label :year %><br>
-  <%= f.text_field :year %>
-</div>
-<div>
-  <%= f.label :value %><br>
-  <%= f.text_field :value %>
-</div>
-<%= f.button :submit %>
+	<div>
+	  <%= f.label :year %><br>
+	  <%= f.text_field :year %>
+	</div>
+	<div>
+	  <%= f.label :value %><br>
+	  <%= f.text_field :value %>
+	</div>
+	<br>
+	<%= f.button :submit, :class => "btn btn-primary" %>
 
 <%end%>
 

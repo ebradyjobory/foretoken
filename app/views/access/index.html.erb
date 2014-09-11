@@ -1,28 +1,31 @@
 <% @page_title = "Main Menu" %>
 
 <div class="main-menu col-md-5">
-
-	<h1>Main Menu</h1>
-
-	<p>Welcome <%= @user.name  %>
+	<h3>Welcome <strong><%= @user.name  %></strong></h3>
 	<p>You have <%= pluralize(@user.projects.size, 'project') %></p>
-	<table class="table table-hover">
-		<thead>
-			<tr>
-			  <th>Project Name</th>
-			</tr>
-		</thead>
-		</tbody>
-			<% @user.projects.each do |project| %>
-			  <tr>
-			    <td><%= link_to project.name, user_project_forecasts_path(project.user.id, project), :class => "btn btn-default col-md-10" %></td>
-				<td><%= link_to 'Edit', edit_user_project_path(project.user.id, project), :class=>"btn btn-success" %></td>
-				<td><%= link_to 'Delete', project, method: :delete, data: { confirm: 'Are you sure?'}, :class => "btn btn-danger" %></td>
-				
-			  </tr>
-			<%end%>	
-		</tbody>
-    </table>
+	<% if @user.projects.size == 0 %>
+		<p>Start forecasting by creating a new project.</p>
+	<%end%>
+	<% if @user.projects.size == 0 %>
+	<%else%>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+				  <th>Project Name</th>
+				</tr>
+			</thead>
+			</tbody>
+				<% @user.projects.each do |project| %>
+				  <tr>
+				    <td><%= link_to project.name, user_project_forecasts_path(project.user.id, project), :class => "btn btn-default col-md-10" %></td>
+					<td><%= link_to 'Edit', edit_user_project_path(project.user.id, project), :class=>"btn btn-success" %></td>
+					<td><%= link_to 'Delete', project, method: :delete, data: { confirm: 'Are you sure?'}, :class => "btn btn-danger" %></td>
+					
+				  </tr>
+				<%end%>	
+			</tbody>
+	    </table>
+	<%end%> 
     <%= link_to("Create new project", new_user_project_path(@user.id), :class => "btn btn-primary") %>
 </div>
 

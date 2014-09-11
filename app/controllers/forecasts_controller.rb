@@ -6,7 +6,6 @@ class ForecastsController < ApplicationController
 
   def index
     @forecasts = Forecast.where(:project_id => @project.id)
-  	# @forecasts = @project.forecasts
     @futures = Future.where(:project_id => @project.id)
 
     @current_user = User.find(session[:user_id])
@@ -44,25 +43,6 @@ class ForecastsController < ApplicationController
     end
 
     # Calculating regression line to be presented on chart
-    
-    # sum = 0
-    # sum2 = 0
-    # @values.each { |i| sum += i }  
-    # reg_mean = sum / @values.length
-
-    # @times.each do |k|
-    #   sum2 += k
-    # end 
-    # tbar = sum2 / times.length
-
-    # sum3 = 0
-    # sum4 = 0
-    # @forecasts.each do |i|
-    #   sum3 += (i.xxbar_ttbar)
-    #   sum4 += (i.ttbar_sq)
-    # end
-    # b1 = sum3 / sum4
-    # b0 = reg_mean  - (b1*tbar)
     regression = []
     @times.each do |time|
       regression <<  @b0 + (@b1 * time)
@@ -80,7 +60,6 @@ class ForecastsController < ApplicationController
     @project = Project.find(params[:project_id])
     @forecast = @project.forecasts.new(params_forecast)
   	if @forecast.save
-  		 # @project.forecasts << @forecast
   		flash[:notice] = "Forecast was created successfully"
   		redirect_to user_project_forecasts_path(:user_id => session[:user_id],  
                                               :project_id => @project.id)
@@ -109,7 +88,7 @@ class ForecastsController < ApplicationController
 
   def destroy
     forecast = Forecast.find(params[:id]).destroy
-    flash[:notice] = "Forecast destroyed successfully."
+    flash[:notice] = "Forecast deleted successfully."
     redirect_to(:action => 'index', :project_id => @project.id)
   end
 

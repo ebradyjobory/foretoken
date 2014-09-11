@@ -1,5 +1,6 @@
-<h1>Input Data to Start Forecasting </h1>
+<% if @project.forecasts.empty? %>
+	<h2>Input Data to Start Forecasting </h2>
+<%end%>
 
-
-	<%= render(:partial => 'form') %>
+<%= render(:partial => 'form') %>
 

@@ -1,0 +1,11 @@
+<%= error_messages_for(@future) %>
+
+<%= form_for [@project, @future] do |f| %>
+	<div>
+	  <%= f.label :future_year %>
+	  <%= f.text_field :future_year %>
+	</div>
+	<%= f.button :submit, :class => "btn btn-primary" %>
+<%end%>
+
+

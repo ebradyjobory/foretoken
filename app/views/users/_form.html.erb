@@ -1,34 +1,33 @@
 <%= error_messages_for(@user) %>
 
-
 <%= form_for @user do |f| %>
 
-<div class="col-md-12">
-  <div class="form-group">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
+  <div class="col-md-12">
+    <div class="form-group">
+      <%= f.label :first_name %><br>
+      <%= f.text_field :first_name %>
+    </div>
+    <div class="form-group">
+      <%= f.label :last_name %><br>
+      <%= f.text_field :last_name %>
+    </div>
+    <div class="form-group">
+      <%= f.label :profile_name %><br>
+      <%= f.text_field :profile_name %>
+    </div>
+    <div class="form-group">
+      <%= f.label :email %><br>
+      <%= f.text_field :email %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password %><br>
+      <%= f.password_field :password %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation %><br>
+      <%= f.password_field :password_confirmation %>
+    </div>
+    <%= f.button :submit, :class => "btn btn-primary" %>
   </div>
-  <div class="form-group">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="form-group">
-    <%= f.label :profile_name %><br>
-    <%= f.text_field :profile_name %>
-  </div>
-  <div class="form-group">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="form-group">
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </div>
-  <div class="form-group">
-    <%= f.label :password_confirmation %><br>
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <%= f.button :submit %>
-</div>
 
 <%end%>

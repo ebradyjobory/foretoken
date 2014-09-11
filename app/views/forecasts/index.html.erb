@@ -1,4 +1,4 @@
-<% @page_title = "Forecasting" %>
+<% @page_title = "Forecasting Page" %>
 
 <div class="col-md-12 back">
   <%= link_to('Back to Main Menu', access_index_path, :class => "btn btn-default") %>
@@ -27,16 +27,16 @@
               <td><%= forecast.xxbar_ttbar %></td>
               <td><%= forecast.ttbar_sq %></td>  -->
               <td><%= link_to "Edit", edit_user_project_forecast_path(:user_id => @current_user.id, :project_id => forecast.project.id, :id => forecast.id), :class=>"btn btn-success" %></td>
-  			      <td><%= link_to("Delete", {:action => 'delete', :id => forecast.id, :project_id => @project.id}, :class=>"btn btn-danger") %></td>
+              <td><%= link_to "Delete", forecast_path(:project_id => forecast.project.id, :id => forecast.id), method: :delete, data: { confirm: 'Are you sure?'}, :class=>"btn btn-danger" %></td>
             </tr>
           <% end %>
         </tbody>
   </table>
-   <div>
-      <%= link_to("Add New Data", new_user_project_forecast_path(:user_id => @project.user.id, :project_id => @project.id), :class => "btn btn-primary") %>
-    </div>
+  <div>
+      <%= link_to "Add New Data", new_user_project_forecast_path(:user_id => @project.user.id, :project_id => @project.id), :class => "btn btn-primary" %>
+  </div>
 </div>
-    
+<!-- *********** Regression results -->  
 <div class="col-md-12">
   <h3>Regression Results</h3>
   <p>Your Simple Linear Regression equation: <strong>  m = <%= @b0 %> + ( <%= @b1 %> ) t</strong></p>
@@ -44,37 +44,41 @@
  <div class="col-md-12">
     <p>The regression of this data <i>R Squared</i>:  <strong><%= @r2 %>%</strong> of total variation explained by regression (higher R Squared = better fit) </p>
  </div>
-
+<!-- *********** Forecasted data input -->  
+<% if @project.futures.empty? %>
+  <div class="col-md-12">
+       <%= link_to("Add data you want to forecast!", new_user_project_future_path(:user_id => @project.user.id, :project_id => @project.id), :class => "btn btn-primary")%>
+  </div>
+<%else%>
 <div class="col-md-5">
-  <table class="table table-hover">
-    <thead>
-     <tr>
-      <th>Future Year</th>
-      <th>Forecasted Data</th>
-     </tr>
-    </thead>
-    </tbody>
-     <tr>
-      <% @project.futures.each do |future| %>
-      <tr>
-        <td><%= future.future_year %></td>
-        <td><%= future.time %></td>
-        <td><%= number_with_precision(future.forecasted, :precision => 2) %></td>
-        <td><%= link_to("Edit", {:controller => 'future', :action => 'edit', :id => future.id, :project_id => @project.id }, :class=>"btn btn-success") %></td>
-        <td><%= link_to("Delete", {:controller => 'future', :action => 'delete', :id => future.id, :project_id => @project.id}, :class=>"btn btn-danger") %></td>
-      </tr>
-      <%end%>
-     </tr>
-    </tbody>
-  </table>
-  <div>
-   <%= link_to("Add more to forecast", {:controller => 'future', :action => 'new', :project_id => @project.id }, :class => "btn btn-primary")%>
+    <table class="table table-hover">
+      <thead>
+       <tr>
+        <th>Future Year</th>
+        <th>Forecasted Data</th>
+       </tr>
+      </thead>
+      </tbody>
+       <tr>
+        <% @project.futures.each do |future| %>
+        <tr>
+          <td><%= future.future_year %></td>
+          <td><%= future.time %></td>
+          <td><%= number_with_precision(future.forecasted, :precision => 2) %></td>
+          <td><%= link_to "Edit", edit_user_project_future_path(:user_id => @current_user.id, :project_id => future.project.id, :id => future.id), :class=>"btn btn-success" %></td>
+          <td><%= link_to "Delete", future_path(:project_id => future.project.id, :id => future.id), method: :delete, data: { confirm: 'Are you sure?'}, :class=>"btn btn-danger" %></td>
+        </tr>
+        <%end%>
+       </tr>
+      </tbody>
+    </table>
+     <%= link_to("Add more to forecast", new_user_project_future_path(:user_id => @project.user.id, :project_id => @project.id), :class => "btn btn-primary")%>
   </div>
 </div>
+<%end%>
 
-
-
-
+<% if @project.forecasts.size < 2 %>
+<%else%>
 <!-- Chat Area -->
 <script>
 $(document).ready(function() {
@@ -111,3 +115,4 @@ $(document).ready(function() {
   <h2 class="col-md-10 output-area">Output Chart</h2>
   <div id="chart-input", class="col-md-10"></div>
 </div>
+<%end%>
