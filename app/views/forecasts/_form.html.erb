@@ -1,17 +1,26 @@
 <%= error_messages_for(@forecast) %>
 
-<%= form_for [@project, @forecast] do |f| %>
+<div class="col-md-12 back">
+  <%= link_to("Back to Forecasts' page", user_project_forecasts_path(:user_id => session[:user_id]), :class => "btn btn-default") %>
+</div>
 
-	<div>
-	  <%= f.label :year %><br>
-	  <%= f.text_field :year %>
-	</div>
-	<div>
-	  <%= f.label :value %><br>
-	  <%= f.text_field :value %>
-	</div>
-	<br>
-	<%= f.button :submit, :class => "btn btn-primary" %>
 
-<%end%>
+<div class="col-md-12" >
+	<%= form_for [@project, @forecast] do |f| %>
+
+		<div>
+		  <%= f.label :year %><br>
+		  <%= f.text_field :year %>
+		</div>
+		<div>
+		  <%= f.label :value %><br>
+		  <%= f.text_field :value %>
+		</div>
+		<br>
+		<%= f.button :submit, :class => "btn btn-primary" %>
+	<%end%>
+</div>
+
+
+
 

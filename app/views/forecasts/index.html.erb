@@ -7,7 +7,7 @@
   <table class="table table-hover">
         <thead>
           <tr>
-            <th>Year</th>
+            <th>Time</th>
             <th>Data</th>
             <!-- <th>Time(t)</th>
             <th>X - Xbar</th>
@@ -54,7 +54,7 @@
     <table class="table table-hover">
       <thead>
        <tr>
-        <th>Future Year</th>
+        <th>Future Time</th>
         <th>Forecasted Data</th>
        </tr>
       </thead>
@@ -63,7 +63,7 @@
         <% @project.futures.each do |future| %>
         <tr>
           <td><%= future.future_year %></td>
-          <td><%= future.time %></td>
+          <!-- <td><%= future.time %></td> -->
           <td><%= number_with_precision(future.forecasted, :precision => 2) %></td>
           <td><%= link_to "Edit", edit_user_project_future_path(:user_id => @current_user.id, :project_id => future.project.id, :id => future.id), :class=>"btn btn-success" %></td>
           <td><%= link_to "Delete", future_path(:project_id => future.project.id, :id => future.id), method: :delete, data: { confirm: 'Are you sure?'}, :class=>"btn btn-danger" %></td>

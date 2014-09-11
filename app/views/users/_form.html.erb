@@ -1,5 +1,9 @@
 <%= error_messages_for(@user) %>
 
+<div class="col-md-12 back">
+  <%= link_to('Back to Main Menu', access_index_path, :class => "btn btn-default") %>
+</div>
+
 <%= form_for @user do |f| %>
 
   <div class="col-md-12">
@@ -27,7 +31,9 @@
       <%= f.label :password_confirmation %><br>
       <%= f.password_field :password_confirmation %>
     </div>
-    <%= f.button :submit, :class => "btn btn-primary" %>
+    <div>
+      <%= f.button :submit, :class => "btn btn-primary" %>
+    </div>
   </div>
-
 <%end%>
+
