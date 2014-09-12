@@ -11,8 +11,7 @@ class ForecastsController < ApplicationController
     @current_user = User.find(session[:user_id])
 
     if @forecasts.empty?
-      render(:controller => 'forecast', :action => 'new',
-             :project => @project.id)
+      render new_project_forecast_path(:project_id => @project.id)
     else
      @forecasts.each do |forecast|
       @b1   = forecast.b1

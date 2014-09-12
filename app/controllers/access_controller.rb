@@ -21,9 +21,9 @@ class AccessController < ApplicationController
       session[:user_id] = authorized_user.id
       session[:profile_name] = authorized_user.profile_name
       flash[:notice] = "You are now logged in."
-      redirect_to(:action => 'index', :user_id => session[:user_id])
+      redirect_to access_index_path(:user_id => session[:user_id])
     else # if authorized_user was false
-      flash[:notice] = "Invalid profile name/password."
+      flash[:error] = "Invalid username and/or password."
       redirect_to(:action => 'login')
     end	
   end

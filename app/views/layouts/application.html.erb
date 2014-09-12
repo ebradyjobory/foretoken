@@ -27,6 +27,11 @@
     </nav>
     <div class="container">
       <div class="row">
+        <% if !flash[:error].blank? %>
+          <div class="alert alert-danger">
+            <%= flash[:error] %>    
+          </div>
+        <% end %>
         <% if !flash[:notice].blank? %>
           <div class="alert alert-success">
             <%= flash[:notice] %>
