@@ -1,24 +1,13 @@
 <%= error_messages_for(@user) %>
 
-<div class="col-md-12 back">
+<div class="col-md-1 back">
   <%= link_to('Back to Main Menu', access_index_path, :class => "btn btn-default") %>
 </div>
 
 <%= form_for @user do |f| %>
 
   <div class="col-md-12">
-    <div class="form-group">
-      <%= f.label :first_name %><br>
-      <%= f.text_field :first_name %>
-    </div>
-    <div class="form-group">
-      <%= f.label :last_name %><br>
-      <%= f.text_field :last_name %>
-    </div>
-    <div class="form-group">
-      <%= f.label :profile_name %><br>
-      <%= f.text_field :profile_name %>
-    </div>
+    
     <div class="form-group">
       <%= f.label :email %><br>
       <%= f.text_field :email %>

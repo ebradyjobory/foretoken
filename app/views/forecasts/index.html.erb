@@ -1,7 +1,6 @@
 <% @page_title = "Forecasting Page" %>
-
-<div class="col-md-12 back">
-  <%= link_to('Back to Main Menu', access_index_path, :class => "btn btn-default") %>
+<div class="col-md-12 btn-space">
+  Project name: <%= link_to @project.name, edit_user_project_path(@project.user.id, @project), :class => "btn btn-info" %>
 </div>
 <div class="col-md-5">
   <table class="table table-hover">
@@ -19,7 +18,7 @@
         <tbody>
           <% @forecasts.each do |forecast| %>
             <tr>
-              <td><%= forecast.year %></td>
+              <td id="hide"><%= forecast.year %></td>
               <td><%= forecast.value %></td>
               <!-- <td><%= forecast.time %></td>
               <td><%= forecast.xxbar %></td>
@@ -116,3 +115,8 @@ $(document).ready(function() {
   <div id="chart-input", class="col-md-10"></div>
 </div>
 <%end%>
+<div class="col-md-12 btn-space">
+  <%= link_to 'Delete this project', @project, method: :delete, data: { confirm: 'Are you sure you want to delete the whole project?'}, :class => "btn btn-danger" %>
+</div>
+
+

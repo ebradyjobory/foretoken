@@ -14,3 +14,10 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+// The plan for forecast page view:
+//  1- Hide the input area for both forecast 
+//  	items and future items
+//  2 - create 	
+//  2- "Add New Data" button on click to open a window	
+ 
