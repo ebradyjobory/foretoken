@@ -1,0 +1,4 @@
+<div id='new-forecast-links'>
+  <%= link_to 'New Forecast', new_user_project_forecast_path(:user_id => @project.user.id, :project_id => @project.id), :remote => true, :'data-type' => 'html', :id => 'new-forecast-link' %>
+  <br />
+

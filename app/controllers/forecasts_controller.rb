@@ -5,41 +5,50 @@ class ForecastsController < ApplicationController
   before_action :check_value, :only => [:index]
 
   def index
-    @forecasts = Forecast.where(:project_id => @project.id)
-    @futures = Future.where(:project_id => @project.id)
-
-    @current_user = User.find(session[:user_id])
+    @forecasts = @project.forecasts
+    @futures = @project.futures
+    @current_user = @project.user
 
     if @forecasts.empty?
       render new_project_forecast_path(:project_id => @project.id)
     else
-     @forecasts.each do |forecast|
-      @b1   = forecast.b1
-      @tbar = forecast.tbar
-      @b0   = forecast.b0
-      @r2   = forecast.r2
+       total_fcast_years = []
+       total_future_years = []
+       total_fcast_values = []
+       total_future_values = []
+       values = []
+       times = []
+      @forecasts.each do |forecast|
+        total_fcast_years << forecast.year
+        total_fcast_values << forecast.value
+        @values = values << forecast.value
+        @times = times << forecast.time
+        @b1   = forecast.b1
+        @tbar = forecast.tbar
+        @b0   = forecast.b0
+        # @r2   = forecast.r2
+       end
      end
-
-     # Calculating total years and values for current project
-     total_fcast_years = []
-     total_future_years = []
-     total_fcast_values = []
-     total_future_values = []
-     values = []
-     times = []
-     @forecasts.each do |i|
-        total_fcast_years << i.year
-        total_fcast_values << i.value
-        @values = values << i.value
-        @times = times << i.time
-     end
+    # Calculating total years and values for current project
+    #  total_fcast_years = []
+    #  total_future_years = []
+    #  total_fcast_values = []
+    #  total_future_values = []
+    #  values = []
+    #  times = []
+    #  @project.forecasts.each do |i|
+    #     total_fcast_years << i.year
+    #     total_fcast_values << i.value
+    #     @values = values << i.value
+    #     @times = times << i.time
+    #  end
      @futures.each do |i|
       total_future_years << i.future_year
       total_future_values << i.forecasted
      end
      @total_years = total_fcast_years + total_future_years
      @total_values = total_fcast_values + total_future_values
-    end
+    # end
 
     # Calculating regression line to be presented on chart
     regression = []
@@ -47,8 +56,9 @@ class ForecastsController < ApplicationController
       regression <<  @b0 + (@b1 * time)
     end
     @regression = regression  
-
   end
+
+
 
   def new
     @project = Project.find(params[:project_id])
@@ -81,15 +91,22 @@ class ForecastsController < ApplicationController
     end
   end
 
-  def delete
-    @forecast = Forecast.find(params[:id])
-  end
+  # def delete
+  #   @forecast = Forecast.find(params[:id])
+  # end
 
   def destroy
-    forecast = Forecast.find(params[:id]).destroy
+    if forecast = Forecast.find(params[:id]).destroy
     flash[:notice] = "Forecast deleted successfully."
-    redirect_to(:action => 'index', :project_id => @project.id)
+     respond_to do |format|
+      format.html { redirect_to user_project_forecasts_path(@forecast.project.user.id, @forecast.project.id) }
+      format.json { head :no_content }
+      format.js   { render :layout => false }
+       end
+  else
+    # redirect_to(:action => 'index', :project_id => @project.id)
   end
+end
 
   private
 

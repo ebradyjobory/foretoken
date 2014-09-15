@@ -1,47 +1,55 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Foretoken<%= " | #{@page_title}" if @page_title %></title>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    <%= stylesheet_link_tag    "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css", media: 'all', 'data-turbolinks-track' => true  %>
-    <%= csrf_meta_tags %>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  </head>
-  <body>
-    <nav class="navbar navbar-inverse" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <%= link_to "Foretoken", access_index_path(:user_id => session[:user_id]) , :class => "navbar-brand" %>
-        </div>
-        <div class="collapse navbar-collapse">
-           <ul class="nav navbar-nav">
-            <li><%= link_to("About", '#', :id => 'username') %></li>
-            <% if session[:user_id] %>
-              <li><%= link_to "Logout", access_logout_path %></li>
-             <%end%>
-           </ul>
-        </div>
-      </div> <!-- .container -->
-    </nav>
-    <div class="container">
-      <div class="row">
-        <% if !flash[:error].blank? %>
-          <div class="alert alert-danger">
-            <%= flash[:error] %>    
-          </div>
-        <% end %>
-        <% if !flash[:notice].blank? %>
-          <div class="alert alert-success">
-            <%= flash[:notice] %>
-          </div>
-        <% end %>
-        <div class="container main-container">
-  	     <%= yield %>
-        </div>
-  	  </div>
-    </div>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-  </body>
+<head>
+<title>Foretoken<%= " | #{@page_title}" if @page_title %></title>
+
+<%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' %>
+
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+
+<%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css", media: 'all', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
+
+<%= javascript_include_tag 'highcharts', 'data-turbolinks-track' => true %>
+
+
+
+<%= csrf_meta_tags %>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+<body>
+<nav class="navbar navbar-inverse" role="navigation">
+<div class="container">
+<div class="navbar-header">
+<%= link_to "Foretoken", access_index_path(:user_id => session[:user_id]) , :class => "navbar-brand" %>
+</div>
+<div class="collapse navbar-collapse">
+<ul class="nav navbar-nav">
+<li><%= link_to("About", '#', :id => 'username') %></li>
+<% if session[:user_id] %>
+<li><%= link_to "Logout", access_logout_path %></li>
+<%end%>
+</ul>
+</div>
+</div> <!-- .container -->
+</nav>
+<div class="container">
+<div class="row">
+<% if !flash[:error].blank? %>
+<div class="alert alert-danger">
+<%= flash[:error] %>
+</div>
+<% end %>
+<% if !flash[:notice].blank? %>
+<div class="alert alert-success">
+<%= flash[:notice] %>
+</div>
+<% end %>
+<div class="container main-container">
+<%= yield %>
+</div>
+</div>
+</div>
+</body>
 </html>

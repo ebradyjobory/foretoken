@@ -1,17 +1,16 @@
 <% @page_title = "Login" %>
 
 <div class="col-md-12 signin">
-	<h1>Login</h1>
 	<%= form_tag(:action => 'attempt_login', :class => "form-horizontal") do |f| %>
-		<div class="form-group">
-			<%= label_tag(:email, "Email") %>
+		<div class="btn-space">
+			<%= label_tag(:email, "Email", :class => "col-md-12")%>
 			<%= text_field_tag(:email) %>
 		</div>
-		<div class="form-group">
-			<td><%= label_tag(:password, "Password") %>
+		<div>
+			<td><%= label_tag(:password, "Password", :class => "col-md-12") %>
 			<td><%= password_field_tag(:password) %>
 		</div>
 		<%= submit_tag('Log In', :class => "btn btn-primary login_btn") %>
 	<%end%>
 	<%= link_to 'Sign Up', new_user_path, :class => "btn btn-success signup_btn" %>
-</div>
+</div> <!-- .signin -->

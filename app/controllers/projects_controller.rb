@@ -4,19 +4,21 @@ class ProjectsController < ApplicationController
   before_action :set_user
 
   def index
-  	@projects = @user.projects
+  	@projects = Project.all(:user_id => session[:user_id]).includes(:user)
   end
 
   def new
-  	@project = Project.new(:user_id => @user.id)
+    @user = User.find(session[:user_id])
+  	@project = @user.projects.new
   end
 
   def create
-  	@project = Project.new(project_params)
+    @user = User.find(session[:user_id])
+    @project = @user.projects.new(project_params)
   	if @project.save
-  		@user.projects << @project
-  		flash[:notice] = "Project was created successfully. Click on the new project to start forecasting."
-  		redirect_to(:controller => 'access', :action => 'index', :user_id => session[:user_id])
+  		flash[:notice] = "Project was created successfully."
+  		redirect_to(:controller => 'forecasts', :action => 'index', 
+                  :user_id => session[:user_id], :project_id => @project.id)
   	else
   		render('new')
   	end

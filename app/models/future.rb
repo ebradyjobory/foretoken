@@ -6,11 +6,11 @@ class Future < ActiveRecord::Base
 
 
 	def to_be_forcasted
-	    Future.where(:project_id => project.id)
+	    project.futures
 	end
 
 	def project_forecast
-		Forecast.where(:project_id => project_id)	
+		project.forecasts	
 	end
 
 	def mean
@@ -56,11 +56,12 @@ class Future < ActiveRecord::Base
 	end	
 
 	def first_future_year
-		future_years = []
-		to_be_forcasted.each do |i|
-			future_years << i.future_year
-		end
-		future_years[0]
+		to_be_forcasted[0]
+		# future_years = []
+		# to_be_forcasted.each do |i|
+			# future_years << i.future_year
+		# end
+		# future_years[0]
 	end
 
 	def last_entry_year_id
@@ -68,7 +69,7 @@ class Future < ActiveRecord::Base
 		last_entry_year_id = last_entry.id	
 	end
 
-	def timer(i) # i = 1877
+	def timer(i) # i = ex. 1877
 		years_diff = i - project_forecast.last.year 
 		timer = last_entry_year_time + years_diff
 	end

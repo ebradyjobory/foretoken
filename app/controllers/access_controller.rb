@@ -4,7 +4,8 @@ class AccessController < ApplicationController
 
 
   def index
-  	@user = User.find(session[:user_id])
+    @user = User.find(session[:user_id])
+    @projects = @user.projects
   end
 
   def login

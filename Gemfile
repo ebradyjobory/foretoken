@@ -7,6 +7,10 @@ gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 
 gem 'coffee-rails', '~> 4.0.0'
+gem 'unicorn'
+
+gem 'figaro'
+gem 'mandrill-api'
 
 gem 'jquery-rails'
 gem 'turbolinks'
@@ -21,6 +25,11 @@ group :production do
   gem 'pg', '0.15.1'
   gem 'rails_12factor', '0.0.2'
 end
+
+group :development do
+  gem 'bullet'
+end
+
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'

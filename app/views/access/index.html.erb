@@ -1,16 +1,16 @@
 <% @page_title = "Main Menu" %>
 
-<div class="main-menu col-md-5">
+<div class="main-menu col-md-4">
 	<h3>Welcome <strong><%= link_to @user.email, edit_user_path(@user)  %></strong></h3>
-	<p>You have <%= pluralize(@user.projects.size, 'project') %></p>
-	<% if @user.projects.size == 0 %>
+	<p>You have <%= pluralize(@projects.size, 'project') %></p>
+	<% if @projects.size == 0 %>
 		<p>Start forecasting by creating a new project.</p>
 	<%end%>
-	<% if @user.projects.size == 0 %>
+	<% if @projects.size == 0 %>
 	<%else%>
 		<table class="table table-hover">
 			</tbody>
-				<% @user.projects.each do |project| %>
+				<% @projects.each do |project| %>
 				  <tr>
 				    <td><%= link_to project.name, user_project_forecasts_path(project.user.id, project), :class => "btn btn-default col-md-10" %></td>			
 				  </tr>

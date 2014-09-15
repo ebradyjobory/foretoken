@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :confirm_logged_in, :except => [:new, :create]
 
   def index
-    @users = User.all
+    @users = User.all.includes(:projects)
   end
 
   def new

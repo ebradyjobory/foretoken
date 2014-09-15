@@ -4,15 +4,17 @@ class Forecast < ActiveRecord::Base
 
 	validates :year, :presence => true
 	validates :value, :presence => true
-
-
+	
 	def project_forecast
-		@forecast_data = Forecast.where(:project_id => project_id)	
+		@forecast_data = project.forecasts	
+	end
+	def to_be_forcasted
+	    project.futures
 	end
 
-	def project_future
-		@future_data = Future.where(:project_id => project_id)
-	end
+	# def project_future
+	# 	@future_data = project.future
+	# end
 
 	def mean
 		values = []
@@ -71,55 +73,57 @@ class Forecast < ActiveRecord::Base
 	end
 
 	def b0
-		b0 = mean  - (b1*tbar)
+		b0 = mean - (b1*tbar)
 	end
 
-	def xhat
-	    b0 + (b1 * time)
-	end
+	# def xhat
+	#     b0 + (b1 * time)
+	# end
 
-	def x_xhatsq
-		(value - xhat)**2
-	end
+	# def x_xhatsq
+	# 	(value - xhat)**2
+	# end
 
-	def xhat_xbarsq
-		(xhat - mean)**2	
-	end
+	# def xhat_xbarsq
+	# 	(xhat - mean)**2	
+	# end
 
-	def x_xbarsq
-		(value - mean)**2	
-	end
+	# def x_xbarsq
+	# 	(value - mean)**2	
+	# end
 
 
 	#calculating R^2
-	def sse
-	 sum_sse = 0
-     project_forecast.each do |i|
-     sum_sse += i.x_xhatsq
-     end
-     @sse = sum_sse # SSE	
-	end
+	# def sse
+	#  sum_sse = 0
+ #     project_forecast.each do |i|
+ #     sum_sse += i.x_xhatsq
+ #     end
+ #     @sse = sum_sse # SSE	
+	# end
 	
-	def ssr
-	 sum_ssr = 0
-     project_forecast.each do |i|
-     sum_ssr += i.xhat_xbarsq
-     end
-     @ssr = sum_ssr # SSR
-	end
+	# def ssr
+	#  sum_ssr = 0
+ #     project_forecast.each do |i|
+ #     sum_ssr += i.xhat_xbarsq
+ #     end
+ #     @ssr = sum_ssr # SSR
+	# end
 
-	def sst
-	 sum_sst = 0
-     project_forecast.each do |i|
-     sum_sst += i.x_xbarsq
-     end
-     @sst = sum_sst # SST 	
-	end 
+	# def sst
+	#  sum_sst = 0
+ #     project_forecast.each do |i|
+ #     sum_sst += i.x_xbarsq
+ #     end
+ #     @sst = sum_sst # SST 	
+	# end 
      
-    def r2
-      # Calculating R^2 ( R^2 = 1 - (SSE / SST))
-      1 - (sse / sst)	
-    end 
+    # def r2
+    #   # Calculating R^2 ( R^2 = 1 - (SSE / SST))
+    #   1 - (sse / sst)	
+    # end 
+
+
     
 
 end
