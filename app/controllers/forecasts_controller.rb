@@ -78,15 +78,19 @@ class ForecastsController < ApplicationController
 
   def edit
   	@forecast = Forecast.find(params[:id])
+    @forecasts = @project.forecasts
+    @current_user = @project.user
   end
 
   def update
     @forecast = Forecast.find(params[:id])
     if @forecast.update_attributes(params_forecast)
-      flash[:notice] = "Forecast updated successfully."
-      redirect_to user_project_forecasts_path(@forecast.project.user.id, @forecast.project.id)
+      flash[:notice] = "Data was updated successfully."
+      @forecasts = @project.forecasts
+      @current_user = @project.user
+      # redirect_to user_project_forecasts_path(@forecast.project.user.id, @forecast.project.id)
     else
-      render('edit')
+      # render('edit')
     end
   end
 

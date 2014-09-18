@@ -18,8 +18,8 @@
 
 $(document).ready(function(){
 
-	$('.new_forecast').on('click', function(){
-		$('#crud').fadeIn();
+	$('.new_forecast, .edit_forecast').on('click', function(){
+		$('#crud').fadeToggle();
 	});
 
  });

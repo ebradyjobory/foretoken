@@ -17,14 +17,14 @@
               <tr>
                 <td><%= forecast.year %></td>
                 <td><%= forecast.value %></td>
-                <td><%= link_to "Edit", edit_user_project_forecast_path(:user_id => @current_user.id, :project_id => forecast.project.id, :id => forecast.id), :class => "btn btn-success", :id => "editAction" , :remote => true %></td>
+                <td><%= link_to "Edit", edit_user_project_forecast_path(:user_id => @current_user.id, :project_id => forecast.project.id, :id => forecast.id), :class => "btn btn-success edit_forecast", :id => "editAction" , :remote => true %></td>
                 <td><%= link_to "Delete", forecast_path(:project_id => forecast.project.id, :id => forecast.id), method: :delete, data: { confirm: 'Are you sure?'}, :class=>"btn btn-danger delete", :id => "delete", :remote => true %></td>
               </tr>
             <% end %>
           </tbody>
     </table>
   </div>
-</div> <!-- .input-area -->    
+</div> <!-- .input-area -->  
     <div class="col-md-12">
       <%= link_to "Add New Data", new_user_project_forecast_path(:user_id => @project.user.id, :project_id => @project.id), :class => "btn btn-primary new-data-btn new_forecast", :remote => true %>
   </div>

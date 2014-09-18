@@ -1,27 +1,22 @@
-// in case of error, stop an posting and show error msg
+// update ----->
+// in case of error, stop any posting and show error msg
 <% if @forecast.errors.any? -%>
   $('#flash').fadeOut().removeClass('alert-success');
   $('#flash').html("<%= escape_javascript(error_messages_for(@forecast)) %>");
   $('#flash').fadeIn();
 <% else -%>
-  // remove the partial form
-  $('#crud').fadeOut();
-  // clear the form 
-  $(":input:not(input[type=submit])").val("");
+  $('#flash').fadeOut();
   // insert the new data line at the bottom of the list
   // create new line
   // update the new line with the new data
   // attach the new line to the table
+ $(".input-area").html("<%= escape_javascript(render(:partial => "forecast"))%>");
 
-  
-  $('.forecast-table').find('tbody')
-   .append($('<tr>')
-    .append($('<td><%= @forecast.year %></td>'))
-      .append($('<td><%= @forecast.value %></td>'))
-      .append($('<td>').append($('#editAction')))
-        .append($('<td>').append($('#delete')))       
-  );
-
+ 
+  // remove the partial form
+  $('#crud').fadeOut();
+  // clear the form 
+  $(":input:not(input[type=submit])").val("");
   // show flash msg of success
   $('#flash').fadeOut(); // if any previous flash is present
   // attach the new flash content 
