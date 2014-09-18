@@ -15,15 +15,14 @@
 //= require turbolinks
 //= require_tree .
 
-// $(document).ready(function(){
 
-// 	$("#crud").hide();
+$(document).ready(function(){
 
-// 	$('.editAction').on('click', function(){
-// 		$("#crud").fadeToggle();
-// 	});
+	$('.new_forecast').on('click', function(){
+		$('#crud').fadeIn();
+	});
 
-// });
+ });
 // The plan for forecast page view:
 
 //  1- Hide the input area for both forecast 

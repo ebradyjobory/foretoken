@@ -19,7 +19,16 @@
 	margin-top: 100px;
 }
 
+#flash {
+	display: none;
+}
+
+.hide {
+	display: none;
+}
+
 #crud {
+	display: none;
 	position: absolute;
 	right: 0px;
 }

@@ -1,3 +1,5 @@
 $('.delete').bind('ajax:success', function() {  
         $(this).closest('tr').fadeOut();
+		$("#flash").html("<%= escape_javascript(flash[:notice])%>");
+		$("#flash").fadeIn();
 });  

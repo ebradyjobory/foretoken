@@ -6,7 +6,7 @@ class Forecast < ActiveRecord::Base
 	validates :value, :presence => true
 	
 	def project_forecast
-		@forecast_data = project.forecasts	
+	    project.forecasts	
 	end
 	def to_be_forcasted
 	    project.futures

@@ -9,6 +9,8 @@ class ForecastsController < ApplicationController
     @futures = @project.futures
     @current_user = @project.user
 
+    @forecast = Forecast.new
+
     if @forecasts.empty?
       render new_project_forecast_path(:project_id => @project.id)
     else
@@ -58,8 +60,6 @@ class ForecastsController < ApplicationController
     @regression = regression  
   end
 
-
-
   def new
     @project = Project.find(params[:project_id])
     @forecast = @project.forecasts.new
@@ -69,11 +69,10 @@ class ForecastsController < ApplicationController
     @project = Project.find(params[:project_id])
     @forecast = @project.forecasts.new(params_forecast)
   	if @forecast.save
-  		flash[:notice] = "Forecast was created successfully"
-  		redirect_to user_project_forecasts_path(:user_id => session[:user_id],  
-                                              :project_id => @project.id)
+  		flash[:notice] = "Data was created successfully"
   	else
-  		render('new')
+       flash[:error] = "Opps. Something's wrong!"
+  		 # render('new')
   	end
   end
 
@@ -96,17 +95,19 @@ class ForecastsController < ApplicationController
   # end
 
   def destroy
-    if forecast = Forecast.find(params[:id]).destroy
-    flash[:notice] = "Forecast deleted successfully."
-     respond_to do |format|
-      format.html { redirect_to user_project_forecasts_path(@forecast.project.user.id, @forecast.project.id) }
-      format.json { head :no_content }
-      format.js   { render :layout => false }
-       end
-  else
-    # redirect_to(:action => 'index', :project_id => @project.id)
-  end
-end
+    @forecast = Forecast.find(params[:id])
+    # respond_to do |format|
+    @forecast.destroy
+    flash[:notice] = "Data deleted successfully."
+    #     format.html { redirect_to user_project_forecasts_path(:user_id => session[:user_id],  
+    #                                           :project_id => @project.id)}
+    #     format.json { head :no_content }
+    #     format.js   { render :layout => false }
+    #   else
+    # # redirect_to(:action => 'index', :project_id => @project.id)
+    #   end
+    end
+
 
   private
 
