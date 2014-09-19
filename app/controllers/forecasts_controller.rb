@@ -8,8 +8,8 @@ class ForecastsController < ApplicationController
     @forecasts = @project.forecasts
     @futures = @project.futures
     @current_user = @project.user
-
     @forecast = Forecast.new
+    @future = Future.new
 
     if @forecasts.empty?
       render new_project_forecast_path(:project_id => @project.id)

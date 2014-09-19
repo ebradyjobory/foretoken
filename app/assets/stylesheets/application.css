@@ -16,7 +16,7 @@
 */
 
 .main-container {
-	margin-top: 100px;
+	margin-top: 50px;
 }
 
 #flash {
@@ -28,10 +28,15 @@
 }
 
 #crud {
-	display: none;
 	position: absolute;
-	right: 0px;
+	margin: 500px 0px 0px 400px;
+	z-index: 1;
 }
+#crud_forecasted {
+	position: absolute;
+	margin: 800px 0px 0px 400px;
+}
+
 .main-menu {
  	margin: 0px auto;
  }
@@ -63,11 +68,6 @@ table {
  	margin-top: 10px;
  }
 
-/* .lightbox {
- 	padding: 100px 200px;
- 	background-color: #bdc3c7;
- 	display: none;
- }*/
 
  .input-area {
  	margin-top: -50px;
@@ -77,4 +77,5 @@ table {
  .future-input {
  	margin-top: 50px;
  }
+
 

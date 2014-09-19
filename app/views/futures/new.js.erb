@@ -1,0 +1,3 @@
+$(":input:not(input[type=submit])").val("");
+
+$("#crud_forecasted").html("<%= escape_javascript(render(:partial => "futures/form"))%>");

@@ -15,14 +15,29 @@
 //= require turbolinks
 //= require_tree .
 
-
 $(document).ready(function(){
 
-	$('.new_forecast, .edit_forecast').on('click', function(){
-		$('#crud').fadeToggle();
+	// $('.new_forecast, .edit_forecast').on('click', function(){
+	// 	$('#crud').toggle();
+	// });
+
+
+	// $('#new_future, #edit_future').on('click', function(){
+	// 	$('#crud_forecasted').toggle();
+	// });
+
+
+	$('#chart').on('click', '#chart-input', function(){
+		$(this).load();
+
 	});
 
- });
+
+});
+
+	
+
+
 // The plan for forecast page view:
 
 //  1- Hide the input area for both forecast 

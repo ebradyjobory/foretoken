@@ -1,0 +1,3 @@
+$(":input:not(input[type=submit])").val("");
+
+$("#crud").html("<%= escape_javascript(render(:partial => "form"))%>");

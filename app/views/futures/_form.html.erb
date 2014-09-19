@@ -1,11 +1,7 @@
 <%= error_messages_for(@future) %>
 
-<div class="col-md-12 back">
-  <%= link_to "Back to Forecasts' page", user_project_forecasts_path(:user_id => session[:user_id]), :class => "btn btn-default" %>
-</div>
-
 <div class="col-md-12" >
-	<%= form_for [@project, @future] do |f| %>
+	<%= form_for [@project, @future], :remote => true do |f| %>
 		<div>
 		  <%= f.label :future_year %>
 		  <%= f.text_field :future_year %>

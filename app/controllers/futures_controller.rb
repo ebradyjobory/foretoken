@@ -5,6 +5,9 @@ class FuturesController < ApplicationController
 
   def index
   	@futures = @project.futures
+    @future = @project.futures.new
+    @current_user = @project.user
+
   end
 
   def new
@@ -17,8 +20,8 @@ class FuturesController < ApplicationController
     @future = @project.futures.new(params_future)
   	if @future.save
   		flash[:notice] = "Future was created successfully"
-  		redirect_to user_project_forecasts_path(:user_id => session[:user_id],  
-                                              :project_id => @project.id)
+  		# redirect_to user_project_forecasts_path(:user_id => session[:user_id],  
+                                              # :project_id => @project.id)
   	else
   		render('new')
   	end
@@ -26,30 +29,33 @@ class FuturesController < ApplicationController
 
   def edit
   	@future = Future.find(params[:id])
+    @current_user = @project.user
   end
 
   def update
     @future = Future.find(params[:id])
+    @current_user = @project.user
+
     if @future.update_attributes(params_future)
       flash[:notice] = "Future updated successfully."
-      redirect_to user_project_forecasts_path(:user_id => session[:user_id],  
-                                              :project_id => @project.id)
+      # redirect_to user_project_forecasts_path(:user_id => session[:user_id],  
+                                              # :project_id => @project.id)
     else
       render('edit')
     end
   end
 
-  def delete
-    @project = Project.find(params[:project_id])
-    @future = @project.futures.find(params[:id])
-  end
+  # def delete
+  #   @project = Project.find(params[:project_id])
+  #   @future = @project.futures.find(params[:id])
+  # end
 
   def destroy
-    @project = Project.find(params[:project_id])
-    @future = @project.futures.find(params[:id]).destroy
+    @future = Future.find(params[:id])
+    @future.destroy
     flash[:notice] = "Future data deleted successfully."
-    redirect_to user_project_forecasts_path(:user_id => session[:user_id],  
-                                              :project_id => @project.id)  
+    # redirect_to user_project_forecasts_path(:user_id => session[:user_id],  
+                                              # :project_id => @project.id)  
   end
 
 
