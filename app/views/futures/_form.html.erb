@@ -1,14 +1,9 @@
 <%= error_messages_for(@future) %>
 
-<div class="col-md-12" >
 	<%= form_for [@project, @future], :remote => true do |f| %>
-		<div>
-		  <%= f.label :future_year %>
-		  <%= f.text_field :future_year %>
-		</div>
-		<br>
-		<%= f.button :submit, :class => "btn btn-primary" %>
+	  <%= f.text_field :future_year %>
+	  <%= f.submit "Save", :class => "btn btn-primary" %>
 	<%end%>
-</div>
+
 
 

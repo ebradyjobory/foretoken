@@ -1,5 +1,7 @@
 class ForecastsController < ApplicationController
 
+  respond_to :html, :json
+
   before_action :confirm_logged_in
 	before_action :set_project
   before_action :check_value, :only => [:index]
@@ -86,8 +88,10 @@ class ForecastsController < ApplicationController
     @forecast = Forecast.find(params[:id])
     if @forecast.update_attributes(params_forecast)
       flash[:notice] = "Data was updated successfully."
-      @forecasts = @project.forecasts
-      @current_user = @project.user
+      # @forecasts = @project.forecasts
+      # @current_user = @project.user
+
+      respond_with @forecast
       # redirect_to user_project_forecasts_path(@forecast.project.user.id, @forecast.project.id)
     else
       # render('edit')

@@ -27,15 +27,19 @@
 	display: none;
 }
 
-#crud {
+#crud, #crud_forecasted {
+	display: none;
+}
+
+/*#crud {
 	position: absolute;
 	margin: 500px 0px 0px 400px;
 	z-index: 1;
-}
-#crud_forecasted {
+}*/
+/*#crud_forecasted {
 	position: absolute;
 	margin: 800px 0px 0px 400px;
-}
+}*/
 
 .main-menu {
  	margin: 0px auto;

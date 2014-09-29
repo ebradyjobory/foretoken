@@ -1,20 +1,12 @@
 <%= error_messages_for(@forecast) %>
 
-<div class="col-md-12" >
-	<%= form_for [@project, @forecast], :remote => true do |f| %>
-
-		<div>
-		  <%= f.label :year %><br>
+	<%= form_for [@project, @forecast], :remote => true do |f| %> 
 		  <%= f.text_field :year %>
-		</div>
-		<div>
-		  <%= f.label :value %><br>
 		  <%= f.text_field :value %>
-		</div>
-		<br>
-		<%= f.button :submit, :class => "btn btn-primary submit" %>
+
+		  <%= f.submit "Save", :class => "btn btn-primary submit" %>
 	<%end%>
-</div>
+
 
 
 

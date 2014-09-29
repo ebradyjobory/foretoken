@@ -1,5 +1,6 @@
 class FuturesController < ApplicationController
-
+  
+  respond_to :html, :json
 	before_action :confirm_logged_in
   before_action :set_project
 
@@ -23,7 +24,7 @@ class FuturesController < ApplicationController
   		# redirect_to user_project_forecasts_path(:user_id => session[:user_id],  
                                               # :project_id => @project.id)
   	else
-  		render('new')
+     flash[:error] = "Opps. Something's wrong!"
   	end
   end
 
@@ -34,12 +35,13 @@ class FuturesController < ApplicationController
 
   def update
     @future = Future.find(params[:id])
-    @current_user = @project.user
+    # @current_user = @project.user
 
     if @future.update_attributes(params_future)
       flash[:notice] = "Future updated successfully."
-      # redirect_to user_project_forecasts_path(:user_id => session[:user_id],  
-                                              # :project_id => @project.id)
+      # redirect_to user_project_forecasts_path(:user_id => session[:user_id],     
+                                        # :project_id => @project.id)
+    respond_with @forecast
     else
       render('edit')
     end

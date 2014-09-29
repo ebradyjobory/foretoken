@@ -11,6 +11,7 @@ gem 'unicorn'
 
 gem 'figaro'
 gem 'mandrill-api'
+gem 'best_in_place', github: 'aaronchi/best_in_place'
 
 gem 'jquery-rails'
 gem 'turbolinks'

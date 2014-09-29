@@ -1,11 +1,12 @@
-// in case of error, stop an posting and show error msg
+// in case of error, stop any posting and show error msg
+
 <% if @future.errors.any? -%>
   $('#flash').fadeOut().removeClass('alert-success');
   $('#flash').html("<%= escape_javascript(error_messages_for(@future)) %>");
   $('#flash').fadeIn();
 <% else -%>
   // remove the partial form
-  // $('#crud_forecasted').fadeOut();
+  $('#crud_forecasted').fadeOut();
   // clear the form 
   $(":input:not(input[type=submit])").val("");
   // insert the new data line at the bottom of the list
@@ -18,7 +19,7 @@
    .append($('<tr>')
     .append($('<td><%= @future.future_year %></td>'))
       .append($('<td><%= @future.forecasted %></td>'))
-      .append($('<td>').append($('#edit_future')))
+    // .append($('<td>').append($('#edit_future')))
         .append($('<td>').append($('#delete_future')))       
   );
 

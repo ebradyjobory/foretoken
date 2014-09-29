@@ -11,11 +11,14 @@
 // about supported directives.
 //
 //= require jquery
+//= require best_in_place
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
 
 $(document).ready(function(){
+
+	$(".best_in_place").best_in_place();
 
 	// $('.new_forecast, .edit_forecast').on('click', function(){
 	// 	$('#crud').toggle();
@@ -27,10 +30,10 @@ $(document).ready(function(){
 	// });
 
 
-	$('#chart').on('click', '#chart-input', function(){
-		$(this).load();
+	// $('#chart').on('click', '#chart-input', function(){
+	// 	$(this).load();
 
-	});
+	// });
 
 
 });

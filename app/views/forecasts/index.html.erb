@@ -35,18 +35,16 @@
 
 <% if @forecasts.size < 2 %> 
 <%else%>
-  <div class="col-md-12 btn-space">
+<!--   <div class="col-md-12 btn-space">
     <%= link_to "Update Forecast Chart", '#', :id => 'chart', :class => "btn btn-primary" %>
-  </div>
-    <div id="chart-input" class="col-md-12"></div>
+  </div> -->
+   <!--  <div id="chart-input" class="col-md-12"></div> -->
 <%end%>
  <!-- End of Graph Area -->
  <!-- data input -->
 <div id="forecasts" class="hide"><%= render 'forecast' %></div>
-<div id="crud"><%= render 'form' %></div>
-
 <div class="input-area">
-  <div class="col-md-4">
+  <div class="col-md-6">
     <table class="table table-hover forecast-table">
       <thead>
         <tr>
@@ -57,14 +55,15 @@
       <tbody>
         <% @forecasts.each do |forecast| %>
           <tr>
-            <td><%= forecast.year %></td>
-            <td><%= forecast.value %></td>
-            <td><%= link_to "Edit", edit_user_project_forecast_path(:user_id => @current_user.id, :project_id => forecast.project.id, :id => forecast.id), :class => "btn btn-success edit_forecast", :id => "editAction" , :remote => true %></td>
+            <td><%= best_in_place forecast, :year %></td>
+            <td><%= best_in_place forecast, :value %></td>
+            <!-- <td><%= link_to "Edit", edit_user_project_forecast_path(:user_id => @current_user.id, :project_id => forecast.project.id, :id => forecast.id), :class => "btn btn-success edit_forecast", :id => "editAction" , :remote => true %></td> -->
             <td><%= link_to "Delete", forecast_path(:project_id => forecast.project.id, :id => forecast.id), method: :delete, data: { confirm: 'Are you sure?'}, :class=>"btn btn-danger delete", :id => "delete", :remote => true %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
+    <div id="crud"><%= render 'form' %></div>     
   </div>
 </div> <!-- .input-area -->  
 <div class="col-md-12">
@@ -80,7 +79,6 @@
  </div> -->
 
 <!-- Forecasted data input  -->  
-<div id="crud_forecasted"><%= render 'futures/form' %></div>
 <div id="futures" class="hide"><%= render 'futures/future' %></div>
 
 <% if @futures.empty? %>
@@ -102,24 +100,23 @@
          <tr>
           <% @project.futures.each do |future| %>
           <tr>
-            <td><%= future.future_year %></td>
+            <td><%= best_in_place future, :future_year %></td>
             <!-- <td><%= future.time %></td> -->
             <td><%= number_with_precision(future.forecasted, :precision => 2) %></td>
-            <td><%= link_to "Edit", edit_user_project_future_path(:user_id => @current_user.id, :project_id => future.project.id, :id => future.id), :class=>"btn btn-success", :remote => true, :id => "edit_future" %></td>
+            <!-- <td><%= link_to "Edit", edit_user_project_future_path(:user_id => @current_user.id, :project_id => future.project.id, :id => future.id), :class=>"btn btn-success", :remote => true, :id => "edit_future" %></td> -->
             <td><%= link_to "Delete", future_path(:project_id => future.project.id, :id => future.id), method: :delete, data: { confirm: 'Are you sure?'}, :class=>"btn btn-danger delete", :remote => true, :id => "delete_future" %></td>
           </tr>
           <%end%>
          </tr>
         </tbody>
       </table>
-      <div class="col-md-12">
+      <div id="crud_forecasted"><%= render 'futures/form' %></div>
        <%= link_to "Add more to forecast", new_user_project_future_path(:user_id => @project.user.id, :project_id => @project.id), :class => "btn btn-primary", :remote => true, :id => "new_future" %>
-      </div>
     </div>
   </div>
 </div> <!-- .forecasted_area --> 
 <%end%>
-<div class="col-md-12 btn-space">
+<div class="btn-space">
   <%= link_to 'Delete this project', @project, method: :delete, data: { confirm: 'Are you sure you want to delete the whole project?'}, :class => "btn btn-danger" %>
 </div>
 
