@@ -15,71 +15,72 @@
 *= require_self
 */
 
-.main-container {
-	margin-top: 50px;
+.container {
+	width: 90%;
+	margin: 20px auto;
+}
+
+.navbar {
+	padding: 30px 20px;
+	background-color: #2c3e50;
+}
+
+#logo {
+	float: left;
+}
+
+#logo a {
+	color: #ecf0f1;
+	text-decoration: none;
+}
+
+.container ul {
+	float: right;
+}
+
+.container ul li {
+	display: inline;
+}
+
+.navbar li a {
+	color: #ecf0f1;
+	text-decoration: none;
 }
 
 #flash {
 	display: none;
+	color: #ecf0f1;
 }
 
-.hide {
+.success {
+	padding: 10px 10px;
+	background-color: #27ae60;
+	border-radius: 5px;
+}
+
+.error {
+	padding: auto 20px;
+	background-color: #c0392b;	
+	border-radius: 5px;
+}
+
+
+#crud, #crud_forecasted, #resultsBox, #projects, .hide {
 	display: none;
 }
 
-#crud, #crud_forecasted {
-	display: none;
+
+input {
+	width: 50px;
 }
 
-/*#crud {
-	position: absolute;
-	margin: 500px 0px 0px 400px;
-	z-index: 1;
-}*/
-/*#crud_forecasted {
-	position: absolute;
-	margin: 800px 0px 0px 400px;
-}*/
+table, th, td {
+   border: 1px solid black;
+   padding: 5px;
 
-.main-menu {
- 	margin: 0px auto;
- }
-
+} 
 table {
- 	align: left;
- }
-
-.btn-space {
- 	margin: 20px 0 20px 0;
- }
-
-.signin {
- 	text-align: center;
- 	margin: 50px 0 0 -20px;
- }
-
-.signup {
-	margin-top: 40px;
-	text-align: center;
+  border-collapse: collapse;
 }
-
-.signup_field {
-	margin-bottom: 10px;
-}
-
-.login_btn, .signup_btn {
- 	width: 230px;
- 	margin-top: 10px;
- }
-
-
- .input-area {
- 	margin-top: -50px;
- 	/*display: none;*/
- }
-
- .future-input {
- 	margin-top: 50px;
- }
 
 

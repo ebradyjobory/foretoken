@@ -1,14 +1,14 @@
 // in case of error, stop any posting and show error msg
 
-<% if @forecast.errors.any? -%>
+<% if @project.errors.any? -%>
   $('#flash').html("<%= escape_javascript(flash[:notice]) %>").removeClass('success');
-  $('#flash').html("<%= escape_javascript(error_messages_for(@forecast)) %>");
+  $('#flash').html("<%= escape_javascript(error_messages_for(@project)) %>");
   $('#flash').fadeIn();
 <% else -%>
 
   $(":input:not(input[type=submit])").val("");
   // remove the partial form
-  $('#crud').fadeOut(100);
+  $('#projects').fadeOut(100);
   // clear the form 
   $(":input:not(input[type=submit])").val("");
   // insert the new data line at the bottom of the list
@@ -17,12 +17,10 @@
   // attach the new line to the table
 
 
-  $('.forecast-table').find('tbody')
-   .append($('<tr>')
-    .append($('<td><%= @forecast.year %></td>'))
-      .append($('<td><%= @forecast.value %></td>'))
-      // .append($('<td>').append($('#editAction')))
-         .append($('<td>').append($('#delete')))       
+  $('.projects-table').find('tbody')
+    .append($('<tr>')
+     .append($('<td><%= @project.name %></td>'))
+       .append($('<td>').append($('#showProject'))) 
   );
 
   // show flash msg of success

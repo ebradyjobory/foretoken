@@ -6,6 +6,7 @@ class AccessController < ApplicationController
   def index
     @user = User.find(session[:user_id])
     @projects = @user.projects
+    @project = Project.new
   end
 
   def login

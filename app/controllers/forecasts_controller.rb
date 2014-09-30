@@ -13,26 +13,21 @@ class ForecastsController < ApplicationController
     @forecast = Forecast.new
     @future = Future.new
 
-    if @forecasts.empty?
-      render new_project_forecast_path(:project_id => @project.id)
-    else
-       total_fcast_years = []
-       total_future_years = []
-       total_fcast_values = []
-       total_future_values = []
-       values = []
-       times = []
-      @forecasts.each do |forecast|
-        total_fcast_years << forecast.year
-        total_fcast_values << forecast.value
-        @values = values << forecast.value
-        @times = times << forecast.time
-        @b1   = forecast.b1
-        @tbar = forecast.tbar
-        @b0   = forecast.b0
-        # @r2   = forecast.r2
-       end
-     end
+    total_fcast_years = []
+    total_future_years = []
+    total_fcast_values = []
+    total_future_values = []
+    values = []
+    times = []
+    @forecasts.each do |forecast|
+      total_fcast_years << forecast.year
+      total_fcast_values << forecast.value
+      @values = values << forecast.value
+      @times = times << forecast.time
+      @b1   = forecast.b1
+      @tbar = forecast.tbar
+      @b0   = forecast.b0
+    end
     # Calculating total years and values for current project
     #  total_fcast_years = []
     #  total_future_years = []
@@ -46,20 +41,20 @@ class ForecastsController < ApplicationController
     #     @values = values << i.value
     #     @times = times << i.time
     #  end
-     @futures.each do |i|
+    @futures.each do |i|
       total_future_years << i.future_year
       total_future_values << i.forecasted
-     end
-     @total_years = total_fcast_years + total_future_years
-     @total_values = total_fcast_values + total_future_values
-    # end
+    end
+    @total_years = total_fcast_years + total_future_years
+    @total_values = total_fcast_values + total_future_values
 
     # Calculating regression line to be presented on chart
     regression = []
     @times.each do |time|
       regression <<  @b0 + (@b1 * time)
     end
-    @regression = regression  
+    @regression = regression
+
   end
 
   def new
@@ -72,6 +67,9 @@ class ForecastsController < ApplicationController
     @forecast = @project.forecasts.new(params_forecast)
   	if @forecast.save
   		flash[:notice] = "Data was created successfully"
+          if @project.forecasts.size == 1   
+              redirect_to(:action => 'index')
+          end
   	else
        flash[:error] = "Opps. Something's wrong!"
   		 # render('new')

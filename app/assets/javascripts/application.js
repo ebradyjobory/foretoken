@@ -18,22 +18,24 @@
 
 $(document).ready(function(){
 
+	// in-place editing function
 	$(".best_in_place").best_in_place();
 
-	// $('.new_forecast, .edit_forecast').on('click', function(){
-	// 	$('#crud').toggle();
-	// });
 
+	// show/hide the results box
+	$('#results').on('click', function(e){
+		e.preventDefault();
+		$('#resultsBox').fadeIn();
+		$('#InputBox').fadeOut();
+	});
 
-	// $('#new_future, #edit_future').on('click', function(){
-	// 	$('#crud_forecasted').toggle();
-	// });
+	$('#hideResults').on('click', function(e){
+		e.preventDefault();
+		$('#resultsBox').fadeOut();
+		$('#InputBox').fadeIn();
+	});
+	
 
-
-	// $('#chart').on('click', '#chart-input', function(){
-	// 	$(this).load();
-
-	// });
 
 
 });

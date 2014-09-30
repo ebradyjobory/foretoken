@@ -1,25 +1,22 @@
 <% @page_title = "Main Menu" %>
 
-<div class="main-menu col-md-4">
+<div class="main-menu">
 	<h3>Welcome <strong><%= link_to @user.email, edit_user_path(@user)  %></strong></h3>
 	<p>You have <%= pluralize(@projects.size, 'project') %></p>
-	<% if @projects.size == 0 %>
-		<p>Start forecasting by creating a new project.</p>
-	<%end%>
-	<% if @projects.size == 0 %>
-	<%else%>
-		<table class="table table-hover">
+		<table class="projects-table">
 			</tbody>
 				<% @projects.each do |project| %>
 				  <tr>
-				    <td><%= link_to project.name, user_project_forecasts_path(project.user.id, project), :class => "btn btn-default col-md-10" %></td>			
+				  	<td><%= link_to project.name, user_project_forecasts_path(project.user.id, project) %></td>		
 				  </tr>
 				<%end%>	
 			</tbody>
 	    </table>
-	<%end%> 
-</div>
-<div class="col-md-12">
-	 <%= link_to("Create new project", new_user_project_path(@user.id), :class => "btn btn-primary") %>
- </div>
+	    <div id="projects" >
+	   		<%= render 'projects/form' %>
+	    </div><!-- #projects -->
+</div><!-- .main-menu -->
+
+<%= link_to "Create new project", new_user_project_path(:user_id => @user.id) %>
+
 

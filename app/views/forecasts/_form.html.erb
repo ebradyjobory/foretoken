@@ -1,11 +1,19 @@
 <%= error_messages_for(@forecast) %>
-
+<% if @project.forecasts.size == 1 %>
+	<%= form_for [@project, @forecast] do |f| %> 
+		  <%= f.label :year, "Time" %>
+		  <%= f.text_field :year %>
+		  <%= f.label :value, "Data" %>
+		  <%= f.text_field :value %>
+		<%= f.submit "Save", :class => "" %>
+	<%end%>
+<%else%>
 	<%= form_for [@project, @forecast], :remote => true do |f| %> 
 		  <%= f.text_field :year %>
 		  <%= f.text_field :value %>
-
-		  <%= f.submit "Save", :class => "btn btn-primary submit" %>
+		<%= f.submit "Save", :class => "" %>
 	<%end%>
+<%end%>
 
 
 

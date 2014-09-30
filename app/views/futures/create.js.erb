@@ -18,7 +18,7 @@
   $('.future-table').find('tbody')
    .append($('<tr>')
     .append($('<td><%= @future.future_year %></td>'))
-      .append($('<td><%= @future.forecasted %></td>'))
+      // .append($('<td><%= @future.forecasted %></td>'))
     // .append($('<td>').append($('#edit_future')))
         .append($('<td>').append($('#delete_future')))       
   );
@@ -26,11 +26,11 @@
   // show flash msg of success
   $('#flash').fadeOut(); // if any previous flash is present
   // attach the new flash content 
-  $('#flash').html("<%= escape_javascript(flash[:notice]) %>").addClass('alert alert-success');
+  $('#flash').html("<%= escape_javascript(flash[:notice]) %>").addClass('success');
   $('#flash').fadeIn();
   $(function() {
       setTimeout(function(){
-          $('.alert').fadeOut();
+          $('#flash').fadeOut();
         }, 3000);
   });
 <% end -%>

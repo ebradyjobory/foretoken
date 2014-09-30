@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-
+  
 	before_action :confirm_logged_in
   before_action :set_user
 
@@ -17,9 +17,10 @@ class ProjectsController < ApplicationController
     @project = @user.projects.new(project_params)
   	if @project.save
   		flash[:notice] = "Project was created successfully."
-  		redirect_to(:controller => 'forecasts', :action => 'index', 
+  	  redirect_to(:controller => 'forecasts', :action => 'index', 
                   :user_id => session[:user_id], :project_id => @project.id)
   	else
+      flash[:notice] = "Something's wrong!"
   		render('new')
   	end
   end
@@ -48,8 +49,6 @@ class ProjectsController < ApplicationController
     redirect_to(:controller => 'access', :action => 'index', :user_id => session[:user_id])
   end
 
-
-
   private
 
   def set_user
@@ -59,8 +58,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-  	params.require(:project).permit(:name)
-  	
+  	params.require(:project).permit(:name)	
   end
 
 
