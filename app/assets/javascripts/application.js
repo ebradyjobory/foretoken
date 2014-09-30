@@ -19,23 +19,19 @@
 $(document).ready(function(){
 
 	// in-place editing function
-	$(".best_in_place").best_in_place();
+	// $(".best_in_place").best_in_place();
+	// $('.best_in_place')
+ //    .best_in_place()
+ //    .bind('ajax:success', function(e) {
+ //        location.reload();
+ //    });
 
-
-	// show/hide the results box
-	$('#results').on('click', function(e){
-		e.preventDefault();
-		$('#resultsBox').fadeIn();
-		$('#InputBox').fadeOut();
+	$('td').mouseover(function(){
+		$(this).addClass('pointer');
 	});
-
-	$('#hideResults').on('click', function(e){
-		e.preventDefault();
-		$('#resultsBox').fadeOut();
-		$('#InputBox').fadeIn();
+	$('td').mouseleave(function(){
+		$(this).removeClass('pointer');
 	});
-	
-
 
 
 });

@@ -13,10 +13,8 @@
   <body>
       <div class="container navbar">
         <nav>
-          <div id="logo">
-            <%= link_to "Foretoken", access_index_path(:user_id => session[:user_id])%>
-          </div><!-- #logo -->
           <ul>
+              <li><%= link_to "Foretoken", access_index_path(:user_id => session[:user_id])%></li>
               <li><%= link_to("About", '#', :id => 'username') %></li>
               <% if session[:user_id] %>
               <li><%= link_to "Logout", access_logout_path %></li>

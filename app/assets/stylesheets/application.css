@@ -21,21 +21,12 @@
 }
 
 .navbar {
-	padding: 30px 20px;
+	padding: 10px 20px;
 	background-color: #2c3e50;
 }
 
-#logo {
-	float: left;
-}
-
-#logo a {
-	color: #ecf0f1;
-	text-decoration: none;
-}
-
-.container ul {
-	float: right;
+.pointer {
+	cursor: pointer; /*Add something to show editing*/
 }
 
 .container ul li {
@@ -71,7 +62,7 @@
 
 
 input {
-	width: 50px;
+	width: 40px;
 }
 
 table, th, td {

@@ -1,34 +1,4 @@
 <% @page_title = "Forecasting Page" %>
-    <script>
-      $(document).ready(function() {
-          var chart1 = new Highcharts.Chart({
-              chart: {
-                  renderTo: 'chart-input',
-              },
-              title: {
-                  text: 'Results'
-              },
-              xAxis: {
-                  categories: <%= @total_years.each {|i| i.inspect}  %>,
-                  title: {
-                    text: "Time"
-                      },
-                     },   
-              yAxis: {
-                  title: {
-                      text: 'Data'
-                  }
-              },
-              series: [{
-                  name: "Input",
-                  data: <%= @total_values.each { |i| i.inspect} %>
-                }, {
-                  name: "Regression Line",
-                  data: <%= @regression.each { |i| i.inspect} %>
-              }]
-          });
-      });
-    </script>
 
 <!-- Results Area -->
 
@@ -137,5 +107,58 @@
 
     <%= link_to 'Delete this project', @project, method: :delete, data: { confirm: 'Are you sure you want to delete the whole project?'} %>
 </div><!--  #inputBox -->
+
+    <script>
+      $(document).ready(function() {
+          var chart1 = new Highcharts.Chart({
+              chart: {
+                  renderTo: 'chart-input',
+              },
+              title: {
+                  text: 'Results'
+              },
+              xAxis: {
+                  categories: <%= @total_years.each {|i| i.inspect}  %>,
+                  title: {
+                    text: "Time"
+                      },
+                     },   
+              yAxis: {
+                  title: {
+                      text: 'Data'
+                  }
+              },
+              series: [{
+                  name: "Input",
+                  data: <%= @total_values.each { |i| i.inspect} %>
+                }, {
+                  name: "Regression Line",
+                  data: <%= @regression.each { |i| i.inspect} %>
+              }]
+          });
+      });
+    </script>
+    <script>
+      // show/hide the results box
+      $('#results').on('click', function(e){
+        e.preventDefault();  
+        $('#resultsBox').fadeIn();
+        $('#InputBox').fadeOut();
+      });
+
+      $('#hideResults').on('click', function(e){
+        e.preventDefault();
+        $('#resultsBox').fadeOut();
+        $('#InputBox').fadeIn();
+      });
+    </script>
+    <script>
+    // reflect changes after updating data with best_in_place
+    $('.best_in_place')
+    .best_in_place()
+    .bind('ajax:success', function(e) {
+        location.reload();
+    });
+    </script>
 
 
