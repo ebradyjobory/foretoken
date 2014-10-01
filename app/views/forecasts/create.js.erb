@@ -26,6 +26,7 @@
   );
 
   // show flash msg of success
+  $('#flash').removeClass('error');
   $('#flash').fadeOut(); // if any previous flash is present
   // attach the new flash content 
   $('#flash').html("<%= escape_javascript(flash[:notice]) %>").addClass('success');
@@ -37,6 +38,7 @@
   });
 
   location.reload();
+  
 <% end -%>
  
 

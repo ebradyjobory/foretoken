@@ -38,27 +38,31 @@
     <%= render 'forecast' %>
   </div> <!-- #forecasts -->
       <table class="forecast-table">
-        <thead>
-          <tr>
-            <th>Time</th>
-            <th>Data</th>
-          </tr>
-        </thead>
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Data</th>
+            </tr>
+          </thead>
         <tbody>
           <% @forecasts.each do |forecast| %>
             <tr>
               <td><%= best_in_place forecast, :year %></td>
               <td><%= best_in_place forecast, :value %></td>
               <!-- <td><%= link_to "Edit", edit_user_project_forecast_path(:user_id => @current_user.id, :project_id => forecast.project.id, :id => forecast.id), :class => "btn btn-success edit_forecast", :id => "editAction" , :remote => true %></td> -->
-              <td><%= link_to "Delete", forecast_path(:project_id => forecast.project.id, :id => forecast.id), method: :delete, data: { confirm: 'Are you sure?'}, :class => "delete", :id => "delete", :remote => true %></td>
+              <% if @project.forecasts.size < 2 %>
+              <td><%= link_to "Delete", "#", :class => 'underDelete' %></td>
+              <%else%>
+              <td><%= link_to "Delete", forecast_path(:project_id => forecast.project.id, :id => forecast.id), method: :delete, data: { confirm: "Are you sure?" }, :class => "delete", :id => "delete", :remote => true %></td>
+              <%end%>
             </tr>
           <% end %>
         </tbody>
       </table>
       <div id="crud">
         <%= render 'form' %>
-      </div><!-- #crud -->     
-    <%= link_to "Add New Data", new_user_project_forecast_path(:user_id => @project.user.id, :project_id => @project.id), :class => "new_forecast", :remote => true %>
+      </div><!-- #crud -->   
+    <%= link_to "Add Time and Data", new_user_project_forecast_path(:user_id => @project.user.id, :project_id => @project.id), :class => "new_forecast", :remote => true %>
   <!-- **** Regression results ****-->  
   <!-- <div class="col-md-12 input-area">
     <h3>Regression Results</h3>
@@ -67,46 +71,40 @@
    <div class="col-md-12 input-area">
       <p>The regression of this data <i>R Squared</i>:  <strong><%= number_with_precision(@r2, :precision => 2) %>%</strong> of total variation explained by regression (higher R Squared = better fit) </p>
    </div> -->
+    <!-- Forecasted data input  -->  
+    <div id="futures" class="hide">
+      <%= render 'futures/future' %>
+    </div><!-- #futures -->
+    <div class="forecasted_area">
+          <table class="future-table">
+            <thead>
+             <tr>
+              <th>Future Time</th>
+             </tr>
+            </thead>
+            </tbody>
+             <tr>
+              <% @project.futures.each do |future| %>
+                <td><%= best_in_place future, :future_year %></td>
+                <!-- <td><%= future.time %></td> -->
+                <!-- <td><%= number_with_precision(future.forecasted, :precision => 2) %></td> -->
+                <!-- <td><%= link_to "Edit", edit_user_project_future_path(:user_id => @current_user.id, :project_id => future.project.id, :id => future.id), :class=>"btn btn-success", :remote => true, :id => "edit_future" %></td> -->
+                <td><%= link_to "Delete", future_path(:project_id => future.project.id, :id => future.id), method: :delete, data: { confirm: 'Are you sure?'}, :class=>"delete", :remote => true, :id => "delete_future" %></td>
+              </tr>
+              <%end%>
+            </tbody>
+          </table>
+          <div id="crud_forecasted">
+            <%= render 'futures/form' %>
+          </div><!-- #crud_forecasted -->
+          <%= link_to "Add data to be forecasted", new_user_project_future_path(:user_id => @project.user.id, :project_id => @project.id), :class => "", :remote => true %>
+          <!-- # <%= link_to "Add more to forecast", new_user_project_future_path(:user_id => @project.user.id, :project_id => @project.id), :class => "", :remote => true, :id => "new_future" %> -->
+    </div> <!-- .forecasted_area --> 
 
-  <!-- Forecasted data input  -->  
-  <div id="futures" class="hide">
-    <%= render 'futures/future' %>
-  </div><!-- #futures -->
+      <%= link_to "Show Results", "#", :id => "results" %>
 
-  <% if @futures.empty? %>
-         <%= link_to("Add data you want to forecast!", new_user_project_future_path(:user_id => @project.user.id, :project_id => @project.id), :class => "")%>
-  <%else%>
-
-  <div class="forecasted_area">
-        <table class="future-table">
-          <thead>
-           <tr>
-            <th>Future Time</th>
-           </tr>
-          </thead>
-          </tbody>
-           <tr>
-            <% @project.futures.each do |future| %>
-              <td><%= best_in_place future, :future_year %></td>
-              <!-- <td><%= future.time %></td> -->
-              <!-- <td><%= number_with_precision(future.forecasted, :precision => 2) %></td> -->
-              <!-- <td><%= link_to "Edit", edit_user_project_future_path(:user_id => @current_user.id, :project_id => future.project.id, :id => future.id), :class=>"btn btn-success", :remote => true, :id => "edit_future" %></td> -->
-              <td><%= link_to "Delete", future_path(:project_id => future.project.id, :id => future.id), method: :delete, data: { confirm: 'Are you sure?'}, :class=>"delete", :remote => true, :id => "delete_future" %></td>
-            </tr>
-            <%end%>
-          </tbody>
-        </table>
-        <div id="crud_forecasted">
-          <%= render 'futures/form' %>
-        </div><!-- #crud_forecasted -->
-        <%= link_to "Add more to forecast", new_user_project_future_path(:user_id => @project.user.id, :project_id => @project.id), :class => "", :remote => true, :id => "new_future" %>
-  </div> <!-- .forecasted_area --> 
-  <%end%>
-
-    <%= link_to "Show Results", "#", :id => "results" %>
-
-    <%= link_to 'Delete this project', @project, method: :delete, data: { confirm: 'Are you sure you want to delete the whole project?'} %>
-</div><!--  #inputBox -->
+      <%= link_to 'Delete this project', @project, method: :delete, data: { confirm: 'Are you sure you want to delete the whole project?'} %>
+  </div><!--  #inputBox -->
 
     <script>
       $(document).ready(function() {
@@ -141,9 +139,16 @@
     <script>
       // show/hide the results box
       $('#results').on('click', function(e){
-        e.preventDefault();  
-        $('#resultsBox').fadeIn();
+        e.preventDefault();
+        var forecastSize = ('<%= @project.forecasts.size %>');
+        var futureSize = ('<%= @project.futures.size %>');
+        if (forecastSize < 2 || futureSize < 1 ){
+          $('#flash').html('<p>Oops! Forecasting requires at least two historical data points and one future data point.</p>');
+          $('#flash').addClass('error').fadeIn();
+        } else {
         $('#InputBox').fadeOut();
+        $('#resultsBox').fadeIn();
+        } 
       });
 
       $('#hideResults').on('click', function(e){
@@ -160,5 +165,13 @@
         location.reload();
     });
     </script>
+    <script>
+      $('.underDelete').on('click', function(e){
+        e.preventDefault();
+        $('#flash').html('<p>At least one historical data point is needed.</p>');
+        $('#flash').addClass('error').fadeIn();
+      });
+    </script>
+
 
 

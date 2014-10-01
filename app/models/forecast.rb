@@ -2,8 +2,8 @@ class Forecast < ActiveRecord::Base
 
 	belongs_to :project
 
-	validates :year, :presence => true
-	validates :value, :presence => true
+	validates :year, :presence => true, :numericality => { only_integer: true }
+	validates :value, :presence => true, :numericality => { only_integer: true }
 	
 	def project_forecast
 	    project.forecasts	

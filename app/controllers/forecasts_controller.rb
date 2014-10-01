@@ -67,9 +67,9 @@ class ForecastsController < ApplicationController
     @forecast = @project.forecasts.new(params_forecast)
   	if @forecast.save
   		flash[:notice] = "Data was created successfully"
-          if @project.forecasts.size == 1   
-              redirect_to(:action => 'index')
-          end
+          # if @project.forecasts.size == 1   
+          #     redirect_to(:action => 'index')
+          # end
   	else
        flash[:error] = "Opps. Something's wrong!"
   		 # render('new')
@@ -125,7 +125,10 @@ class ForecastsController < ApplicationController
 
   def check_value
     if @project.forecasts.empty?
-      redirect_to(:action => 'new', :project_id => @project.id)
+      @times = [1, 1]
+      @b1 = 1
+      @b0 = 1
+      # redirect_to(:action => 'new', :project_id => @project.id)
     end
   end
 

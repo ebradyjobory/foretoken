@@ -1,9 +1,8 @@
 <%= error_messages_for(@future) %>
 
-	<%= form_for [@project, @future], :remote => true do |f| %>
-	  <%= f.text_field :future_year %>
-	  <%= f.submit "Save", :class => "btn btn-primary" %>
-	<%end%>
-
+<%= form_for [@project, @future], :remote => true do |f| %>
+  	<%= f.text_field :future_year %>
+  	<%= f.submit "Save", :class => "" %>
+<%end%>
 
 

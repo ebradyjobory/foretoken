@@ -2,7 +2,9 @@ class Future < ActiveRecord::Base
 
 	belongs_to :project
 
-	validates :future_year, :presence => true
+	validates :future_year, :presence => true, 
+							numericality: { only_integer: true }
+
 
 
 	def to_be_forcasted

@@ -3,6 +3,7 @@ class FuturesController < ApplicationController
   respond_to :html, :json
 	before_action :confirm_logged_in
   before_action :set_project
+  # before_action :check_forecast_value, :only => [:index]
 
   def index
   	@futures = @project.futures
