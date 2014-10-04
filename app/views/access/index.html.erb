@@ -1,22 +1,24 @@
 <% @page_title = "Main Menu" %>
 
 <div class="main-menu">
-	<h3>Welcome <strong><%= link_to @user.email, edit_user_path(@user)  %></strong></h3>
+	<h3>Welcome <span><%= link_to @user.email, edit_user_path(@user)  %></span></h3>
 	<p>You have <%= pluralize(@projects.size, 'project') %></p>
-		<table class="projects-table">
+	<div class="main-table">
+		<table class="projects-table table table-hover">
 			</tbody>
 				<% @projects.each do |project| %>
 				  <tr>
-				  	<td><%= link_to project.name, user_project_forecasts_path(project.user.id, project) %></td>		
+				  	<td><%= link_to project.name, user_project_forecasts_path(project.user.id, project), :class => "btn btn-default btn-sm" %></td>		
 				  </tr>
 				<%end%>	
 			</tbody>
 	    </table>
-	    <div id="projects" >
+	</div><!-- .main-table -->
+	<div id="projects" >
 	   		<%= render 'projects/form' %>
-	    </div><!-- #projects -->
+	</div><!-- #projects -->
 </div><!-- .main-menu -->
 
-<%= link_to "Create new project", new_user_project_path(:user_id => @user.id) %>
+<%= link_to "Create new project", new_user_project_path(:user_id => @user.id), :class => "btn btn-success" %>
 
 

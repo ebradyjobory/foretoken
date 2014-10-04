@@ -26,10 +26,10 @@ $(document).ready(function(){
  //        location.reload();
  //    });
 
-	$('td').mouseover(function(){
+	$('.forecast-table td, .future-table td').mouseover(function(){
 		$(this).addClass('pointer');
 	});
-	$('td').mouseleave(function(){
+	$('.forecast-table td, .future-table td').mouseleave(function(){
 		$(this).removeClass('pointer');
 	});
 

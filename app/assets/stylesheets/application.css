@@ -14,64 +14,38 @@
 *= require_tree .
 *= require_self
 */
-
-.container {
-	width: 90%;
-	margin: 20px auto;
+.table {
+    width: 60% !important;
 }
-
-.navbar {
-	padding: 10px 20px;
-	background-color: #2c3e50;
+.main-table {
+  width: 60%;
+  clear: both;
 }
 
 .pointer {
-	cursor: pointer; /*Add something to show editing*/
+	cursor: context-menu; /*Add something to show editing*/
 }
 
-.container ul li {
-	display: inline;
-}
-
-.navbar li a {
-	color: #ecf0f1;
-	text-decoration: none;
-}
 
 #flash {
 	display: none;
-	color: #ecf0f1;
+	color: #2c3e50;
 }
 
 .success {
-	padding: 10px 10px;
-	background-color: #27ae60;
+	padding: 20px 20px;
+	background-color: #DFF0D8;
 	border-radius: 5px;
 }
 
 .error {
-	padding: auto 20px;
-	background-color: #c0392b;	
+	padding: 20px 20px;
+	background-color: #F2DEDE;	
 	border-radius: 5px;
 }
 
 
-#crud, #crud_forecasted, #resultsBox, #projects, .hide {
+#crud, #crud_forecasted, #projects, .hide {
 	display: none;
 }
-
-
-input {
-	width: 40px;
-}
-
-table, th, td {
-   border: 1px solid black;
-   padding: 5px;
-
-} 
-table {
-  border-collapse: collapse;
-}
-
 

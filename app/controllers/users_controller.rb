@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :confirm_logged_in, :except => [:new, :create]
+  before_action :add_user_email
 
   def index
     @users = User.all.includes(:projects)

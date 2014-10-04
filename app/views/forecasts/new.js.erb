@@ -1,3 +1,4 @@
 $(":input:not(input[type=submit])").val("");
 $("#crud").fadeToggle(100);
+$(".more-historical-data").hide();
 $("#crud").html("<%= escape_javascript(render(:partial => "form"))%>");

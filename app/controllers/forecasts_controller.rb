@@ -4,6 +4,7 @@ class ForecastsController < ApplicationController
 
   before_action :confirm_logged_in
 	before_action :set_project
+  before_action :add_user_email
   before_action :check_value, :only => [:index]
 
   def index
@@ -47,6 +48,8 @@ class ForecastsController < ApplicationController
     end
     @total_years = total_fcast_years + total_future_years
     @total_values = total_fcast_values + total_future_values
+    @forecasted = total_future_values
+    @future_years = total_future_years
 
     # Calculating regression line to be presented on chart
     regression = []

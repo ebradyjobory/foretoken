@@ -2,32 +2,48 @@
 <html>
   <head>
     <title>Foretoken<%= " | #{@page_title}" if @page_title %></title>
+    <%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js', 'data-turbolinks-track' => false %>
+    <%= javascript_include_tag 'charts', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' %>
-    <%= stylesheet_link_tag 'reset', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css", media: 'all', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
-    <%= javascript_include_tag 'highcharts', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   </head>
   <body>
-      <div class="container navbar">
-        <nav>
-          <ul>
-              <li><%= link_to "Foretoken", access_index_path(:user_id => session[:user_id])%></li>
-              <li><%= link_to("About", '#', :id => 'username') %></li>
-              <% if session[:user_id] %>
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <a><%= link_to "Foretoken", root_path, :class => "navbar-brand" %></a>
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div><!-- .navbar-header -->
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><%= link_to "Login", access_login_path unless session[:user_id]  %></li>
+            <% if session[:user_id] %>
+              <li><%= link_to "Projects", access_index_path(:user_id => session[:user_id]) %></li>
+              <li><%= link_to @user.email, edit_user_path(@user) %></li>
               <li><%= link_to "Logout", access_logout_path %></li>
-              <%end%>
+            <%end%>
           </ul>
-        </nav>
-      </div> <!-- .container -->
-    
-    
-    <!-- Main Body -->
-    <div class="container">
-        <div id="flash" ></div>
-          <%= yield %>
-    </div> <!-- .container -->
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to 'Contact', pages_contact_path %></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+  </nav>
+  <!-- Main Body -->
+  <div class="container">
+      <div id="flash" ></div>
+        <%= yield %>
+  </div> <!-- .container -->
   </body>
 </html>

@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'pages/contact'
+
+  get 'pages/about'
+
   resources :users do
     resources :projects do
       resources :forecasts
@@ -37,8 +41,9 @@ Rails.application.routes.draw do
 
   # get 'future/delete'
 
-  get '/', to: 'access#login'
+  root 'pages#home'
   get 'access/logout'
+  get 'access/login'
 
   match ':controller(/:action(/:id))', :via => [:get, :post] 
 

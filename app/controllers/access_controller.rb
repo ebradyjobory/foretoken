@@ -1,7 +1,7 @@
 class AccessController < ApplicationController
 
   before_action :confirm_logged_in,  :except => [:login, :attempt_login, :logout]
-
+  before_action :add_user_email, :only => [:index]
 
   def index
     @user = User.find(session[:user_id])
@@ -34,9 +34,7 @@ class AccessController < ApplicationController
   	session[:user_id] = nil
     session[:email] = nil
     flash[:notice] = "Logged out. Visit us again!"
-    redirect_to(:action => "login")	
+    redirect_to root_path	
   end
-
-
 
 end

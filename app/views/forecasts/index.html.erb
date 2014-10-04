@@ -4,26 +4,30 @@
 
 <div id="resultsBox">
   <div id="chart-input">
-    <!-- Chart will be shown here.. -->
+    <canvas id="myChart">
+       <!-- Chart will be shown here.. -->
+    </canvas>
   </div><!-- #chart-input -->
-  <table>
-        <thead>
-         <tr>
-          <th>Future Time</th>
-          <th>Forecasted Data</th>
-         </tr>
-        </thead>
-        </tbody>
-          <tr>
-            <% @project.futures.each do |future| %>
-              <td><%= future.future_year %></td>
-              <td><%= number_with_precision(future.forecasted, :precision => 2) %></td>  
-          </tr>
-          <%end%>
-         </tr>
-        </tbody>
-  </table>
-      <%= link_to "Hide Results", "#", :id => "hideResults", :class=>"" %>
+  <div class="main-table">
+    <table class="table table-hover">
+          <thead>
+           <tr>
+            <th>Future Time</th>
+            <th>Forecasted Data</th>
+           </tr>
+          </thead>
+          </tbody>
+            <tr>
+              <% @project.futures.each do |future| %>
+                <td><%= future.future_year %></td>
+                <td><%= number_with_precision(future.forecasted, :precision => 2) %></td>  
+            </tr>
+            <%end%>
+           </tr>
+          </tbody>
+    </table>
+  </div><!-- .main-table -->
+      <%= link_to "Hide Results", "#", :id => "hideResults", :class=>"btn btn-primary" %>
 </div> <!-- #resultsBox -->
 <br>
 <br>
@@ -37,32 +41,34 @@
   <div id="forecasts" class="hide">
     <%= render 'forecast' %>
   </div> <!-- #forecasts -->
-      <table class="forecast-table">
-          <thead>
-            <tr>
-              <th>Time</th>
-              <th>Data</th>
-            </tr>
-          </thead>
-        <tbody>
-          <% @forecasts.each do |forecast| %>
-            <tr>
-              <td><%= best_in_place forecast, :year %></td>
-              <td><%= best_in_place forecast, :value %></td>
-              <!-- <td><%= link_to "Edit", edit_user_project_forecast_path(:user_id => @current_user.id, :project_id => forecast.project.id, :id => forecast.id), :class => "btn btn-success edit_forecast", :id => "editAction" , :remote => true %></td> -->
-              <% if @project.forecasts.size < 2 %>
-              <td><%= link_to "Delete", "#", :class => 'underDelete' %></td>
-              <%else%>
-              <td><%= link_to "Delete", forecast_path(:project_id => forecast.project.id, :id => forecast.id), method: :delete, data: { confirm: "Are you sure?" }, :class => "delete", :id => "delete", :remote => true %></td>
-              <%end%>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+  <div class="main-table">
+    <table class="forecast-table table table-hover">
+            <thead>
+              <tr>
+                <th>Historical Time (<em>x</em>)</th>
+                <th>Data (<em>y</em>)</th>
+              </tr>
+            </thead>
+          <tbody>
+            <% @forecasts.each do |forecast| %>
+              <tr>
+                <td><%= best_in_place forecast, :year %></td>
+                <td><%= best_in_place forecast, :value %></td>
+                <!-- <td><%= link_to "Edit", edit_user_project_forecast_path(:user_id => @current_user.id, :project_id => forecast.project.id, :id => forecast.id), :class => "btn btn-success edit_forecast", :id => "editAction" , :remote => true %></td> -->
+                <% if @project.forecasts.size < 3 %>
+                <td><%= link_to "Delete", "#", :class => 'underDelete delete btn btn-danger btn-xs' %></td>
+                <%else%>
+                <td><%= link_to "Delete", forecast_path(:project_id => forecast.project.id, :id => forecast.id), method: :delete, data: { confirm: "Are you sure?" }, :class => "delete btn btn-danger btn-xs", :id => "delete", :remote => true %></td>
+                <%end%>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div><!-- .main-table -->  
       <div id="crud">
         <%= render 'form' %>
       </div><!-- #crud -->   
-    <%= link_to "Add Time and Data", new_user_project_forecast_path(:user_id => @project.user.id, :project_id => @project.id), :class => "new_forecast", :remote => true %>
+      <%= link_to "+", new_user_project_forecast_path(:user_id => @project.user.id, :project_id => @project.id), :class => "more-historical-data", :remote => true %>
   <!-- **** Regression results ****-->  
   <!-- <div class="col-md-12 input-area">
     <h3>Regression Results</h3>
@@ -76,10 +82,11 @@
       <%= render 'futures/future' %>
     </div><!-- #futures -->
     <div class="forecasted_area">
-          <table class="future-table">
+        <div class="main-table">
+          <table class="future-table table table-hover">
             <thead>
              <tr>
-              <th>Future Time</th>
+              <th>Forecasted Time</th>
              </tr>
             </thead>
             </tbody>
@@ -89,55 +96,27 @@
                 <!-- <td><%= future.time %></td> -->
                 <!-- <td><%= number_with_precision(future.forecasted, :precision => 2) %></td> -->
                 <!-- <td><%= link_to "Edit", edit_user_project_future_path(:user_id => @current_user.id, :project_id => future.project.id, :id => future.id), :class=>"btn btn-success", :remote => true, :id => "edit_future" %></td> -->
-                <td><%= link_to "Delete", future_path(:project_id => future.project.id, :id => future.id), method: :delete, data: { confirm: 'Are you sure?'}, :class=>"delete", :remote => true, :id => "delete_future" %></td>
+                <td><%= link_to "Delete", future_path(:project_id => future.project.id, :id => future.id), method: :delete, data: { confirm: 'Are you sure?'}, :class=>"delete btn btn-danger btn-xs", :remote => true, :id => "delete_future" %></td>
               </tr>
               <%end%>
             </tbody>
           </table>
+        </div><!-- .main-table -->
           <div id="crud_forecasted">
             <%= render 'futures/form' %>
           </div><!-- #crud_forecasted -->
-          <%= link_to "Add data to be forecasted", new_user_project_future_path(:user_id => @project.user.id, :project_id => @project.id), :class => "", :remote => true %>
+          <%= link_to "+", new_user_project_future_path(:user_id => @project.user.id, :project_id => @project.id), :class => "more-future-data", :remote => true %>
           <!-- # <%= link_to "Add more to forecast", new_user_project_future_path(:user_id => @project.user.id, :project_id => @project.id), :class => "", :remote => true, :id => "new_future" %> -->
     </div> <!-- .forecasted_area --> 
 
-      <%= link_to "Show Results", "#", :id => "results" %>
+      <%= link_to "Show Results", "#", :id => "results", :class => "col-md-3 btn btn-info" %>
 
-      <%= link_to 'Delete this project', @project, method: :delete, data: { confirm: 'Are you sure you want to delete the whole project?'} %>
+      <%= link_to 'Delete this project', @project, method: :delete, data: { confirm: 'Are you sure you want to delete the whole project?'}, :class=>"btn btn-danger col-md-12"%>
+
   </div><!--  #inputBox -->
-
-    <script>
-      $(document).ready(function() {
-          var chart1 = new Highcharts.Chart({
-              chart: {
-                  renderTo: 'chart-input',
-              },
-              title: {
-                  text: 'Results'
-              },
-              xAxis: {
-                  categories: <%= @total_years.each {|i| i.inspect}  %>,
-                  title: {
-                    text: "Time"
-                      },
-                     },   
-              yAxis: {
-                  title: {
-                      text: 'Data'
-                  }
-              },
-              series: [{
-                  name: "Input",
-                  data: <%= @total_values.each { |i| i.inspect} %>
-                }, {
-                  name: "Regression Line",
-                  data: <%= @regression.each { |i| i.inspect} %>
-              }]
-          });
-      });
-    </script>
     <script>
       // show/hide the results box
+      $('#resultsBox').fadeOut(50);
       $('#results').on('click', function(e){
         e.preventDefault();
         var forecastSize = ('<%= @project.forecasts.size %>');
@@ -157,6 +136,41 @@
         $('#InputBox').fadeIn();
       });
     </script>
+   
+    <script>
+        var ctx = document.getElementById("myChart").getContext("2d");
+        var data = {
+              labels:  <%= @total_years.each {|i| i.inspect}  %>,
+              datasets: [
+              {
+                  label: "Regression",
+                  fillColor: "rgba(220,220,220,0)",
+                  strokeColor: "#2c3e50", //change line color
+                  pointColor: "#7f8c8d",
+                  pointStrokeColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(220,220,220,1)",
+                  data: <%= @regression.each { |i| i.inspect} %>
+              },
+              {
+                  label: "Data",
+                  fillColor: "rgba(151,187,205,0.2)",
+                  strokeColor: "rgba(151,187,205,1)",
+                  pointColor: "rgba(151,187,205,1)",
+                  pointStrokeColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(151,187,205,1)",
+                  data: <%= @total_values.each { |i| i.inspect} %>
+              },
+              ]
+            };
+
+        var myLineChart = new Chart(ctx).Line(data, {
+            responsive: true,
+            maintainAspectRatio: true
+        });
+
+    </script>
     <script>
     // reflect changes after updating data with best_in_place
     $('.best_in_place')
@@ -168,10 +182,21 @@
     <script>
       $('.underDelete').on('click', function(e){
         e.preventDefault();
-        $('#flash').html('<p>At least one historical data point is needed.</p>');
+        $('#flash').html('<p>At least two historical data points are needed.</p>');
         $('#flash').addClass('error').fadeIn();
       });
     </script>
+
+    <script>
+
+      $('body').on('click', function(){
+        $('#crud').fadeOut(100);
+        $(".more-historical-data").show();
+      });
+
+
+    </script>
+
 
 
 
