@@ -2,7 +2,7 @@ class FuturesController < ApplicationController
   
   respond_to :html, :json
 	before_action :confirm_logged_in
-  before_action :add_user_email
+  # before_action :add_user_email
   before_action :set_project
   # before_action :check_forecast_value, :only => [:index]
 

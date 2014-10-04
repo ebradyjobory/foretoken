@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   
 	before_action :confirm_logged_in
   before_action :set_user
-  before_action :add_user_email
+  # before_action :add_user_email
 
   def index
   	@projects = Project.all(:user_id => session[:user_id]).includes(:user)

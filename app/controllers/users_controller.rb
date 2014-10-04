@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :confirm_logged_in, :except => [:new, :create]
-  before_action :add_user_email
+  # before_action :add_user_email, :only => [:index, :edit, :update]
 
   def index
     @users = User.all.includes(:projects)
@@ -14,8 +14,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params_user)
     if @user.save
-      flash[:notice] = "User was created successfully"
-      redirect_to(:controller => 'access', :action => 'index', :user_id => @user.id)
+      session[:user_id] = @user.id
+      redirect_to access_index_path
     else
       render('new')
     end   
@@ -35,8 +35,14 @@ class UsersController < ApplicationController
     end
   end
 
-  def delete
-  end
+  def destroy
+    @user = User.find(params[:id])
+    # respond_to do |format|
+    @user.destroy
+    session[:user_id] = nil
+    session[:email] = nil
+    redirect_to root_path
+    end
 
   private
 

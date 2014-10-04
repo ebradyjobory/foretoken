@@ -1,7 +1,7 @@
 <% @page_title = "Main Menu" %>
 
 <div class="main-menu">
-	<h3>Welcome <span><%= link_to @user.email, edit_user_path(@user)  %></span></h3>
+	<h3>Welcome <span><%= @user.email %></span></h3>
 	<p>You have <%= pluralize(@projects.size, 'project') %></p>
 	<div class="main-table">
 		<table class="projects-table table table-hover">

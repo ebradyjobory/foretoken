@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-
+  root 'pages#home'
+  
   get 'pages/contact'
 
   get 'pages/about'
@@ -40,8 +41,6 @@ Rails.application.routes.draw do
   # get 'future/edit'
 
   # get 'future/delete'
-
-  root 'pages#home'
   get 'access/logout'
   get 'access/login'
 

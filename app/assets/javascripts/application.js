@@ -37,8 +37,6 @@ $(document).ready(function(){
 });
 
 	
-
-
 // The plan for forecast page view:
 
 //  1- Hide the input area for both forecast 

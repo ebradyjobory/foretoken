@@ -1,7 +1,7 @@
 class AccessController < ApplicationController
 
   before_action :confirm_logged_in,  :except => [:login, :attempt_login, :logout]
-  before_action :add_user_email, :only => [:index]
+  #before_action :add_user_email, :only => [:index]
 
   def index
     @user = User.find(session[:user_id])
@@ -22,18 +22,16 @@ class AccessController < ApplicationController
     if authorized_user # when authorized user is an object
       session[:user_id] = authorized_user.id
       session[:email] = authorized_user.email
-      flash[:notice] = "You are now logged in."
       redirect_to access_index_path(:user_id => session[:user_id])
     else # if authorized_user was false
       flash[:error] = "Invalid username and/or password."
-      redirect_to(:action => 'login')
+      redirect_to access_login_path
     end	
   end
 
   def logout
   	session[:user_id] = nil
     session[:email] = nil
-    flash[:notice] = "Logged out. Visit us again!"
     redirect_to root_path	
   end
 
