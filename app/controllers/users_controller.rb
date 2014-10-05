@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params_user)
     if @user.save
+      NotificationMailer.sign_up_notification(@user).deliver
       session[:user_id] = @user.id
       redirect_to access_index_path
     else

@@ -20,10 +20,5 @@ class User < ActiveRecord::Base
                     :format => EMAIL_REGEX,
                     :confirmation => true,
                     :uniqueness => true
-
-
-	def name
-		first_name + ' ' + last_name	
-	end
 	
 end

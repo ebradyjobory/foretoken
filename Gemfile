@@ -12,6 +12,7 @@ gem 'soda-ruby', :require => 'soda'
 
 gem 'figaro'
 gem 'mandrill-api'
+gem 'mass_mandrill'
 gem 'best_in_place', github: 'aaronchi/best_in_place'
 
 gem 'jquery-rails'
