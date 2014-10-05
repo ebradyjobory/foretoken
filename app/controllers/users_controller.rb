@@ -40,6 +40,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     # respond_to do |format|
     @user.destroy
+    NotificationMailer.terminate_notification(@user).deliver
     session[:user_id] = nil
     session[:email] = nil
     redirect_to root_path
