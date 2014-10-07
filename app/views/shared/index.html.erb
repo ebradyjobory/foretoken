@@ -1,0 +1,17 @@
+<h2>You may use your own data</h2>
+<div>
+	<%= link_to "Custom Data", user_project_forecasts_path(@user, @project) %> 
+</div>
+<h2>Or get live data from the world bank</h2>
+<div>
+	<%= link_to "World Bank Data", new_project_forecast_api_path(:user_id => @user.id, :project_id => @project.id) %> 
+</div>
+
+ <script>
+// 	$('#projectForm').hide();
+// 	$('#customData').on('click', function(e){
+// 		e.preventDefault();
+// 		$('#projectForm').toggle();
+// 		$('#worldBank').hide();
+// 	});
+</script>

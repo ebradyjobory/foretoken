@@ -1,0 +1,10 @@
+<%= error_messages_for(@project_api) %>
+
+	<%= form_for [@user, @project_api] do |f| %>
+		<%= f.label :project_api_name, "Project Api Name" %>
+		<%= f.text_field :project_api_name %>
+		<%= f.submit "save", :class => "" %>
+	<%end%>
+
+
+

@@ -1,12 +1,21 @@
 class AccessController < ApplicationController
 
   before_action :confirm_logged_in,  :except => [:login, :attempt_login, :logout]
-  #before_action :add_user_email, :only => [:index]
-
+  before_action :add_user_email, :only => [:index]
+    
   def index
     @user = User.find(session[:user_id])
+
+    # Custom projects
     @projects = @user.projects
-    @project = Project.new
+    @projects.each do |project|
+      @forecasts = project.forecasts
+    end
+    # Api projects
+    @project_apis = @user.project_apis
+    @project_apis.each do |project_api|
+      @forecast_apis = project_api.forecast_apis
+    end
   end
 
   def login

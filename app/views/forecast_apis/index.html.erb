@@ -1,0 +1,199 @@
+<% @page_title = "Forecasting Page" %>
+
+<!-- Results Area -->
+
+<div id="resultsBox">
+  <div id="chart-input">
+    <canvas id="myChart">
+       <!-- Chart will be shown here.. -->
+    </canvas>
+  </div><!-- #chart-input -->
+  <div class="main-table">
+    <table class="table table-hover">
+          <thead>
+           <tr>
+            <th>Future Time</th>
+            <th>Forecasted Data</th>
+           </tr>
+          </thead>
+          </tbody>
+            <tr>
+              <% @project_api.future_apis.each do |future| %>
+                <td><%= future.future_api_year %></td>
+                <td><%= number_with_precision(future.forecasted, :precision => 2) %></td>  
+            </tr>
+            <%end%>
+           </tr>
+          </tbody>
+    </table>
+  </div><!-- .main-table -->
+      <%= link_to "Hide Results", "#", :id => "hideResults", :class=>"btn btn-primary" %>
+</div> <!-- #resultsBox -->
+<br>
+<br>
+<br>
+<br>
+
+ <!-- End of Results Area -->
+
+<div id="InputBox">
+   <!-- data input -->
+  <div id="forecasts" class="hide">
+    <%= render 'forecast_api' %>
+  </div> <!-- #forecasts -->
+  <div class="main-table">
+    <table class="forecast-table table table-hover">
+            <thead>
+              <tr>
+                <th>Historical Time (<em>x</em>)</th>
+                <th>Data (<em>y</em>)</th>
+              </tr>
+            </thead>
+          <tbody>
+            <% @forecast_apis.each do |forecast| %>
+              <tr>
+                <td><%= best_in_place forecast, :forecast_api_year %></td>
+                <td><%= best_in_place forecast, :forecast_api_value %></td>
+                <!-- <td><%= link_to "Edit", edit_user_project_forecast_path(:user_id => @current_user.id, :project_id => forecast.project.id, :id => forecast.id), :class => "btn btn-success edit_forecast", :id => "editAction" , :remote => true %></td> -->
+                <% if @project.forecast_apis.size < 3 %>
+                <td><%= link_to "Delete", "#", :class => 'underDelete delete btn btn-danger btn-xs' %></td>
+                <%else%>
+                <!-- <td><%= link_to "Delete", forecast_api_path(:project_id => forecast.project.id, :id => forecast.id), method: :delete, data: { confirm: "Are you sure?" }, :class => "delete btn btn-danger btn-xs", :id => "delete", :remote => true %></td> -->
+                <%end%>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div><!-- .main-table -->  
+      <div id="crud">
+        <%= render 'form' %>
+      </div><!-- #crud -->   
+  <!-- **** Regression results ****-->  
+  <!-- <div class="col-md-12 input-area">
+    <h3>Regression Results</h3>
+    <p>Your Simple Linear Regression equation: <strong>  m = <%= number_with_precision(@b0, :precision => 2) %> + ( <%= @b1 %> ) t</strong></p>
+  </div>
+   <div class="col-md-12 input-area">
+      <p>The regression of this data <i>R Squared</i>:  <strong><%= number_with_precision(@r2, :precision => 2) %>%</strong> of total variation explained by regression (higher R Squared = better fit) </p>
+   </div> -->
+    <!-- Forecasted data input  -->  
+    <div id="futures" class="hide">
+      <%= render 'future_apis/future_api' %>
+    </div><!-- #futures -->
+    <div class="forecasted_area">
+        <div class="main-table">
+          <table class="future-table table table-hover">
+            <thead>
+             <tr>
+              <th>Forecasted Time</th>
+             </tr>
+            </thead>
+            </tbody>
+             <tr>
+              <% @project_api.future_apis.each do |future| %>
+                <td><%= best_in_place future, :future_api_year %></td>
+                <!-- <td><%= future.time %></td> -->
+                <!-- <td><%= number_with_precision(future.forecasted, :precision => 2) %></td> -->
+                <!-- <td><%= link_to "Edit", edit_user_project_future_path(:user_id => @current_user.id, :project_id => future.project.id, :id => future.id), :class=>"btn btn-success", :remote => true, :id => "edit_future" %></td> -->
+                <!-- <td><%= link_to "Delete", future_path(:project_id => future.project.id, :id => future.id), method: :delete, data: { confirm: 'Are you sure?'}, :class=>"delete btn btn-danger btn-xs", :remote => true, :id => "delete_future" %></td> -->
+              </tr>
+              <%end%>
+            </tbody>
+          </table>
+        </div><!-- .main-table -->
+          <div id="crud_forecasted">
+            <%= render 'future_apis/form' %>
+          </div><!-- #crud_forecasted -->
+    </div> <!-- .forecasted_area --> 
+
+      <%= link_to "Show Results", "#", :id => "results", :class => "col-md-3 btn btn-info" %>
+
+      <%= link_to 'Delete this project', @project_api, method: :delete, data: { confirm: 'Are you sure you want to delete the whole project?'}, :class=>"btn btn-danger col-md-12"%>
+
+  </div><!--  #inputBox -->
+    <script>
+      // show/hide the results box
+      $('#resultsBox').fadeOut(50);
+      $('#results').on('click', function(e){
+        e.preventDefault();
+        var forecastSize = ('<%= @project_api.forecast_apis.size %>');
+        var futureSize = ('<%= @project_api.future_apis.size %>');
+        if (forecastSize < 2 || futureSize < 1 ){
+          $('#flash').html('<p>Oops! Forecasting requires at least two historical data points and one future data point.</p>');
+          $('#flash').addClass('error').fadeIn();
+        } else {
+        $('#InputBox').fadeOut();
+        $('#resultsBox').fadeIn();
+        } 
+      });
+
+      $('#hideResults').on('click', function(e){
+        e.preventDefault();
+        $('#resultsBox').fadeOut();
+        $('#InputBox').fadeIn();
+      });
+    </script>
+   
+    <script>
+        var ctx = document.getElementById("myChart").getContext("2d");
+        var data = {
+              labels:  <%= @total_years.each {|i| i.inspect}  %>,
+              datasets: [
+              {
+                  label: "Regression",
+                  fillColor: "rgba(220,220,220,0)",
+                  strokeColor: "#2c3e50", //change line color
+                  pointColor: "#7f8c8d",
+                  pointStrokeColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(220,220,220,1)",
+                  data: <%= @regression.each { |i| i.inspect} %>
+              },
+              {
+                  label: "Data",
+                  fillColor: "rgba(151,187,205,0.2)",
+                  strokeColor: "rgba(151,187,205,1)",
+                  pointColor: "rgba(151,187,205,1)",
+                  pointStrokeColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(151,187,205,1)",
+                  data: <%= @total_values.each { |i| i.inspect} %>
+              },
+              ]
+            };
+
+        var myLineChart = new Chart(ctx).Line(data, {
+            responsive: true,
+            maintainAspectRatio: true
+        });
+
+    </script>
+    <script>
+    // reflect changes after updating data with best_in_place
+    $('.best_in_place')
+    .best_in_place()
+    .bind('ajax:success', function(e) {
+        location.reload();
+    });
+    </script>
+    <script>
+      $('.underDelete').on('click', function(e){
+        e.preventDefault();
+        $('#flash').html('<p>At least two historical data points are needed.</p>');
+        $('#flash').addClass('error').fadeIn();
+      });
+    </script>
+
+    <script>
+
+      // $('body').on('click', function(){
+      //   $('#crud').fadeOut(100);
+      //   $(".more-historical-data").show();
+      // });
+
+
+    </script>
+
+
+
+

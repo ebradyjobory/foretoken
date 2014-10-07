@@ -1,0 +1,9 @@
+<% if @project.forecasts.size == 0 -%>
+	$('#flash').removeClass('success');
+	$('#flash').html("<p>Humm..You need to add historical data first.</p>");
+	$('#flash').fadeIn().addClass('error');
+<%else -%>
+	$(":input:not(input[type=submit])").val("");
+	$("#crud_forecasted").fadeToggle(100);
+	$("#crud_forecasted").html("<%= escape_javascript(render(:partial => "futures/form"))%>");
+<%end%>

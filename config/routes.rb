@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/api', to:'api#index'
+
   root 'pages#home'
   
   get 'pages/contact'
@@ -6,6 +8,10 @@ Rails.application.routes.draw do
   get 'pages/about'
 
   resources :users do
+    resources :project_apis do
+      resources :forecast_apis
+      resources :future_apis
+    end 
     resources :projects do
       resources :forecasts
       resources :futures
@@ -17,10 +23,18 @@ Rails.application.routes.draw do
     resources :futures
   end
 
+  resources :project_apis do
+    resources :forecast_apis
+    resources :future_apis
+  end
+
   resources :forecasts
   resources :futures
+  resources :forecast_apis
+  resources :future_apis
 
   resources :access, :only => [:index, :login]
+  resources :shared, :only => [:index]
 
  
 

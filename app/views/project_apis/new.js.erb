@@ -1,0 +1,3 @@
+$(":input:not(input[type=submit])").val("");
+$("#projects").fadeToggle(100);
+$("#projects").html("<%= escape_javascript(render(:partial => "projects/form"))%>");

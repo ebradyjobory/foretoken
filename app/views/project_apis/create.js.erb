@@ -1,0 +1,45 @@
+// in case of error, stop any posting and show error msg
+
+<% if @project.errors.any? -%>
+  $('#flash').html("<%= escape_javascript(flash[:notice]) %>").removeClass('success');
+  $('#flash').html("<%= escape_javascript(error_messages_for(@project)) %>");
+  $('#flash').fadeIn();
+<% else -%>
+
+  $(":input:not(input[type=submit])").val("");
+  // remove the partial form
+  $('#projects').fadeOut(100);
+  // clear the form 
+  $(":input:not(input[type=submit])").val("");
+  // insert the new data line at the bottom of the list
+  // create new line
+  // update the new line with the new data
+  // attach the new line to the table
+
+
+  $('.projects-table').find('tbody')
+    .append($('<tr>')
+     .append($('<td><%= @project.name %></td>'))
+       .append($('<td>').append($('#showProject'))) 
+  );
+
+  // show flash msg of success
+  $('#flash').fadeOut(); // if any previous flash is present
+  // attach the new flash content 
+  $('#flash').html("<%= escape_javascript(flash[:notice]) %>").addClass('success');
+  $('#flash').fadeIn();
+  $(function() {
+      setTimeout(function(){
+          $('#flash').fadeOut();
+        }, 3000);
+  });
+<% end -%>
+ 
+
+  
+
+
+
+
+       
+

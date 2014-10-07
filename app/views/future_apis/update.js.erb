@@ -1,0 +1,39 @@
+// update ----->
+// in case of error, stop any posting and show error msg
+<% if @future.errors.any? -%>
+  $('#flash').fadeOut().removeClass('alert-success');
+  $('#flash').html("<%= escape_javascript(error_messages_for(@future)) %>");
+  $('#flash').fadeIn();
+<% else -%>
+  // $('#flash').fadeOut();
+  // insert the new data line at the bottom of the list
+  // create new line
+  // update the new line with the new data
+  // attach the new line to the table
+ $(".forecasted_area").html("<%= escape_javascript(render(:partial => "futures/future"))%>");
+
+ 
+  // remove the partial form
+  $('#crud_forecasted').fadeOut();
+  // clear the form 
+  $(":input:not(input[type=submit])").val("");
+  // show flash msg of success
+  $('#flash').fadeOut(); // if any previous flash is present
+  // attach the new flash content 
+  $('#flash').html("<%= escape_javascript(flash[:notice]) %>").addClass('alert alert-success');
+  $('#flash').fadeIn();
+  $(function(){
+    setTimeout(function(){
+      $('.alert').fadeOut();
+    }, 3000);
+  });
+<% end -%>
+ 
+
+  
+
+
+
+
+       
+

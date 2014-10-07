@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140912020112) do
+ActiveRecord::Schema.define(version: 20141007125924) do
+
+  create_table "forecast_apis", force: true do |t|
+    t.integer  "forecast_api_year"
+    t.integer  "forecast_api_value"
+    t.integer  "project_api_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "forecast_apis", ["project_api_id"], name: "index_forecast_apis_on_project_api_id", using: :btree
 
   create_table "forecasts", force: true do |t|
     t.integer  "year"
@@ -23,6 +33,15 @@ ActiveRecord::Schema.define(version: 20140912020112) do
 
   add_index "forecasts", ["project_id"], name: "index_forecasts_on_project_id", using: :btree
 
+  create_table "future_apis", force: true do |t|
+    t.integer  "future_api_year"
+    t.integer  "project_api_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "future_apis", ["project_api_id"], name: "index_future_apis_on_project_api_id", using: :btree
+
   create_table "futures", force: true do |t|
     t.integer  "future_year"
     t.integer  "project_id"
@@ -31,6 +50,15 @@ ActiveRecord::Schema.define(version: 20140912020112) do
   end
 
   add_index "futures", ["project_id"], name: "index_futures_on_project_id", using: :btree
+
+  create_table "project_apis", force: true do |t|
+    t.string   "project_api_name", limit: 50
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "project_apis", ["user_id"], name: "index_project_apis_on_user_id", using: :btree
 
   create_table "projects", force: true do |t|
     t.string   "name",        limit: 50
@@ -49,6 +77,7 @@ ActiveRecord::Schema.define(version: 20140912020112) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_confirmation"
+    t.integer  "project_api_id"
   end
 
 end

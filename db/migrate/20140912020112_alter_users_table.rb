@@ -7,7 +7,7 @@ class AlterUsersTable < ActiveRecord::Migration
   end
 
   def down
-  	add_column :users, :first_name
+    add_column :users, :first_name
   	add_column :users, :last_name
   	add_column :users, :profile_name
   end

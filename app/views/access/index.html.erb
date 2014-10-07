@@ -2,23 +2,34 @@
 
 <div class="main-menu">
 	<h3>Welcome <span><%= @user.email %></span></h3>
-	<p>You have <%= pluralize(@projects.size, 'project') %></p>
+	<p>You have <%= pluralize(@projects.size, 'custom project') %></p>
 	<div class="main-table">
 		<table class="projects-table table table-hover">
 			</tbody>
 				<% @projects.each do |project| %>
 				  <tr>
-				  	<td><%= link_to project.name, user_project_forecasts_path(project.user.id, project), :class => "btn btn-default btn-sm" %></td>		
+				  	<td><%= link_to project.name, user_project_forecasts_path(project.user.id, project), :class => "btn btn-default btn-sm" %></td>	
 				  </tr>
 				<%end%>	
 			</tbody>
 	    </table>
 	</div><!-- .main-table -->
-	<div id="projects" >
-	   		<%= render 'projects/form' %>
-	</div><!-- #projects -->
+	<%= link_to "Create new project", new_user_project_path(:user_id => @user.id), :class => "btn btn-success new_project" %>
+    <p>You have <%= pluralize(@project_apis.size, 'API project') %></p>
+	<div class="main-table">
+		<table class="projects-table table table-hover">
+			</tbody>
+				<% @project_apis.each do |project| %>
+				  <tr>
+				  	<td><%= link_to project.project_api_name, user_project_api_forecast_apis_path(project.user.id, project), :class => "btn btn-default btn-sm" %></td>	
+				  </tr>
+				<%end%>	
+			</tbody>
+	    </table>
+	</div><!-- .main-table -->
+	<%= link_to "Create new Api", new_user_project_api_path(:user_id => @user.id), :class => "btn btn-success new_project" %>
+
 </div><!-- .main-menu -->
 
-<%= link_to "Create new project", new_user_project_path(:user_id => @user.id), :class => "btn btn-success" %>
 
 

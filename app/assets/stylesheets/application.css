@@ -23,6 +23,13 @@ body { padding-top: 70px; }
 	margin: 80px auto;
 }
 
+.main-menu{
+	width: 100%;
+}
+.new_project {
+	width: 150px;
+}
+
 .cus-btn {
 	width: 100%;
 }

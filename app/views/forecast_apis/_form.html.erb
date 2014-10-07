@@ -1,0 +1,7 @@
+<%= error_messages_for(@forecast) %>
+	
+	<%= form_for [@project, @forecast_api], :remote => true do |f| %> 
+	  <%= f.text_field :forecast_api_year %>
+	  <%= f.text_field :forecast_api_value %>
+	  <%= f.submit "Save", :class => "" %>
+	<%end%>

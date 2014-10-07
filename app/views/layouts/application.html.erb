@@ -19,14 +19,13 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a><%= link_to "Sooth", root_path, :class => "navbar-brand" %></a>
+            <a><%= link_to "Foretoken", root_path, :class => "navbar-brand" %></a>
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               <li><%= link_to "Login", access_login_path unless !session[:user_id].blank? %></li>
               <% if session[:user_id] %>
                 <li><%= link_to "Projects", access_index_path(:user_id => session[:user_id]) %></li>
-                <li><%= link_to @user.email, edit_user_path(@user) %></li>
                 <li><%= link_to "Logout", access_logout_path %></li>
               <%end%>
             </ul>

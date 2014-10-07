@@ -1,0 +1,14 @@
+$('.delete').bind('ajax:success', function() {  
+        $(this).closest('tr').fadeOut(100);
+        $("#flash").removeClass('error');
+		$("#flash").html("<%= escape_javascript(flash[:notice])%>").addClass('success');
+		$("#flash").fadeIn();
+		$(function(){
+			setTimeout(function(){
+				$('#flash').fadeOut();
+			}, 3000);
+		});
+		location.reload();
+
+});  
+

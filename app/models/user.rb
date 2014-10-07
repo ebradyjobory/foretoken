@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 	has_secure_password
 	 
 	has_many :projects
+	has_many :project_apis
 
 	EMAIL_REGEX = /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}\Z/i
 
