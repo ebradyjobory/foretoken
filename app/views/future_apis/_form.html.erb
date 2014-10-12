@@ -1,6 +1,6 @@
-<%= error_messages_for(@future) %>
+<%= error_messages_for(@future_api) %>
 
-<%= form_for [@project, @future_api], :remote => true do |f| %>
+<%= form_for [@project_api, @future_api], :remote => true do |f| %>
   	<%= f.text_field :future_api_year %>
   	<%= f.submit "Save", :class => "" %>
 <%end%>

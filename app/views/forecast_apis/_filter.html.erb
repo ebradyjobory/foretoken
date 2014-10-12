@@ -1,0 +1,40 @@
+
+<div id='filterForm'>
+	<%= form_for [@project_api, @forecast_api] do |f| %>
+		<div id="country">
+			<p>Choose a country<%= f.select(:country, @countries) %></p>
+		</div>
+		<div id="indicator">
+			<p>Choose an indicator<%= f.select(:indicator, @indicators) %></p>
+		</div>
+		<div id="startDate">
+			<p>Choose Start date<%= f.select(:start_date, (1960..2015)) %></p>
+		</div>
+		<div id="endDate">
+			<p>Choose End date<%= f.select(:end_date, (1960..2015)) %></p>
+		</div>
+		<div id="submit">
+			<%= f.submit %>
+		</div>
+	<%end%>
+</div>
+
+<script>
+
+	// $("#startDate, #endDate, #submit").hide();
+
+	// $('#filterForm').change(function(){
+	// 	var value = $(this).val();
+	// 	$.ajax({
+	// 		// url: '<%= forecast_apis_path(:html) %>',
+	// 		type: 'GET',
+	// 		data: value,
+	// 		success: function(data){
+	// 			$('#flash').show();
+	// 		}
+	// 	});
+	// });
+	
+  
+</script>
+

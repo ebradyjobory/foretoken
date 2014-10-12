@@ -1,24 +1,20 @@
 class ForecastApi < ActiveRecord::Base
-	belongs_to :project
+	belongs_to :project_api
 
-	validates :forecast_api_year, :presence => true, :numericality => { only_integer: true }
-	validates :forecast_api_value, :presence => true, :numericality => { only_integer: true }
+	# validates :forecast_api_year, :presence => true, :numericality => { only_integer: true }
+	# validates :forecast_api_value, :presence => true, :numericality => { only_integer: true }
 	
 	def project_forecast
-	    project.forecast_apis	
+	    project_api.forecast_apis	
 	end
 	def to_be_forcasted
-	    project.future_apis
+	    project_api.future_apis
 	end
-
-	# def project_future
-	# 	@future_data = project.future
-	# end
 
 	def mean
 		values = []
 		project_forecast.each do |i|
-			values << i.value
+			values << i.forecast_api_value
 		end		
 		sum = 0
 		values.each { |i| sum += i }	
@@ -26,7 +22,7 @@ class ForecastApi < ActiveRecord::Base
 	end
 
 	def xxbar
-		(value - mean).to_f
+		(forecast_api_value - mean).to_f
 	end
 
 	def timer(i)

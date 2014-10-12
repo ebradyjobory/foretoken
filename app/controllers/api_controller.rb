@@ -7,6 +7,7 @@ class ApiController < ApplicationController
     @response = HTTParty.get("http://api.worldbank.org/countries/iq/indicators/SP.POP.TOTL?format=json")
 
 
+
     # @all_countries = HTTParty.get("http://api.worldbank.org/country?per_page=300&region=WLD&format=json")
 
     # @countries =[]

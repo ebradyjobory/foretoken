@@ -1,21 +1,21 @@
 class FutureApi < ActiveRecord::Base
 
-	belongs_to :project
+	belongs_to :project_api
     validates :future_api_year, :presence => true, 
-							numericality: { only_integer: true }
+								numericality: { only_integer: true }
 
 	def to_be_forcasted
-	    project.future_apis
+	    project_api.future_apis
 	end
 
 	def project_forecast
-		project.forecast_apis	
+		project_api.forecast_apis	
 	end
 
 	def mean
 		values = []
 		project_forecast.each do |i|
-			values << i.value
+			values << i.forecast_api_value
 		end		
 		sum = 0
 		values.each { |i| sum += i }	
@@ -69,13 +69,13 @@ class FutureApi < ActiveRecord::Base
 	end
 
 	def timer(i) # i = ex. 1877
-		years_diff = i - project_forecast.last.year 
+		years_diff = i - project_forecast.last.forecast_api_year 
 		timer = last_entry_year_time + years_diff
 	end
 		
 
 	def time   
-		timer(to_be_forcasted.find(id).future_year)	# return a data input	
+		timer(to_be_forcasted.find(id).future_api_year)	# return a data input	
 	end
 
 	def forecasted

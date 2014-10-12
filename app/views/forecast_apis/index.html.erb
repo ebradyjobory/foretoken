@@ -1,5 +1,30 @@
 <% @page_title = "Forecasting Page" %>
 
+<%= render 'forecast_apis/filter' %>
+
+
+<script>
+
+  // function run() {
+  //  var country = document.getElementById("countries").value;
+  //  console.log(country);
+  //  var indicator = document.getElementById("indicators").value;
+  //  console.log(indicator);
+  //  // var url = "http://api.worldbank.org/countries/"+ country + "/indicators/SP.POP.TOTL?format=json"
+  //  // console.log(url);
+  // $.ajax({
+  //  url: "forecast_apis/show", 
+  //  data:(
+  //    'country=' + $('#countries').val() + '&' +
+  //    'indicator=' + $('#indicators').val()
+  //  )
+  //  });
+  //  };
+
+ </script>
+
+
+
 <!-- Results Area -->
 
 <div id="resultsBox">
@@ -52,14 +77,8 @@
           <tbody>
             <% @forecast_apis.each do |forecast| %>
               <tr>
-                <td><%= best_in_place forecast, :forecast_api_year %></td>
-                <td><%= best_in_place forecast, :forecast_api_value %></td>
-                <!-- <td><%= link_to "Edit", edit_user_project_forecast_path(:user_id => @current_user.id, :project_id => forecast.project.id, :id => forecast.id), :class => "btn btn-success edit_forecast", :id => "editAction" , :remote => true %></td> -->
-                <% if @project.forecast_apis.size < 3 %>
-                <td><%= link_to "Delete", "#", :class => 'underDelete delete btn btn-danger btn-xs' %></td>
-                <%else%>
-                <!-- <td><%= link_to "Delete", forecast_api_path(:project_id => forecast.project.id, :id => forecast.id), method: :delete, data: { confirm: "Are you sure?" }, :class => "delete btn btn-danger btn-xs", :id => "delete", :remote => true %></td> -->
-                <%end%>
+                <td><%= forecast.forecast_api_year %></td>
+                <td><%= forecast.forecast_api_value %></td>
               </tr>
             <% end %>
           </tbody>
@@ -93,15 +112,15 @@
               <% @project_api.future_apis.each do |future| %>
                 <td><%= best_in_place future, :future_api_year %></td>
                 <!-- <td><%= future.time %></td> -->
-                <!-- <td><%= number_with_precision(future.forecasted, :precision => 2) %></td> -->
-                <!-- <td><%= link_to "Edit", edit_user_project_future_path(:user_id => @current_user.id, :project_id => future.project.id, :id => future.id), :class=>"btn btn-success", :remote => true, :id => "edit_future" %></td> -->
-                <!-- <td><%= link_to "Delete", future_path(:project_id => future.project.id, :id => future.id), method: :delete, data: { confirm: 'Are you sure?'}, :class=>"delete btn btn-danger btn-xs", :remote => true, :id => "delete_future" %></td> -->
+                <!-- <td><%= number_with_precision(future.forecasted, :precision => 2) %></td>  -->
+                <!-- <td><%= link_to "Edit", edit_user_project_api_future_api_path(:user_id => @current_user.id, :project_api_id => future.project_api.id, :id => future.id), :class=>"btn btn-success", :remote => true, :id => "edit_future" %></td> -->
+                <td><%= link_to "Delete", future_api_path(:project_api_id => future.project_api.id, :id => future.id), method: :delete, data: { confirm: 'Are you sure?'}, :class=>"delete btn btn-danger btn-xs", :remote => true, :id => "delete_future" %></td> 
               </tr>
               <%end%>
             </tbody>
           </table>
         </div><!-- .main-table -->
-          <div id="crud_forecasted">
+          <div id="">
             <%= render 'future_apis/form' %>
           </div><!-- #crud_forecasted -->
     </div> <!-- .forecasted_area --> 
@@ -184,15 +203,6 @@
       });
     </script>
 
-    <script>
-
-      // $('body').on('click', function(){
-      //   $('#crud').fadeOut(100);
-      //   $(".more-historical-data").show();
-      // });
-
-
-    </script>
 
 
 

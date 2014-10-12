@@ -7,20 +7,19 @@ class FutureApisController < ApplicationController
   # before_action :check_forecast_value, :only => [:index]
 
   def index
-  	@future_apis = @project.future_apis
-    @future_api = @project.future_apis.new
-    @current_user = @project.user
-
+  	@future_apis = @project_api.future_apis
+    @future_api = @project_api.future_apis.new
+    @current_user = @project_api.user
   end
 
   def new
-    @project = Project.find(params[:project_id])
-  	@future_api = @project.future_apis.new
+    @project_api = ProjectApi.find(params[:project_api_id])
+  	@future_api = @project_api.future_apis.new
   end
 
   def create
-  	@project = Project.find(params[:project_id])
-    @future_api = @project.future_apis.new(params_future)
+  	@project_api = ProjectApi.find(params[:project_api_id])
+    @future_api = @project_api.future_apis.new(params_future)
   	if @future_api.save
   		flash[:notice] = "Future was created successfully"
   		# redirect_to user_project_forecasts_path(:user_id => session[:user_id],  
@@ -66,13 +65,13 @@ class FutureApisController < ApplicationController
   private
 
   def set_project
-  	if params[:project_id]
-  		@project = Project.find(params[:project_id])
+  	if params[:project_api_id]
+  		@project_api = ProjectApi.find(params[:project_api_id])
   	end	
   end
 
   def params_future
-  	params.require(:future).permit(:future_api_year)	
+  	params.require(:future_api).permit(:future_api_year)	
   end
 
 

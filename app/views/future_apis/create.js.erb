@@ -1,8 +1,8 @@
 // in case of error, stop any posting and show error msg
 
-  <% if @future.errors.any? -%>
+  <% if @future_api.errors.any? -%>
     $('#flash').fadeOut().removeClass('success');
-    $('#flash').html("<%= escape_javascript(error_messages_for(@future)) %>");
+    $('#flash').html("<%= escape_javascript(error_messages_for(@future_api)) %>");
     $('#flash').fadeIn();
   <% else -%>
     // remove the partial form
@@ -17,9 +17,7 @@
 
     $('.future-table').find('tbody')
      .append($('<tr>')
-      .append($('<td><%= @future.future_year %></td>'))
-        // .append($('<td><%= @future.forecasted %></td>'))
-      // .append($('<td>').append($('#edit_future')))
+      .append($('<td><%= @future_api.future_api_year %></td>'))
           .append($('<td>').append($('#delete_future')))       
     );
 

@@ -5,8 +5,6 @@ class Future < ActiveRecord::Base
 	validates :future_year, :presence => true, 
 							numericality: { only_integer: true }
 
-
-
 	def to_be_forcasted
 	    project.futures
 	end

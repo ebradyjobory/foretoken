@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141007125924) do
+ActiveRecord::Schema.define(version: 20141009150443) do
 
   create_table "forecast_apis", force: true do |t|
     t.integer  "forecast_api_year"
@@ -19,6 +19,10 @@ ActiveRecord::Schema.define(version: 20141007125924) do
     t.integer  "project_api_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "country"
+    t.string   "indicator"
+    t.integer  "start_date"
+    t.integer  "end_date"
   end
 
   add_index "forecast_apis", ["project_api_id"], name: "index_forecast_apis_on_project_api_id", using: :btree
@@ -69,6 +73,16 @@ ActiveRecord::Schema.define(version: 20141007125924) do
   end
 
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
+
+  create_table "sessions", force: true do |t|
+    t.string   "session_id", null: false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email"

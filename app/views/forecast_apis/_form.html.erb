@@ -1,4 +1,4 @@
-<%= error_messages_for(@forecast) %>
+<%= error_messages_for(@forecast_api) %>
 	
 	<%= form_for [@project, @forecast_api], :remote => true do |f| %> 
 	  <%= f.text_field :forecast_api_year %>

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   
   get 'pages/contact'
 
+  post 'forecast_apis/variables', to: 'forecast_apis#variables'
   get 'pages/about'
 
   resources :users do
