@@ -36,6 +36,10 @@ class ForecastApisController < ApplicationController
       total_fcast_api_years << forecast.forecast_api_year
       total_fcast_api_values << forecast.forecast_api_value
       @values = values << forecast.forecast_api_value
+      @times = times << forecast.time
+      @b1   = forecast.b1
+      @tbar = forecast.tbar
+      @b0   = forecast.b0
     end
     # Calculating total years and values for current project
      total_fcast_years = []
@@ -51,19 +55,19 @@ class ForecastApisController < ApplicationController
         @times = times << i.time
      end
     @future_apis.each do |i|
-      total_future_years << i.future_api_year
-      total_future_values << i.forecasted
+      total_future_api_years << i.future_api_year
+      total_future_api_values << i.forecasted
     end
-    @total_years = total_fcast_api_years + total_future_api_years
+    @total_years = total_fcast_api_years.reverse + total_future_api_years
     @total_values = total_fcast_api_values + total_future_api_values
     @forecasted = total_future_api_values
     @future_years = total_future_api_years
 
     # Calculating regression line to be presented on chart
     regression = []
-    # @times.each do |time|
-    #   regression <<  @b0 + (@b1 * time)
-    # end
+    @times.each do |time|
+      regression <<  @b0 + (@b1 * time)
+    end
     @regression = regression
 
   end

@@ -75,7 +75,7 @@
               </tr>
             </thead>
           <tbody>
-            <% @forecast_apis.each do |forecast| %>
+            <% @forecast_apis.reverse.each do |forecast| %>
               <tr>
                 <td><%= forecast.forecast_api_year %></td>
                 <td><%= forecast.forecast_api_value %></td>
