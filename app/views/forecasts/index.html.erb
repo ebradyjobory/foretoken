@@ -47,6 +47,14 @@
               <tr>
                 <th>Historical Time (<em>x</em>)</th>
                 <th>Data (<em>y</em>)</th>
+                <th>time</th>
+                <th>mean</th>
+                <th>tbar</th>
+                <th>ttbar</th> 
+                <th>xxbar_ttbar</th>
+                <th>ttbar_sq</th>
+                <th>b1</th>
+                <th>b0</th>
               </tr>
             </thead>
           <tbody>
@@ -54,6 +62,15 @@
               <tr>
                 <td><%= best_in_place forecast, :year %></td>
                 <td><%= best_in_place forecast, :value %></td>
+                <td><%= forecast.time %></td>
+                <td><%= forecast.mean_all %></td>
+                <td><%= forecast.tbar_all %></td>
+                <td><%= forecast.ttbar_all %></td>
+                <td><%= forecast.xxbar_ttbar_all %></td>
+                <td><%= forecast.ttbar_sq_all %></td>
+                <td><%= forecast.b1_all %></td>
+                <td><%= forecast.b0_all %></td>
+
                 <!-- <td><%= link_to "Edit", edit_user_project_forecast_path(:user_id => @current_user.id, :project_id => forecast.project.id, :id => forecast.id), :class => "btn btn-success edit_forecast", :id => "editAction" , :remote => true %></td> -->
                 <% if @project.forecasts.size < 3 %>
                 <td><%= link_to "Delete", "#", :class => 'underDelete delete btn btn-danger btn-xs' %></td>
@@ -93,7 +110,6 @@
              <tr>
               <% @project.futures.each do |future| %>
                 <td><%= best_in_place future, :future_year %></td>
-                <!-- <td><%= future.time %></td> -->
                 <!-- <td><%= number_with_precision(future.forecasted, :precision => 2) %></td> -->
                 <!-- <td><%= link_to "Edit", edit_user_project_future_path(:user_id => @current_user.id, :project_id => future.project.id, :id => future.id), :class=>"btn btn-success", :remote => true, :id => "edit_future" %></td> -->
                 <td><%= link_to "Delete", future_path(:project_id => future.project.id, :id => future.id), method: :delete, data: { confirm: 'Are you sure?'}, :class=>"delete btn btn-danger btn-xs", :remote => true, :id => "delete_future" %></td>

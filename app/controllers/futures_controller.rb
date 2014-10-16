@@ -21,6 +21,8 @@ class FuturesController < ApplicationController
   def create
   	@project = Project.find(params[:project_id])
     @future = @project.futures.new(params_future)
+    @forecasts = @project.forecasts
+
   	if @future.save
   		flash[:notice] = "Future was created successfully"
   		# redirect_to user_project_forecasts_path(:user_id => session[:user_id],  

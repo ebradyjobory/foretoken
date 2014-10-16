@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141009150443) do
+ActiveRecord::Schema.define(version: 20141014142940) do
 
   create_table "forecast_apis", force: true do |t|
     t.integer  "forecast_api_year"
@@ -33,8 +33,18 @@ ActiveRecord::Schema.define(version: 20141009150443) do
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "mean"
+    t.integer  "mean_id"
+    t.integer  "b1"
+    t.integer  "b0"
+    t.integer  "time"
+    t.integer  "tbar"
+    t.integer  "ttbar"
+    t.integer  "xxbar_ttbar"
+    t.integer  "ttbar_sq"
   end
 
+  add_index "forecasts", ["mean_id"], name: "index_forecasts_on_mean_id", using: :btree
   add_index "forecasts", ["project_id"], name: "index_forecasts_on_project_id", using: :btree
 
   create_table "future_apis", force: true do |t|
@@ -51,9 +61,18 @@ ActiveRecord::Schema.define(version: 20141009150443) do
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "mean"
+    t.integer  "forecasted"
   end
 
   add_index "futures", ["project_id"], name: "index_futures_on_project_id", using: :btree
+
+  create_table "means", force: true do |t|
+    t.integer  "mean"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "forecast_id"
+  end
 
   create_table "project_apis", force: true do |t|
     t.string   "project_api_name", limit: 50
