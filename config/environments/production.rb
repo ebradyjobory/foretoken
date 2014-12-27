@@ -1,6 +1,6 @@
 Rails.application.configure do
 
-  NEWRELIC_AGENT_ENABLED=true rake assets:precompile
+  NEWRELIC_AGENT_ENABLED=true
   
   # Settings specified here will take precedence over those in config/application.rb.
 
