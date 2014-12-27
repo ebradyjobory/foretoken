@@ -1,0 +1,81 @@
+
+/*
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+* or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the bottom of the
+* compiled file so the styles you add here take precedence over styles defined in any styles
+* defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+* file per style scope.
+*
+
+
+*/
+
+
+body { padding-top: 70px; }
+
+.cus-form {
+	width: 190px;
+	text-align: center;
+	margin: 80px auto;
+}
+
+.main-menu{
+	width: 100%;
+}
+.new_project {
+	width: 150px;
+}
+
+.cus-btn {
+	width: 100%;
+}
+
+
+.login_btn {
+	margin-bottom: 5px;
+}
+
+.cus-link, .cus-link input {
+	margin-bottom: 10px;
+	width: 100%; 
+}
+.table {
+    width: 60% !important;
+}
+.main-table {
+  width: 60%;
+  clear: both;
+}
+
+.pointer {
+	cursor: context-menu; /*Add something to show editing*/
+}
+
+
+#flash {
+	display: none;
+	color: #2c3e50;
+}
+
+.success {
+	padding: 20px 20px;
+	background-color: #DFF0D8;
+	border-radius: 5px;
+}
+
+.error {
+	padding: 20px 20px;
+	background-color: #F2DEDE;	
+	border-radius: 5px;
+}
+
+
+#crud, #crud_forecasted, #projects, .hide {
+	display: none;
+}
+
