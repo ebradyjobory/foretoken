@@ -37,24 +37,24 @@ class ForecastsController < ApplicationController
      total_future_values = []
      values = []
      times = []
-     @forecasts.each do |i|
-        total_fcast_years << i.year
-        total_fcast_values << i.value
-        @values = values << i.value
-     end
+    @forecasts.each do |i|
+      total_fcast_years << i.year
+      total_fcast_values << i.value
+      @values = values << i.value
+    end
     @futures.each do |i|
       total_future_years << i.future_year
       total_future_values << i.forecasted
     end
     @total_years = total_fcast_years + total_future_years.sort
-    @total_values = total_fcast_values + total_future_values.sort {|x, y| y <=> x}
+    @total_values = total_fcast_values + total_future_values
     @forecasted = total_future_values
     @future_years = total_future_years
 
     # Calculating regression line to be presented on chart
     @regression = []
     @forecasts.each do |forecast|
-      @regression <<  (forecast.b0_all + (forecast.b1_all * @forecasts.index(forecast) + 1))
+      @regression << (forecast.b0_all + (forecast.b1_all * forecast.time))
     end
   end
 
@@ -123,7 +123,5 @@ class ForecastsController < ApplicationController
   def params_forecast
   	params.require(:forecast).permit(:year, :value)	
   end
-
-
 
 end
