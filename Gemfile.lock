@@ -92,6 +92,7 @@ GEM
     multi_json (1.10.1)
     multi_xml (0.5.5)
     mysql2 (0.3.16)
+    newrelic_rpm (3.9.8.273)
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
     pg (0.15.1)
@@ -197,6 +198,7 @@ DEPENDENCIES
   mandrill-api
   mass_mandrill
   mysql2
+  newrelic_rpm
   pg (= 0.15.1)
   rails (= 4.1.5)
   rails_12factor (= 0.0.2)
