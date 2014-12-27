@@ -1,4 +1,7 @@
 Rails.application.configure do
+
+  NEWRELIC_AGENT_ENABLED=true rake assets:precompile
+  
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
