@@ -6,6 +6,10 @@ gem 'mysql2'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 
+gem "therubyracer"
+gem "less-rails"
+gem "twitter-bootstrap-rails"
+
 gem 'activerecord-session_store'
 
 gem 'newrelic_rpm'
