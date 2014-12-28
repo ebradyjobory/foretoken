@@ -15,6 +15,17 @@
 *= require_self
 */
 
+.more-historical-data, .more-future-data {
+  margin-left: 90px;
+  margin-bottom: 15px;
+  margin-top: -10px;
+}
+
+.show-results, .delete-project {
+  margin-left: 90px;
+  margin-top: 10px;
+}
+
 .beta {
 	font-size: 0.2em;
 	color: #219ab3;
@@ -39,6 +50,7 @@ label, p {
   color: #ecf0f1;
   font-weight: lighter;
 }
+
 .input {
 	color: #ecf0f1 !important;
   background-color: #000 !important; 
@@ -58,6 +70,11 @@ label, p {
 	margin-top: 100px;
 	margin-left: 100px;
 }
+
+.main-menu p {
+  margin-bottom: 0px !important;
+}
+
 .new_project {
 	width: 150px;
 }
@@ -77,9 +94,63 @@ label, p {
 .table {
     width: 60% !important;
 }
+
+.future-table {
+    width: 25% !important;
+}
+
+.projects-table {
+  margin-top: -20px;
+  margin-left: -75px;
+  margin-bottom: 10px;
+}
+
+.projects-table tr:hover td {
+  background: none !important;
+}
+
+.forecast-form, .future-form {
+  margin-left: 100px;
+  margin-top: -10px;
+}
+
+.forecast-form input, .future-form input{
+  width: 5%;
+}
+
+
 .main-table {
   width: 60%;
   clear: both;
+  margin-left: 90px;
+  margin-top: 25px;
+  color: #ecf0f1;
+  font-weight: lighter !important;
+}
+
+.forecast-table th, .future-table th {
+  font-weight: lighter !important;
+  color: #219ab3;
+  border-bottom: 1px solid #219ab3 !important;
+}
+
+.forecast-table td, .future-table td {
+  font-weight: lighter !important;
+  color: #ecf0f1;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+td {
+  border-top: none !important;
+}
+
+.grey {
+  color: #95a5a6 !important;
+}
+
+.table tr:hover td {
+  background-color: #ecf0f1;
+  color: #000 !important;
 }
 
 .pointer {

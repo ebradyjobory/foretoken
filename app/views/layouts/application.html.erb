@@ -40,15 +40,27 @@
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
-                    <li>
-                        <a class="page-scroll" href="#about">About</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#how-it-works">How It Works</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
-                    </li>
+                    <%if current_page? root_path %>
+                      <li>
+                          <a class="page-scroll" href="#about">About</a>
+                      </li>
+                      <li>
+                          <a class="page-scroll" href="#how-it-works">How It Works</a>
+                      </li>
+                      <li>
+                          <a class="page-scroll" href="#contact">Contact</a>
+                      </li>
+                    <%else%>
+                      <li>
+                          <a class="page-scroll" href="/#about">About</a>
+                      </li>
+                      <li>
+                          <a class="page-scroll" href="/#how-it-works">How It Works</a>
+                      </li>
+                      <li>
+                          <a class="page-scroll" href="/#contact">Contact</a>
+                      </li>
+                    <%end%>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

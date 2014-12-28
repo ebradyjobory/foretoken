@@ -3,5 +3,5 @@
 	<%= form_for [@project, @forecast_api], :remote => true do |f| %> 
 	  <%= f.text_field :forecast_api_year %>
 	  <%= f.text_field :forecast_api_value %>
-	  <%= f.submit "Save", :class => "" %>
+	  <%= f.submit "Save", :class => "btn btn-default btn-sm" %>
 	<%end%>

@@ -10,12 +10,12 @@
       </tbody>
        <tr>
         <% @project.futures.each do |future| %>
-        <tr>
+        <!-- <tr>
           <td><%= future.future_year %></td>
           <td><%= number_with_precision(future.forecasted, :precision => 2) %></td>
           <td><%= link_to "Edit", edit_user_project_future_path(:user_id => @current_user.id, :project_id => future.project.id, :id => future.id), :class=>"btn btn-success", :remote => true, :id => "edit_future" %></td>
           <td><%= link_to "Delete", future_path(:project_id => future.project.id, :id => future.id), method: :delete, data: { confirm: 'Are you sure?'}, :class=>"btn btn-danger delete", :remote => true, :id => "delete_future" %></td>
-        </tr>
+        </tr> -->
         <%end%>
        </tr>
       </tbody>

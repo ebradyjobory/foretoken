@@ -42,19 +42,19 @@
     <%= render 'forecast' %>
   </div> <!-- #forecasts -->
   <div class="main-table">
-    <table class="forecast-table table table-hover">
+    <table class="forecast-table table">
             <thead>
               <tr>
-                <th>Historical Time (<em>x</em>)</th>
-                <th>Data (<em>y</em>)</th>
-                <th>time</th>
-                <th>mean</th>
-                <th>tbar</th>
-                <th>ttbar</th> 
-                <th>xxbar_ttbar</th>
-                <th>ttbar_sq</th>
-                <th>b1</th>
-                <th>b0</th>
+                <th>Historical Period (<em>x</em>)</th>
+                <th>Historical Data (<em>y</em>)</th>
+                <th class="grey">time</th>
+                <th class="grey">mean</th>
+                <th class="grey">tbar</th>
+                <th class="grey">ttbar</th> 
+                <th class="grey">xxbar_ttbar</th>
+                <th class="grey">ttbar_sq</th>
+                <th class="grey">b1</th>
+                <th class="grey">b0</th>
               </tr>
             </thead>
           <tbody>
@@ -62,20 +62,20 @@
               <tr>
                 <td><%= best_in_place forecast, :year %></td>
                 <td><%= best_in_place forecast, :value %></td>
-                <td><%= forecast.time %></td>
-                <td><%= forecast.mean_all %></td>
-                <td><%= forecast.tbar_all %></td>
-                <td><%= forecast.ttbar_all %></td>
-                <td><%= forecast.xxbar_ttbar_all %></td>
-                <td><%= forecast.ttbar_sq_all %></td>
-                <td><%= forecast.b1_all %></td>
-                <td><%= forecast.b0_all %></td>
+                <td class="grey"><%= forecast.time %></td>
+                <td class="grey"><%= forecast.mean_all %></td>
+                <td class="grey"><%= forecast.tbar_all %></td>
+                <td class="grey"><%= forecast.ttbar_all %></td>
+                <td class="grey"><%= forecast.xxbar_ttbar_all %></td>
+                <td class="grey"><%= forecast.ttbar_sq_all %></td>
+                <td class="grey"><%= forecast.b1_all %></td>
+                <td class="grey"><%= forecast.b0_all %></td>
 
                 <!-- <td><%= link_to "Edit", edit_user_project_forecast_path(:user_id => @current_user.id, :project_id => forecast.project.id, :id => forecast.id), :class => "btn btn-success edit_forecast", :id => "editAction" , :remote => true %></td> -->
                 <% if @project.forecasts.size < 3 %>
-                <td><%= link_to "Delete", "#", :class => 'underDelete delete btn btn-danger btn-xs' %></td>
+                <td><%= link_to "x", "#", :class => 'underDelete delete btn btn-default btn-xs' %></td>
                 <%else%>
-                <td><%= link_to "Delete", forecast_path(:project_id => forecast.project.id, :id => forecast.id), method: :delete, data: { confirm: "Are you sure?" }, :class => "delete btn btn-danger btn-xs", :id => "delete", :remote => true %></td>
+                <td><%= link_to "x", forecast_path(:project_id => forecast.project.id, :id => forecast.id), method: :delete, data: { confirm: "Are you sure?" }, :class => "delete btn btn-default btn-xs", :id => "delete", :remote => true %></td>
                 <%end%>
               </tr>
             <% end %>
@@ -85,7 +85,7 @@
       <div id="crud">
         <%= render 'form' %>
       </div><!-- #crud -->   
-      <%= link_to "+", new_user_project_forecast_path(:user_id => @project.user.id, :project_id => @project.id), :class => "more-historical-data", :remote => true %>
+      <%= link_to "+", new_user_project_forecast_path(:user_id => @project.user.id, :project_id => @project.id), :class => "btn btn-default btn-xs more-historical-data", :remote => true %>
   <!-- **** Regression results ****-->  
   <!-- <div class="col-md-12 input-area">
     <h3>Regression Results</h3>
@@ -112,7 +112,7 @@
                 <td><%= best_in_place future, :future_year %></td>
                 <!-- <td><%= number_with_precision(future.forecasted, :precision => 2) %></td> -->
                 <!-- <td><%= link_to "Edit", edit_user_project_future_path(:user_id => @current_user.id, :project_id => future.project.id, :id => future.id), :class=>"btn btn-success", :remote => true, :id => "edit_future" %></td> -->
-                <td><%= link_to "Delete", future_path(:project_id => future.project.id, :id => future.id), method: :delete, data: { confirm: 'Are you sure?'}, :class=>"delete btn btn-danger btn-xs", :remote => true, :id => "delete_future" %></td>
+                <td><%= link_to "x", future_path(:project_id => future.project.id, :id => future.id), method: :delete, data: { confirm: 'Are you sure?'}, :class=>"delete btn btn-default btn-xs", :remote => true, :id => "delete_future" %></td>
               </tr>
               <%end%>
             </tbody>
@@ -121,14 +121,15 @@
           <div id="crud_forecasted">
             <%= render 'futures/form' %>
           </div><!-- #crud_forecasted -->
-          <%= link_to "+", new_user_project_future_path(:user_id => @project.user.id, :project_id => @project.id), :class => "more-future-data", :remote => true %>
+          <%= link_to "+", new_user_project_future_path(:user_id => @project.user.id, :project_id => @project.id), :class => "btn btn-default btn-xs more-future-data", :remote => true %>
           <!-- # <%= link_to "Add more to forecast", new_user_project_future_path(:user_id => @project.user.id, :project_id => @project.id), :class => "", :remote => true, :id => "new_future" %> -->
     </div> <!-- .forecasted_area --> 
-
-      <%= link_to "Show Results", "#", :id => "results", :class => "col-md-3 btn btn-info" %>
-
-      <%= link_to 'Delete this project', @project, method: :delete, data: { confirm: 'Are you sure you want to delete the whole project?'}, :class=>"btn btn-danger col-md-12"%>
-
+    <div class="col-md-12">
+      <%= link_to "Show Results", "#", :id => "results", :class => "show-results col-md-3 btn btn-default btn-lg" %><br><br><br><br>
+      </div>
+    <div class="col-md-12">
+      <%= link_to 'Delete this project', @project, method: :delete, data: { confirm: 'Are you sure you want to delete the whole project?'}, :class=>"delete-project btn btn-default btn-sm col-md-2"%>
+      </div>
   </div><!--  #inputBox -->
     <script>
       // show/hide the results box
@@ -150,6 +151,11 @@
         e.preventDefault();
         $('#resultsBox').fadeOut();
         $('#InputBox').fadeIn();
+      });
+
+      $('.more-future-data').on('click', function(e){
+        e.preventDefault();
+        $(this).hide(100);
       });
     </script>
    

@@ -132,7 +132,7 @@ a:focus {
 
     .top-nav-collapse {
         padding: 0;
-        background-color: #000;
+        background-color: #000 !important;
     }
 
     .navbar-custom.top-nav-collapse {
@@ -294,13 +294,19 @@ a:focus {
     }
 }
 
-.btn, .btn-nav {
+.btn, .btn-nav, .btn-project-list {
     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 400;
     -webkit-transition: all .3s ease-in-out;
     -moz-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
+}
+
+.btn-project-list {
+    border: none !important;
+    color: #ecf0f1;
+    background-color: transparent !important;
 }
 
 .btn-default, .btn-nav {
@@ -315,6 +321,14 @@ a:focus {
     outline: 0 !important;
     color: #000 !important;
     background-color: #219ab3 !important;
+}
+
+.btn-project-list:hover,
+.btn-project-list:focus {
+    border: none !important;
+    outline: 0 !important;
+    color: #000 !important;
+    background-color: #ecf0f1 !important;
 }
 
 ul.banner-social-buttons {

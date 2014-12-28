@@ -8,20 +8,20 @@
 			</tbody>
 				<% @projects.each do |project| %>
 				  <tr>
-				  	<td><%= link_to project.name, user_project_forecasts_path(project.user.id, project), :class => "btn btn-default btn-sm" %></td>	
+				  	<td><%= link_to project.name, user_project_forecasts_path(project.user.id, project), :class => "btn-project-list btn-sm" %></td>	
 				  </tr>
 				<%end%>	
 			</tbody>
 	    </table>
 	</div><!-- .main-table -->
-	<%= link_to "Create new custom project", new_user_project_path(:user_id => @user.id), :class => "btn btn-default btn-lg" %>
+	<%= link_to "Create new custom project", new_user_project_path(:user_id => @user.id), :class => "btn btn-default btn-lg" %><br><br><br>
     <p>You have <%= pluralize(@project_apis.size, 'World Bank API project') %></p>
 	<div class="main-table">
-		<table class="projects-table table table-hover">
+		<table class="projects-table table">
 			</tbody>
 				<% @project_apis.each do |project| %>
 				  <tr>
-				  	<td><%= link_to project.project_api_name, user_project_api_forecast_apis_path(project.user.id, project), :class => "btn btn-default btn-sm" %></td>	
+				  	<td><%= link_to project.project_api_name, user_project_api_forecast_apis_path(project.user.id, project), :class => "btn-project-list btn-sm" %></td>	
 				  </tr>
 				<%end%>	
 			</tbody>
