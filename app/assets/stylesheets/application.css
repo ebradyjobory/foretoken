@@ -15,12 +15,42 @@
 *= require_self
 */
 
-body { padding-top: 70px; }
+.beta {
+	font-size: 0.2em;
+	color: #219ab3;
+	padding-top: 17px;
+	position: absolute;
+}
+
+.beta-logo {
+	font-size: 0.6em;
+	color: #219ab3;
+	margin-top: -2px;
+	position: absolute;
+}
 
 .cus-form {
 	width: 190px;
 	text-align: center;
-	margin: 80px auto;
+	margin: 175px auto;
+}
+
+label, p {
+  color: #ecf0f1;
+  font-weight: lighter;
+}
+.input {
+	color: #ecf0f1 !important;
+  background-color: #000 !important; 
+}
+
+.login-page {
+	background: url(https://s3.amazonaws.com/foretoken/intro-bg.jpg) no-repeat bottom center scroll;
+  background-color: #000;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
 }
 
 .main-menu{
@@ -34,9 +64,8 @@ body { padding-top: 70px; }
 	width: 100%;
 }
 
-
-.login_btn {
-	margin-bottom: 5px;
+.login-or {
+	margin-bottom: 2px;
 }
 
 .cus-link, .cus-link input {

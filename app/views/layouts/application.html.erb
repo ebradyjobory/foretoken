@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Foretoken<%= " | #{@page_title}" if @page_title %></title>
+    <title>Foretoken&mdash;A Free Data Forecasting Application<%= " | #{@page_title}" if @page_title %></title>
     <%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css", media: 'all', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' %>
@@ -22,7 +22,7 @@
                     <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand page-scroll" href="/">
-                    <i class="fa fa-play-circle"></i><span class="light">Fore</span>&middot;token
+                    <i class="fa fa-play-circle"></i><span class="light">Fore</span>&middot;token<small class="beta-logo">Beta</small>
                 </a>
             </div>
 
@@ -30,10 +30,12 @@
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                 <ul class="nav navbar-nav">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                    <li><%= link_to "Login", access_login_path unless !session[:user_id].blank? %></li>
+                    <% if session[:user_id].blank? %>
+                      <li><%= link_to "Login", access_login_path, :class=>'btn-nav'%></li>
+                    <%end%>
                     <% if session[:user_id] %>
-                      <li><%= link_to "Projects", access_index_path(:user_id => session[:user_id], :class=>'page-scroll') %></li>
-                      <li><%= link_to "Logout", access_logout_path, :class=>'page-scroll' %></li>
+                      <li><%= link_to "Projects", access_index_path(:user_id => session[:user_id], :class=>'btn-nav page-scroll') %></li>
+                      <li><%= link_to "Logout", access_logout_path, :class=>'btn-nav page-scroll' %></li>
                     <%end%>
                     <li class="hidden">
                         <a href="#page-top"></a>
@@ -42,7 +44,7 @@
                         <a class="page-scroll" href="#about">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#download">Download</a>
+                        <a class="page-scroll" href="#how-it-works">How It Works</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
@@ -81,7 +83,7 @@
         </div><!--/.container-fluid -->
       </div>
   <!-- Main Body -->
-  <div class="container">
+
       <div id="flash"></div>
       <% if flash[:error] %>
         <div class="alert alert-danger"><%= flash[:error] %></div>
@@ -91,8 +93,6 @@
       <%end%>
       
         <%= yield %>
-  </div> <!-- .container -->
- 
 
   </body>
 </html>

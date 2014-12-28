@@ -16,11 +16,11 @@
       </div>
       <% if session[:user_id] && !@users.blank? %>
         <div>
-          <%= f.submit "Save", :class => "btn btn-success cus-btn" %>
+          <%= f.submit "Save", :class => "btn btn-default btn-lg" %>
         </div>
       <%else%>
         <div>
-          <%= f.submit "Sign Up", :class => "btn btn-success cus-btn" %>
+          <%= f.submit "Sign Up", :class => "btn btn-default btn-lg" %>
         </div>
       <%end%>
   <%end%>

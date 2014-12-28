@@ -8,7 +8,7 @@ body {
     width: 100%;
     height: 100%;
     font-family: Lora,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    color: #fff;
+/*    color: #ecf0f1;*/
     background-color: #000;
 }
 
@@ -28,6 +28,7 @@ h6 {
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
     letter-spacing: 1px;
+    color: #ecf0f1;
 }
 
 p {
@@ -61,6 +62,14 @@ a:focus {
     font-weight: lighter !important;
 }
 
+.navbar {
+    padding: 20px 0px;
+    border-bottom: 0px none;
+    letter-spacing: 1px;
+    background: none repeat scroll 0px 0px transparent !important;
+    transition: #6363CE 0.5s ease-in-out 0s, padding 0.5s ease-in-out 0s;
+}
+
 .navbar-custom {
     margin-bottom: 0;
     border-bottom: 1px solid rgba(255,255,255,.3);
@@ -80,7 +89,7 @@ a:focus {
 .navbar-custom .navbar-brand .navbar-toggle {
     padding: 4px 6px;
     font-size: 16px;
-    color: #fff;
+    color: #ecf0f1;
 }
 
 .navbar-custom .navbar-brand .navbar-toggle:focus,
@@ -89,7 +98,7 @@ a:focus {
 }
 
 .navbar-custom a {
-    color: #fff;
+    color: #ecf0f1;
 }
 
 .navbar-custom .nav li.active {
@@ -115,7 +124,7 @@ a:focus {
         padding: 20px 0;
         border-bottom: 0;
         letter-spacing: 1px;
-        background: 0 0;
+        background: 0 0 !important;
         -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
         -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
         transition: background .5s ease-in-out,padding .5s ease-in-out;
@@ -137,8 +146,8 @@ a:focus {
     height: auto;
     padding: 100px 0;
     text-align: center;
-    color: #fff;
-    background: url(../img/intro-bg.jpg) no-repeat bottom center scroll;
+    color: #ecf0f1;
+    background: url(https://s3.amazonaws.com/foretoken/intro-bg.jpg) no-repeat bottom center scroll;
     background-color: #000;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -179,10 +188,10 @@ a:focus {
     height: 70px;
     margin-top: 15px;
     padding: 7px 16px;
-    border: 2px solid #fff;
+    border: 2px solid #ecf0f1;
     border-radius: 35px;
     font-size: 40px;
-    color: #fff;
+    color: #ecf0f1;
     background: 0 0;
     -webkit-transition: background .3s ease-in-out;
     -moz-transition: background .3s ease-in-out;
@@ -192,7 +201,7 @@ a:focus {
 .btn-circle:hover,
 .btn-circle:focus {
     outline: 0;
-    color: #fff;
+    color: #ecf0f1;
     background: rgba(255,255,255,.1);
 }
 
@@ -255,7 +264,7 @@ a:focus {
 .download-section {
     width: 100%;
     padding: 50px 0;
-    color: #fff;
+    color: #ecf0f1;
     background: url(../img/downloads-bg.jpg) no-repeat center center scroll;
     background-color: #000;
     -webkit-background-size: cover;
@@ -285,7 +294,7 @@ a:focus {
     }
 }
 
-.btn {
+.btn, .btn-nav {
     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 400;
@@ -294,18 +303,18 @@ a:focus {
     transition: all .3s ease-in-out;
 }
 
-.btn-default {
-    border: 1px solid #219ab3;
+.btn-default, .btn-nav {
+    border: 1px solid #219ab3 !important;
     color: #219ab3;
-    background-color: transparent;
+    background-color: transparent !important;
 }
 
-.btn-default:hover,
-.btn-default:focus {
-    border: 1px solid #219ab3;
-    outline: 0;
-    color: #000;
-    background-color: #219ab3;
+.btn-default:hover, .btn-nav:hover,
+.btn-default:focus, .btn-nav:focus {
+    border: 1px solid #219ab3 !important;
+    outline: 0 !important;
+    color: #000 !important;
+    background-color: #219ab3 !important;
 }
 
 ul.banner-social-buttons {
