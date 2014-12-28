@@ -4,7 +4,7 @@
 	<h3>Welcome <span><%= @user.email %></span></h3>
 	<p>You have <%= pluralize(@projects.size, 'custom project') %></p>
 	<div class="main-table">
-		<table class="projects-table table table-hover">
+		<table class="projects-table table">
 			</tbody>
 				<% @projects.each do |project| %>
 				  <tr>
@@ -14,8 +14,8 @@
 			</tbody>
 	    </table>
 	</div><!-- .main-table -->
-	<%= link_to "Create new project", new_user_project_path(:user_id => @user.id), :class => "btn btn-success new_project" %>
-    <p>You have <%= pluralize(@project_apis.size, 'API project') %></p>
+	<%= link_to "Create new custom project", new_user_project_path(:user_id => @user.id), :class => "btn btn-default btn-lg" %>
+    <p>You have <%= pluralize(@project_apis.size, 'World Bank API project') %></p>
 	<div class="main-table">
 		<table class="projects-table table table-hover">
 			</tbody>
@@ -27,7 +27,7 @@
 			</tbody>
 	    </table>
 	</div><!-- .main-table -->
-	<%= link_to "Create new Api", new_user_project_api_path(:user_id => @user.id), :class => "btn btn-success new_project" %>
+	<%= link_to "Create new World Bank API project", new_user_project_api_path(:user_id => @user.id), :class => "btn btn-default btn-lg" %>
 
 </div><!-- .main-menu -->
 
