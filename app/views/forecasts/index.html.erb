@@ -9,7 +9,7 @@
     </canvas>
   </div><!-- #chart-input -->
   <div class="main-table">
-    <table class="table table-hover">
+    <table class="forecast-table table results">
           <thead>
            <tr>
             <th>Future Time</th>
@@ -27,7 +27,7 @@
           </tbody>
     </table>
   </div><!-- .main-table -->
-      <%= link_to "Hide Results", "#", :id => "hideResults", :class=>"btn btn-primary" %>
+      <%= link_to "Hide Results", "#", :id => "hideResults", :class=>"btn btn-default btn-lg" %>
 </div> <!-- #resultsBox -->
 <br>
 <br>
@@ -139,8 +139,9 @@
         var forecastSize = ('<%= @project.forecasts.size %>');
         var futureSize = ('<%= @project.futures.size %>');
         if (forecastSize < 2 || futureSize < 1 ){
-          $('#flash').html('<p>Oops! Forecasting requires at least two historical data points and one future data point.</p>');
-          $('#flash').addClass('error').fadeIn();
+          //$('#flash').html('<p>Oops! Forecasting requires at least two historical data points and one future data point.</p>');
+          //$('#flash').addClass('error').fadeIn();
+          sweetAlert({   title: "Alert!",   text: "Oops! Forecasting requires at least two historical data points and one future data point.",   timer: 2000 });
         } else {
         $('#InputBox').fadeOut();
         $('#resultsBox').fadeIn();
@@ -167,7 +168,7 @@
               {
                   label: "Regression",
                   fillColor: "rgba(220,220,220,0)",
-                  strokeColor: "#2c3e50", //change line color
+                  strokeColor: "#219ab3", //change line color
                   pointColor: "#7f8c8d",
                   pointStrokeColor: "#fff",
                   pointHighlightFill: "#fff",
@@ -177,7 +178,7 @@
               {
                   label: "Data",
                   fillColor: "rgba(151,187,205,0.2)",
-                  strokeColor: "rgba(151,187,205,1)",
+                  strokeColor: "#ecf0f1",
                   pointColor: "rgba(151,187,205,1)",
                   pointStrokeColor: "#fff",
                   pointHighlightFill: "#fff",
@@ -204,8 +205,7 @@
     <script>
       $('.underDelete').on('click', function(e){
         e.preventDefault();
-        $('#flash').html('<p>At least two historical data points are needed.</p>');
-        $('#flash').addClass('error').fadeIn();
+        sweetAlert({   title: "Alert!",   text: "At least two historical data points are needed.",   timer: 2000 });
       });
     </script>
 
