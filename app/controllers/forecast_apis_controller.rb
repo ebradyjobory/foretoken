@@ -19,7 +19,7 @@ class ForecastApisController < ApplicationController
   # end
 
   def index 
-   # @forecast_url = "http://api.worldbank.org/countries/usa/indicators/SP.POP.TOTL?date=1990:2013&?per_page=20000&format=json"
+    @forecast_url = HTTParty.get("http://api.worldbank.org/countries/usa/indicators/SP.POP.TOTL?date=1990:2013&?per_page=20000&format=json")
     @forecast_apis = @project_api.forecast_apis
     @future_apis = @project_api.future_apis
     @current_user = @project_api.user

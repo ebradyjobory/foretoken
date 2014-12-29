@@ -15,10 +15,27 @@
 *= require_self
 */
 
+.alert {
+  margin-top: 100px;
+}
+
 .project-list {
   margin-left: 90px;
   margin-top: 150px;
   font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.download-section {
+  margin-top: -150px;
+}
+
+.content-section {
+  margin-top: -140px;
+  margin-bottom: 70px;
+}
+
+.formula img:nth-child(6){
+  margin-left: -90px;
 }
 
 .more-historical-data, .more-future-data {
@@ -97,6 +114,11 @@ label, p {
 
 .login-or {
 	margin-bottom: 2px;
+}
+
+#filterForm {
+  margin-top: 100px;
+  margin-left: 100px;
 }
 
 .cus-link, .cus-link input {

@@ -2,16 +2,16 @@
 <div id='filterForm'>
 	<%= form_for [@project_api, @forecast_api] do |f| %>
 		<div id="country">
-			<p>Choose a country<%= f.select(:country, @countries) %></p>
+			<p>Country <%= f.select(:country, ['United States']) %></p>
 		</div>
 		<div id="indicator">
-			<p>Choose an indicator<%= f.select(:indicator, @indicators) %></p>
+			<p>Indicator <%= f.select(:indicator, ['Total final energy consumption (TFEC)']) %></p>
 		</div>
 		<div id="startDate">
-			<p>Choose Start date<%= f.select(:start_date, (1960..2015)) %></p>
+			<p>Start date <%= f.select(:start_date, (1990..2012)) %></p>
 		</div>
 		<div id="endDate">
-			<p>Choose End date<%= f.select(:end_date, (1960..2015)) %></p>
+			<p>End date <%= f.select(:end_date, (1990..2012)) %></p>
 		</div>
 		<div id="submit">
 			<%= f.submit %>

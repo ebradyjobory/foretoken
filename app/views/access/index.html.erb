@@ -1,7 +1,7 @@
 <% @page_title = "Main Menu" %>
 
 <div class="main-menu">
-	<h3>Welcome <span><%= @user.email %></span></h3>
+	<h3>Welcome <span><%= link_to @user.email, edit_user_path(:id=> @user.id) %></span></h3>
 	<p>You have <%= pluralize(@projects.size, 'custom project') %></p>
 	<div class="main-table">
 		<table class="projects-table table">
@@ -15,7 +15,9 @@
 	    </table>
 	</div><!-- .main-table -->
 	<%= link_to "Create new custom project", new_user_project_path(:user_id => @user.id), :class => "btn btn-default btn-lg" %><br><br><br>
-    <p>You have <%= pluralize(@project_apis.size, 'World Bank API project') %></p>
+
+
+  <!--<p>You have <%= pluralize(@project_apis.size, 'World Bank API project') %></p>
 	<div class="main-table">
 		<table class="projects-table table">
 			</tbody>
@@ -27,7 +29,7 @@
 			</tbody>
 	    </table>
 	</div><!-- .main-table -->
-	<%= link_to "Create new World Bank API project", new_user_project_api_path(:user_id => @user.id), :class => "btn btn-default btn-lg" %>
+	<!--<%= link_to "Create new World Bank API project", new_user_project_api_path(:user_id => @user.id), :class => "btn btn-default btn-lg" %>-->
 
 </div><!-- .main-menu -->
 

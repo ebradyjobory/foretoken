@@ -14,7 +14,7 @@
         <%= f.label :password_confirmation %><br>
         <%= f.password_field :password_confirmation %>
       </div>
-      <% if session[:user_id] && !@users.blank? %>
+      <% if session[:user_id] %>
         <div>
           <%= f.submit "Save", :class => "btn btn-default btn-lg" %>
         </div>

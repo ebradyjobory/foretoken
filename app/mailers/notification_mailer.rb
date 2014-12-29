@@ -6,9 +6,9 @@ class NotificationMailer < MassMandrill::MandrillMailer
     address << user.email
 
     mail(   :to => address,
-            :from => 'essam.joubori@gmail.com',
+            :from => 'foretoken@cuneiform.io',
             template: 'welcome_email',
-            :subject => "Welcome to Datacast!"   
+            :subject => "Welcome to Foretoken beta!"   
         )         
   end  
 
@@ -17,7 +17,7 @@ class NotificationMailer < MassMandrill::MandrillMailer
     address << user.email
 
     mail(   :to => address,
-            :from => 'essam.joubori@gmail.com',
+            :from => 'foretoken@cuneiform.io',
             template: 'terminate_email',
             :subject => "Farewell"   
         )   
