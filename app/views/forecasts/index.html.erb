@@ -7,12 +7,18 @@
     <canvas id="myChart">
        <!-- Chart will be shown here.. -->
     </canvas>
+    <div>
+      <ul class="legend">
+        <li id="regLine"></li> Trend Line
+        <li id="dataLine"></li> Historical + Projected Data
+      <ul>
+    </div>
   </div><!-- #chart-input -->
   <div class="main-table">
     <table class="forecast-table table results">
           <thead>
            <tr>
-            <th>Future Time</th>
+            <th>Forecasted Period</th>
             <th>Forecasted Data</th>
            </tr>
           </thead>
@@ -103,7 +109,7 @@
           <table class="future-table table table-hover">
             <thead>
              <tr>
-              <th>Forecasted Time</th>
+              <th>Period to Forecast</th>
              </tr>
             </thead>
             </tbody>
@@ -185,7 +191,7 @@
                   pointHighlightStroke: "rgba(151,187,205,1)",
                   data: <%= @total_values.each { |i| i.inspect} %>
               },
-              ]
+              ],
             };
 
         var myLineChart = new Chart(ctx).Line(data, {

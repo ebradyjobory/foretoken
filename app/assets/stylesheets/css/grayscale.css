@@ -193,7 +193,7 @@ a:focus {
     border-radius: 35px;
     font-size: 40px;
     color: #ecf0f1;
-    background: 0 0;
+    background: url('https://s3.amazonaws.com/foretoken/arrow.png') no-repeat 4.5px;
     -webkit-transition: background .3s ease-in-out;
     -moz-transition: background .3s ease-in-out;
     transition: background .3s ease-in-out;
@@ -203,7 +203,7 @@ a:focus {
 .btn-circle:focus {
     outline: 0;
     color: #ecf0f1;
-    background: rgba(255,255,255,.1);
+    /*background: rgba(255,255,255,.1);*/
 }
 
 .btn-circle i.animated {

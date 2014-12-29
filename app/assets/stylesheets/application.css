@@ -19,6 +19,29 @@
   margin-top: 100px;
 }
 
+#regLine {
+  background-color: #219ab3;
+  width: 50px;
+  height: 3px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  list-style: none;
+}
+
+#dataLine {
+  background-color: #ecf0f1;
+  width: 50px;
+  height: 3px;
+  margin-top: 20px; 
+  margin-bottom: 5px;
+  list-style: none;
+}
+
+.legend {
+  color: #ecf0f1;
+  float: center;
+}
+
 .project-list {
   margin-left: 90px;
   margin-top: 150px;
