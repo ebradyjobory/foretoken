@@ -1,7 +1,12 @@
 Rails.application.configure do
 
   NEWRELIC_AGENT_ENABLED=true
-  
+
+  KEEN_PROJECT_ID=aaaaaaaaaaaaaaa
+  KEEN_MASTER_KEY=xxxxxxxxxxxxxxx
+  KEEN_WRITE_KEY=yyyyyyyyyyyyyyy
+  KEEN_READ_KEY=zzzzzzzzzzzzzzz
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
