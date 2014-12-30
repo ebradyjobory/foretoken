@@ -40,7 +40,7 @@ test:
 # On Heroku and other platform providers, you may have a full connection URL
 # available as an environment variable. For example:
 #
-  DATABASE_URL: "mysql2://essamjoubori:root@localhost/foretoken_development"
+#  DATABASE_URL: "mysql2://essamjoubori:root@localhost/foretoken_development"
 #
 # You can use this database configuration with:
 #
