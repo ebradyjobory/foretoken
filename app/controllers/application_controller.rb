@@ -26,9 +26,5 @@ class ApplicationController < ActionController::Base
   def add_user_email
     @user = User.find(session[:user_id])
   end
-
-  
-
-
   
 end

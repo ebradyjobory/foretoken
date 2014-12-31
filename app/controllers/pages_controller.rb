@@ -11,7 +11,6 @@ class PagesController < ApplicationController
 
   private
 
-
   # def user_id
   # 	if session[:user_id]
   # 		@user = User.find(session[:user_id]) 
