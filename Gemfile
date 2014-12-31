@@ -3,6 +3,7 @@ ruby '2.1.2'
 
 gem 'rails', '4.1.5'
 gem 'unicorn'
+gem 'mysql2'
 
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
@@ -34,7 +35,7 @@ gem 'spring',        group: :development
 gem 'bcrypt', '~> 3.1.7'
 
 group :production do
-  gem 'mysql2'
+  gem 'pg'
   gem 'rails_12factor', '0.0.2'
 end
 
