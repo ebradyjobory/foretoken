@@ -41,7 +41,7 @@
 <br>
 
  <!-- End of Results Area -->
-
+ <%= @allforecast %>
 <div id="InputBox">
    <!-- data input -->
   <div id="forecasts" class="hide">
@@ -128,7 +128,6 @@
             <%= render 'futures/form' %>
           </div><!-- #crud_forecasted -->
           <%= link_to "+", new_user_project_future_path(:user_id => @project.user.id, :project_id => @project.id), :class => "btn btn-default btn-xs more-future-data", :remote => true %>
-          <!-- # <%= link_to "Add more to forecast", new_user_project_future_path(:user_id => @project.user.id, :project_id => @project.id), :class => "", :remote => true, :id => "new_future" %> -->
     </div> <!-- .forecasted_area --> 
     <div class="col-md-12">
       <%= link_to "Show Results", "#", :id => "results", :class => "show-results col-md-3 btn btn-default btn-lg" %><br><br><br><br>
@@ -160,10 +159,10 @@
         $('#InputBox').fadeIn();
       });
 
-      $('.more-future-data').on('click', function(e){
-        e.preventDefault();
-        $(this).hide(100);
-      });
+      // $('.more-future-data').on('click', function(e){
+      //   e.preventDefault();
+      //   $(this).hide(100);
+      // });
     </script>
    
     <script>
@@ -179,7 +178,7 @@
                   pointStrokeColor: "#fff",
                   pointHighlightFill: "#fff",
                   pointHighlightStroke: "rgba(220,220,220,1)",
-                  data: <%= @regression.each { |i| i.inspect} %>
+                  data: <%= @regression.each {|i| i.inspect} %>
               },
               {
                   label: "Data",
@@ -189,7 +188,7 @@
                   pointStrokeColor: "#fff",
                   pointHighlightFill: "#fff",
                   pointHighlightStroke: "rgba(151,187,205,1)",
-                  data: <%= @total_values.each { |i| i.inspect} %>
+                  data: <%= @total_values.each {|i| i.inspect} %>
               },
               ],
             };

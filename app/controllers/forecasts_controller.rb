@@ -3,7 +3,7 @@ class ForecastsController < ApplicationController
   respond_to :html, :json
 
   before_action :confirm_logged_in
-	before_action :set_project
+  before_action :set_project
   before_action :add_user_email
 
 
@@ -37,16 +37,16 @@ class ForecastsController < ApplicationController
      total_future_values = []
      values = []
      times = []
-    @forecasts.each do |i|
-      total_fcast_years << i.year
-      total_fcast_values << i.value
-      @values = values << i.value
-    end
+     @forecasts.each do |i|
+        total_fcast_years << i.year
+        total_fcast_values << i.value
+        @values = values << i.value
+     end
     @futures.each do |i|
       total_future_years << i.future_year
       total_future_values << i.forecasted
     end
-    @total_years = total_fcast_years + total_future_years.sort
+    @total_years = total_fcast_years + total_future_years
     @total_values = total_fcast_values + total_future_values
     @forecasted = total_future_values
     @future_years = total_future_years
@@ -54,7 +54,7 @@ class ForecastsController < ApplicationController
     # Calculating regression line to be presented on chart
     @regression = []
     @forecasts.each do |forecast|
-      @regression << (forecast.b0_all + (forecast.b1_all * forecast.time))
+      @regression <<  (forecast.b0_all + (forecast.b1_all * (@forecasts.index(forecast) + 1)))
     end
   end
 
@@ -66,15 +66,16 @@ class ForecastsController < ApplicationController
   def create
     @project = Project.find(params[:project_id])
     @forecast = @project.forecasts.new(params_forecast)
+    @forecast.time = @project.forecasts.index(@forecast) + 1
     if @forecast.save
-      flash[:notice] = "Data was created successfully"
+      #flash[:notice] = "Data was created successfully"
     else
-       flash[:error] = "Opps. Something's wrong!"
+       #flash[:error] = "Opps. Something's wrong!"
     end
   end
 
   def edit
-  	@forecast = Forecast.find(params[:id])
+    @forecast = Forecast.find(params[:id])
     @forecasts = @project.forecasts
     @current_user = @project.user
   end
@@ -82,7 +83,7 @@ class ForecastsController < ApplicationController
   def update
     @forecast = Forecast.find(params[:id])
     if @forecast.update_attributes(params_forecast)
-      flash[:notice] = "Data was updated successfully."
+      # flash[:notice] = "Data was updated successfully."
       # @forecasts = @project.forecasts
       # @current_user = @project.user
 
@@ -101,7 +102,7 @@ class ForecastsController < ApplicationController
     @forecast = Forecast.find(params[:id])
     # respond_to do |format|
     @forecast.destroy
-    flash[:notice] = "Data deleted successfully."
+    # flash[:notice] = "Data deleted successfully."
     #     format.html { redirect_to user_project_forecasts_path(:user_id => session[:user_id],  
     #                                           :project_id => @project.id)}
     #     format.json { head :no_content }
@@ -115,13 +116,15 @@ class ForecastsController < ApplicationController
   private
 
   def set_project
-  	if params[:project_id]
-  		@project = Project.find(params[:project_id])
-  	end	
+    if params[:project_id]
+      @project = Project.find(params[:project_id])
+    end 
   end
 
   def params_forecast
-  	params.require(:forecast).permit(:year, :value)	
+    params.require(:forecast).permit(:year, :value) 
   end
+
+
 
 end

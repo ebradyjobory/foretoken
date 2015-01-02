@@ -16,14 +16,6 @@ class Forecast < ActiveRecord::Base
 		mean = sum.to_f / values.length
 	end
 
-	def timer(i)
-		project.forecasts.index(i) + 1
-	end
-
-	def time
-		timer(project.forecasts.find(id))
-	end
-
 	def tbar_all
 		sum = 0
 		times = []
