@@ -48,6 +48,20 @@
   font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
+.current-project {
+  color: #ecf0f1;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  margin-top: 90px;
+  margin-bottom: -80px;
+  margin-left: 95px;
+  font-size: 1.5em;
+}
+
+.current-project:hover {
+  cursor: context-menu;
+  color: #219AB3;
+}
+
 .download-section {
   margin-top: -150px;
 }
@@ -61,6 +75,11 @@
   margin-left: -90px;
 }
 
+.best_in_place input {
+  color: #2c3e50;
+}
+
+
 .more-historical-data, .more-future-data {
   margin-left: 90px;
   margin-bottom: 15px;
@@ -70,12 +89,13 @@
 .show-results, .delete-project {
   margin-left: 90px;
   margin-top: 10px;
+  margin-bottom: 30px;
 }
 
 #resultsBox {
   margin-top: 90px;
-  margin-left: 90px;
-  margin-right: 90px;
+  margin-left: 115px;
+  margin-right: 115px;
 }
 
 .beta {
@@ -218,6 +238,7 @@ td {
 
 .pointer {
 	cursor: context-menu; /*Add something to show editing*/
+  color: #219AB3;
 }
 
 

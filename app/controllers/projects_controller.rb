@@ -1,7 +1,10 @@
 class ProjectsController < ApplicationController
   
+  respond_to :html, :json
+  
 	before_action :confirm_logged_in
   before_action :set_user
+
   # before_action :add_user_email
 
   def index
@@ -34,9 +37,11 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     if @project.update_attributes(project_params)
       #flash[:notice] = "Project updated successfully."
-      redirect_to(:controller => 'access', :action => 'index', :user_id => session[:user_id])
+      #redirect_to(:controller => 'access', :action => 'index', :user_id => session[:user_id])
+      respond_with @project
     else
-      render('edit')
+      #flash[:notice] = "Not successful."
+      #render('edit')
     end
   end
 
