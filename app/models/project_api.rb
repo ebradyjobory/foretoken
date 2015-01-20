@@ -6,4 +6,5 @@ class ProjectApi < ActiveRecord::Base
 	has_many :future_apis
 
 	validates :project_api_name, :presence => true
+  
 end

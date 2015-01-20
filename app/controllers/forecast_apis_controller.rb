@@ -1,22 +1,10 @@
 class ForecastApisController < ApplicationController
-	
-  # respond_to :html, :json
-    
-  #skip_before_action :verify_authenticity_token
-
+	    
   before_action :confirm_logged_in
   before_action :set_project
   before_action :add_user_email
   before_action :check_value, :only => [:index]
   before_action :input
-
-  # def show
-  #   @country = params[:country]
-  #   @indicator = params[:indicator]
-  #   respond_to do |format|
-  #     format.js { render 'variables' } 
-  #  end
-  # end
 
   def index 
     @forecast_url = HTTParty.get("http://api.worldbank.org/countries/usa/indicators/SP.POP.TOTL?date=1990:2013&?per_page=20000&format=json")
@@ -84,46 +72,41 @@ class ForecastApisController < ApplicationController
     if @inputs.start_date.nil? || @inputs.end_date.nil?
       !@input.save #don't save the object
     else
-      # @inputs.save
-         @country = @inputs.country 
-         @indicator = @inputs.indicator
-         @start = @inputs.start_date
-         @end = @inputs.end_date
+       @country = @inputs.country 
+       @indicator = @inputs.indicator
+       @start = @inputs.start_date
+       @end = @inputs.end_date
 
-         # 1-convert the country to its IsoCode
-         @country_iso_hash.each do |country, code|
-            if country == @country
-              @iso_code = @country_iso_hash[country]
-            end
-         end
-         # 2-convert the indicator to its id
-          @indicator_code =""
-          @indicator_id_hash.each do |indicator, id|
-            if indicator == @indicator 
-              @indicator_code << @indicator_id_hash[indicator]
-            end
+       # 1-convert the country to its IsoCode
+       @country_iso_hash.each do |country, code|
+          if country == @country
+            @iso_code = @country_iso_hash[country]
           end
+       end
+       # 2-convert the indicator to its id
+        @indicator_code =""
+        @indicator_id_hash.each do |indicator, id|
+          if indicator == @indicator 
+            @indicator_code << @indicator_id_hash[indicator]
+          end
+        end
 
-           # 3-insert the given parameters into the url
-           # @forecast_url = HTTParty.get("http://api.worldbank.org/countries/usa/indicators/SP.POP.TOTL?date=1990:2013&?per_page=20000&format=json")
-           @forecast_url = HTTParty.get("http://api.worldbank.org/countries/#{@iso_code}/indicators/#{@indicator_code}?date=#{@start}:#{@end}&?per_page=200&format=json")
-           # 4-return data (time and value) from the url
-            if @forecast_url[0]["total"] == 0
-              flash[:error] = "Not enough data available. Please change your searching criteria."
-              render('new')
-              # redirect_to user_project_api_forecast_apis_path(:user_id => session[:user_id], :project_api_id => @project_api.id)
-            else
-              # @forecast_url_reverse =  Hash[@forecast_url[1].to_a.map {|x| x = x.reverse}]
-
-            i = 0 
-            while i < @forecast_url[1].size
-                @forecast_api = @project_api.forecast_apis.new(:forecast_api_year => @forecast_url[1][i]["date"], 
-                                                               :forecast_api_value => @forecast_url[1][i]["value"] )
-                @forecast_api.save
-                i += 1
-            end
-         redirect_to user_project_api_forecast_apis_path(:user_id => session[:user_id], :project_api_id => @project_api.id)
-    	 end
+         # 3-insert the given parameters into the url
+         @forecast_url = HTTParty.get("http://api.worldbank.org/countries/#{@iso_code}/indicators/#{@indicator_code}?date=#{@start}:#{@end}&?per_page=200&format=json")
+         # 4-return data (time and value) from the url
+          if @forecast_url[0]["total"] == 0
+            flash[:error] = "Not enough data available. Please change your searching criteria."
+            render('new')
+          else
+          i = 0 
+          while i < @forecast_url[1].size
+              @forecast_api = @project_api.forecast_apis.new(:forecast_api_year => @forecast_url[1][i]["date"], 
+                                                             :forecast_api_value => @forecast_url[1][i]["value"] )
+              @forecast_api.save
+              i += 1
+          end
+       redirect_to user_project_api_forecast_apis_path(:user_id => session[:user_id], :project_api_id => @project_api.id)
+  	 end
     end
   end
 
@@ -137,32 +120,16 @@ class ForecastApisController < ApplicationController
     @forecast_api = ForecastApi.find(params[:id])
     if @forecast_api.update_attributes(params_forecast)
       flash[:notice] = "Data was updated successfully."
-      # @forecasts = @project.forecasts
-      # @current_user = @project.user
-
       respond_with @forecast_api
-      # redirect_to user_project_forecasts_path(@forecast.project.user.id, @forecast.project.id)
     else
-      # render('edit')
     end
   end
-
-  # def delete
-  #   @forecast = Forecast.find(params[:id])
-  # end
 
   def destroy
     @forecast_api = ForecastApi.find(params[:id])
     # respond_to do |format|
     @forecast_api.destroy
     flash[:notice] = "Data deleted successfully."
-    #     format.html { redirect_to user_project_forecasts_path(:user_id => session[:user_id],  
-    #                                           :project_id => @project.id)}
-    #     format.json { head :no_content }
-    #     format.js   { render :layout => false }
-    #   else
-    # # redirect_to(:action => 'index', :project_id => @project.id)
-    #   end
     end
 
   private
@@ -178,12 +145,10 @@ class ForecastApisController < ApplicationController
       @times = [1, 1]
       @b1 = 1
       @b0 = 1
-      # redirect_to(:action => 'new', :project_id => @project.id)
     end
   end
 
   def input
-
     # Api all Countries
     @countries_hash = HTTParty.get("http://api.worldbank.org/country?per_page=500&format=json")
     # Api all indicators
@@ -216,12 +181,7 @@ class ForecastApisController < ApplicationController
       @indicator_id << @indicators_hash[1][i]["id"]
       i+= 1
     end
-    @indicator_id_hash = Hash[*@indicator_id]
-    # i = 0
-    # while i < @indicators_hash[1].size
-    #   @indicators << @indicators_hash[1][i]["name"]
-    #   i+= 1
-    # end   
+    @indicator_id_hash = Hash[*@indicator_id] 
   end
 
   def params_forecast_api
@@ -231,4 +191,3 @@ class ForecastApisController < ApplicationController
 
 
 end
-

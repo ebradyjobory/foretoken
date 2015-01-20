@@ -1,9 +1,6 @@
 class ForecastApi < ActiveRecord::Base
 	belongs_to :project_api
 
-	# validates :forecast_api_year, :presence => true, :numericality => { only_integer: true }
-	# validates :forecast_api_value, :presence => true, :numericality => { only_integer: true }
-	
 	def project_forecast
 	    project_api.forecast_apis	
 	end
@@ -71,50 +68,4 @@ class ForecastApi < ActiveRecord::Base
 		b0 = mean - (b1*tbar)
 	end
 
-	# def xhat
-	#     b0 + (b1 * time)
-	# end
-
-	# def x_xhatsq
-	# 	(value - xhat)**2
-	# end
-
-	# def xhat_xbarsq
-	# 	(xhat - mean)**2	
-	# end
-
-	# def x_xbarsq
-	# 	(value - mean)**2	
-	# end
-
-
-	#calculating R^2
-	# def sse
-	#  sum_sse = 0
- #     project_forecast.each do |i|
- #     sum_sse += i.x_xhatsq
- #     end
- #     @sse = sum_sse # SSE	
-	# end
-	
-	# def ssr
-	#  sum_ssr = 0
- #     project_forecast.each do |i|
- #     sum_ssr += i.xhat_xbarsq
- #     end
- #     @ssr = sum_ssr # SSR
-	# end
-
-	# def sst
-	#  sum_sst = 0
- #     project_forecast.each do |i|
- #     sum_sst += i.x_xbarsq
- #     end
- #     @sst = sum_sst # SST 	
-	# end 
-     
-    # def r2
-    #   # Calculating R^2 ( R^2 = 1 - (SSE / SST))
-    #   1 - (sse / sst)	
-    # end 
 end

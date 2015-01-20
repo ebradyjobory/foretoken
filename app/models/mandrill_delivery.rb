@@ -10,7 +10,7 @@ class MandrillDelivery
     send_mandrill(mail)
   end
 
-#Message stuff
+  #Message stuff
 
   def build_meta_mandrill(mail)
 

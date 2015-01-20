@@ -1,7 +1,7 @@
 class FutureApi < ActiveRecord::Base
 
 	belongs_to :project_api
-    validates :future_api_year, :presence => true, 
+  validates :future_api_year, :presence => true, 
 								numericality: { only_integer: true }
 
 	def to_be_forcasted
@@ -56,11 +56,6 @@ class FutureApi < ActiveRecord::Base
 
 	def first_future_year
 		to_be_forcasted[0]
-		# future_years = []
-		# to_be_forcasted.each do |i|
-			# future_years << i.future_year
-		# end
-		# future_years[0]
 	end
 
 	def last_entry_year_id
@@ -68,7 +63,7 @@ class FutureApi < ActiveRecord::Base
 		last_entry_year_id = last_entry.id	
 	end
 
-	def timer(i) # i = ex. 1877
+	def timer(i)
 		years_diff = i - project_forecast.last.forecast_api_year 
 		timer = last_entry_year_time + years_diff
 	end
@@ -82,5 +77,4 @@ class FutureApi < ActiveRecord::Base
 		b0 + (b1 * time)
 	end
 
-	
 end

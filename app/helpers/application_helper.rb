@@ -5,5 +5,4 @@ module ApplicationHelper
 			   :locals => {:object => object})
 	end
 
-
 end

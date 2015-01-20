@@ -1,48 +1,37 @@
 // in case of error, stop any posting and show error msg
 
-  <% if @future_api.errors.any? -%>
-    $('#flash').fadeOut().removeClass('success');
-    $('#flash').html("<%= escape_javascript(error_messages_for(@future_api)) %>");
-    $('#flash').fadeIn();
-  <% else -%>
-    // remove the partial form
-    $('#crud_forecasted').fadeOut();
-    // clear the form 
-    $(":input:not(input[type=submit])").val("");
-    // insert the new data line at the bottom of the list
-    // create new line
-    // update the new line with the new data
-    // attach the new line to the table
+<% if @future_api.errors.any? -%>
+  $('#flash').fadeOut().removeClass('success');
+  $('#flash').html("<%= escape_javascript(error_messages_for(@future_api)) %>");
+  $('#flash').fadeIn();
+<% else -%>
+  // remove the partial form
+  $('#crud_forecasted').fadeOut();
+  // clear the form 
+  $(":input:not(input[type=submit])").val("");
+  // insert the new data line at the bottom of the list
+  // create new line
+  // update the new line with the new data
+  // attach the new line to the table
 
+  $('.future-table').find('tbody')
+   .append($('<tr>')
+    .append($('<td><%= @future_api.future_api_year %></td>'))
+        .append($('<td>').append($('#delete_future')))       
+  );
 
-    $('.future-table').find('tbody')
-     .append($('<tr>')
-      .append($('<td><%= @future_api.future_api_year %></td>'))
-          .append($('<td>').append($('#delete_future')))       
-    );
+  // show flash msg of success
+  $('#flash').removeClass('error');
+  $('#flash').fadeOut(); // if any previous flash is present
+  // attach the new flash content 
+  $('#flash').html("<%= escape_javascript(flash[:notice]) %>").addClass('success');
+  $('#flash').fadeIn();
+  $(function() {
+      setTimeout(function(){
+          $('#flash').fadeOut();
+        }, 3000);
+  });
 
-    // show flash msg of success
-    $('#flash').removeClass('error');
-    $('#flash').fadeOut(); // if any previous flash is present
-    // attach the new flash content 
-    $('#flash').html("<%= escape_javascript(flash[:notice]) %>").addClass('success');
-    $('#flash').fadeIn();
-    $(function() {
-        setTimeout(function(){
-            $('#flash').fadeOut();
-          }, 3000);
-    });
-
-    location.reload();
-    
-  <% end -%>
-
- 
-
+  location.reload();
   
-
-
-
-
-       
-
+<% end -%>

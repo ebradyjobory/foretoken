@@ -1,4 +1,3 @@
-
 <div id='filterForm'>
 	<%= form_for [@project_api, @forecast_api] do |f| %>
 		<div id="country">
@@ -18,23 +17,3 @@
 		</div>
 	<%end%>
 </div>
-
-<script>
-
-	// $("#startDate, #endDate, #submit").hide();
-
-	// $('#filterForm').change(function(){
-	// 	var value = $(this).val();
-	// 	$.ajax({
-	// 		// url: '<%= forecast_apis_path(:html) %>',
-	// 		type: 'GET',
-	// 		data: value,
-	// 		success: function(data){
-	// 			$('#flash').show();
-	// 		}
-	// 	});
-	// });
-	
-  
-</script>
-

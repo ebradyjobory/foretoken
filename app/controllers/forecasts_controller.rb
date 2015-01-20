@@ -6,7 +6,6 @@ class ForecastsController < ApplicationController
   before_action :set_project
   before_action :add_user_email
 
-
   def index
 
     @forecasts = @project.forecasts
@@ -14,22 +13,6 @@ class ForecastsController < ApplicationController
     @current_user = @project.user
     @forecast = Forecast.new
     @future = Future.new
-
-    # total_fcast_years = []
-    # total_future_years = []
-    # total_fcast_values = []
-    # total_future_values = []
-    # @values = []
-    # @times = []
-    # @forecasts.each do |forecast|
-    #   total_fcast_years << forecast.year
-    #   total_fcast_values << forecast.value
-    #   @values << forecast.value
-    #   @times  << forecast.time
-    #   @b1      = forecast.b1
-    #   @tbar    = forecast.tbar
-    #   @b0      = forecast.b0
-    # end
     # Calculating total years and values for current project
      total_fcast_years = []
      total_future_years = []
@@ -68,9 +51,7 @@ class ForecastsController < ApplicationController
     @forecast = @project.forecasts.new(params_forecast)
     @forecast.time = @project.forecasts.index(@forecast) + 1
     if @forecast.save
-      #flash[:notice] = "Data was created successfully"
     else
-       #flash[:error] = "Opps. Something's wrong!"
     end
   end
 
@@ -83,34 +64,15 @@ class ForecastsController < ApplicationController
   def update
     @forecast = Forecast.find(params[:id])
     if @forecast.update_attributes(params_forecast)
-      # flash[:notice] = "Data was updated successfully."
-      # @forecasts = @project.forecasts
-      # @current_user = @project.user
-
       respond_with @forecast
-      # redirect_to user_project_forecasts_path(@forecast.project.user.id, @forecast.project.id)
     else
-      # render('edit')
     end
   end
 
-  # def delete
-  #   @forecast = Forecast.find(params[:id])
-  # end
-
   def destroy
     @forecast = Forecast.find(params[:id])
-    # respond_to do |format|
     @forecast.destroy
-    # flash[:notice] = "Data deleted successfully."
-    #     format.html { redirect_to user_project_forecasts_path(:user_id => session[:user_id],  
-    #                                           :project_id => @project.id)}
-    #     format.json { head :no_content }
-    #     format.js   { render :layout => false }
-    #   else
-    # # redirect_to(:action => 'index', :project_id => @project.id)
-    #   end
-    end
+  end
 
 
   private
@@ -124,7 +86,6 @@ class ForecastsController < ApplicationController
   def params_forecast
     params.require(:forecast).permit(:year, :value) 
   end
-
-
+  
 
 end

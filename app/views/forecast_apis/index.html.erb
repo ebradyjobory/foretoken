@@ -1,28 +1,6 @@
 <% @page_title = "Forecasting Page" %>
 
 <%= render 'forecast_apis/filter' %>
-<%=@total_values%>
-<script>
-
-  // function run() {
-  //  var country = document.getElementById("countries").value;
-  //  console.log(country);
-  //  var indicator = document.getElementById("indicators").value;
-  //  console.log(indicator);
-  //  // var url = "http://api.worldbank.org/countries/"+ country + "/indicators/SP.POP.TOTL?format=json"
-  //  // console.log(url);
-  // $.ajax({
-  //  url: "forecast_apis/show", 
-  //  data:(
-  //    'country=' + $('#countries').val() + '&' +
-  //    'indicator=' + $('#indicators').val()
-  //  )
-  //  });
-  //  };
-
- </script>
-
-
 
 <!-- Results Area -->
 
@@ -53,11 +31,7 @@
   </div><!-- .main-table -->
       <%= link_to "Hide Results", "#", :id => "hideResults", :class=>"btn btn-primary" %>
 </div> <!-- #resultsBox -->
-<br>
-<br>
-<br>
-<br>
-
+<br><br><br><br>
  <!-- End of Results Area -->
 
 <div id="InputBox">
@@ -86,14 +60,6 @@
       <div id="crud">
         <%= render 'form' %>
       </div><!-- #crud -->   
-  <!-- **** Regression results ****-->  
-  <!-- <div class="col-md-12 input-area">
-    <h3>Regression Results</h3>
-    <p>Your Simple Linear Regression equation: <strong>  m = <%= number_with_precision(@b0, :precision => 2) %> + ( <%= @b1 %> ) t</strong></p>
-  </div>
-   <div class="col-md-12 input-area">
-      <p>The regression of this data <i>R Squared</i>:  <strong><%= number_with_precision(@r2, :precision => 2) %>%</strong> of total variation explained by regression (higher R Squared = better fit) </p>
-   </div> -->
     <!-- Forecasted data input  -->  
     <div id="futures" class="hide">
       <%= render 'future_apis/future_api' %>
@@ -110,9 +76,6 @@
              <tr>
               <% @project_api.future_apis.each do |future| %>
                 <td><%= best_in_place future, :future_api_year %></td>
-                <!-- <td><%= future.time %></td> -->
-                <!-- <td><%= number_with_precision(future.forecasted, :precision => 2) %></td>  -->
-                <!-- <td><%= link_to "Edit", edit_user_project_api_future_api_path(:user_id => @current_user.id, :project_api_id => future.project_api.id, :id => future.id), :class=>"btn btn-success", :remote => true, :id => "edit_future" %></td> -->
                 <td><%= link_to "Delete", future_api_path(:project_api_id => future.project_api.id, :id => future.id), method: :delete, data: { confirm: 'Are you sure?'}, :class=>"delete btn btn-danger btn-xs", :remote => true, :id => "delete_future" %></td> 
               </tr>
               <%end%>
@@ -129,80 +92,75 @@
       <%= link_to 'Delete this project', @project_api, method: :delete, data: { confirm: 'Are you sure you want to delete the whole project?'}, :class=>"btn btn-danger col-md-12"%>
 
   </div><!--  #inputBox -->
-    <script>
-      // show/hide the results box
-      $('#resultsBox').fadeOut(50);
-      $('#results').on('click', function(e){
-        e.preventDefault();
-        var forecastSize = ('<%= @project_api.forecast_apis.size %>');
-        var futureSize = ('<%= @project_api.future_apis.size %>');
-        if (forecastSize < 2 || futureSize < 1 ){
-          $('#flash').html('<p>Oops! Forecasting requires at least two historical data points and one future data point.</p>');
-          $('#flash').addClass('error').fadeIn();
-        } else {
-        $('#InputBox').fadeOut();
-        $('#resultsBox').fadeIn();
-        } 
-      });
+<script>
+  // show/hide the results box
+  $('#resultsBox').fadeOut(50);
+  $('#results').on('click', function(e){
+    e.preventDefault();
+    var forecastSize = ('<%= @project_api.forecast_apis.size %>');
+    var futureSize = ('<%= @project_api.future_apis.size %>');
+    if (forecastSize < 2 || futureSize < 1 ){
+      $('#flash').html('<p>Oops! Forecasting requires at least two historical data points and one future data point.</p>');
+      $('#flash').addClass('error').fadeIn();
+    } else {
+    $('#InputBox').fadeOut();
+    $('#resultsBox').fadeIn();
+    } 
+  });
 
-      $('#hideResults').on('click', function(e){
-        e.preventDefault();
-        $('#resultsBox').fadeOut();
-        $('#InputBox').fadeIn();
-      });
-    </script>
-   
-    <script>
-        var ctx = document.getElementById("myChart").getContext("2d");
-        var data = {
-              labels:  <%= @total_years.each {|i| i.inspect}  %>,
-              datasets: [
-              {
-                  label: "Regression",
-                  fillColor: "rgba(220,220,220,0)",
-                  strokeColor: "#2c3e50", //change line color
-                  pointColor: "#7f8c8d",
-                  pointStrokeColor: "#fff",
-                  pointHighlightFill: "#fff",
-                  pointHighlightStroke: "rgba(220,220,220,1)",
-                  data: <%= @regression.each { |i| i.inspect} %>
-              },
-              {
-                  label: "Data",
-                  fillColor: "rgba(151,187,205,0.2)",
-                  strokeColor: "rgba(151,187,205,1)",
-                  pointColor: "rgba(151,187,205,1)",
-                  pointStrokeColor: "#fff",
-                  pointHighlightFill: "#fff",
-                  pointHighlightStroke: "rgba(151,187,205,1)",
-                  data: <%= @total_values.each { |i| i.inspect} %>
-              },
-              ]
-            };
+  $('#hideResults').on('click', function(e){
+    e.preventDefault();
+    $('#resultsBox').fadeOut();
+    $('#InputBox').fadeIn();
+  });
+</script>
 
-        var myLineChart = new Chart(ctx).Line(data, {
-            responsive: true,
-            maintainAspectRatio: true
-        });
+<script>
+    var ctx = document.getElementById("myChart").getContext("2d");
+    var data = {
+          labels:  <%= @total_years.each {|i| i.inspect}  %>,
+          datasets: [
+          {
+              label: "Regression",
+              fillColor: "rgba(220,220,220,0)",
+              strokeColor: "#2c3e50", //change line color
+              pointColor: "#7f8c8d",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(220,220,220,1)",
+              data: <%= @regression.each { |i| i.inspect} %>
+          },
+          {
+              label: "Data",
+              fillColor: "rgba(151,187,205,0.2)",
+              strokeColor: "rgba(151,187,205,1)",
+              pointColor: "rgba(151,187,205,1)",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(151,187,205,1)",
+              data: <%= @total_values.each { |i| i.inspect} %>
+          },
+          ]
+        };
 
-    </script>
-    <script>
-    // reflect changes after updating data with best_in_place
-    $('.best_in_place')
-    .best_in_place()
-    .bind('ajax:success', function(e) {
-        location.reload();
+    var myLineChart = new Chart(ctx).Line(data, {
+        responsive: true,
+        maintainAspectRatio: true
     });
-    </script>
-    <script>
-      $('.underDelete').on('click', function(e){
-        e.preventDefault();
-        $('#flash').html('<p>At least two historical data points are needed.</p>');
-        $('#flash').addClass('error').fadeIn();
-      });
-    </script>
 
-
-
-
-
+</script>
+<script>
+  // reflect changes after updating data with best_in_place
+  $('.best_in_place')
+  .best_in_place()
+  .bind('ajax:success', function(e) {
+      location.reload();
+  });
+  </script>
+  <script>
+    $('.underDelete').on('click', function(e){
+      e.preventDefault();
+      $('#flash').html('<p>At least two historical data points are needed.</p>');
+      $('#flash').addClass('error').fadeIn();
+    });
+</script>

@@ -38,11 +38,7 @@
   </div><!-- .main-table -->
       <%= link_to "Hide Results", "#", :id => "hideResults", :class=>"btn btn-default btn-lg" %>
 </div> <!-- #resultsBox -->
-<br>
-<br>
-<br>
-<br>
-
+<br><br><br><br>
  <!-- End of Results Area -->
  <%= @allforecast %>
 <div id="InputBox">
@@ -79,8 +75,6 @@
                 <td class="grey"><%= forecast.ttbar_sq_all %></td>
                 <td class="grey"><%= forecast.b1_all %></td>
                 <td class="grey"><%= forecast.b0_all %></td>
-
-                <!-- <td><%= link_to "Edit", edit_user_project_forecast_path(:user_id => @current_user.id, :project_id => forecast.project.id, :id => forecast.id), :class => "btn btn-success edit_forecast", :id => "editAction" , :remote => true %></td> -->
                 <% if @project.forecasts.size < 3 %>
                 <td><%= link_to "x", "#", :class => 'underDelete delete btn btn-default btn-xs' %></td>
                 <%else%>
@@ -95,14 +89,6 @@
         <%= render 'form' %>
       </div><!-- #crud -->   
       <%= link_to "+", new_user_project_forecast_path(:user_id => @project.user.id, :project_id => @project.id), :class => "btn btn-default btn-xs more-historical-data", :remote => true %>
-  <!-- **** Regression results ****-->  
-  <!-- <div class="col-md-12 input-area">
-    <h3>Regression Results</h3>
-    <p>Your Simple Linear Regression equation: <strong>  m = <%= number_with_precision(@b0, :precision => 2) %> + ( <%= @b1 %> ) t</strong></p>
-  </div>
-   <div class="col-md-12 input-area">
-      <p>The regression of this data <i>R Squared</i>:  <strong><%= number_with_precision(@r2, :precision => 2) %>%</strong> of total variation explained by regression (higher R Squared = better fit) </p>
-   </div> -->
     <!-- Forecasted data input  -->  
     <div id="futures" class="hide">
       <%= render 'futures/future' %>
@@ -119,8 +105,6 @@
              <tr>
               <% @project.futures.each do |future| %>
                 <td><%= best_in_place future, :future_year %></td>
-                <!-- <td><%= number_with_precision(future.forecasted, :precision => 2) %></td> -->
-                <!-- <td><%= link_to "Edit", edit_user_project_future_path(:user_id => @current_user.id, :project_id => future.project.id, :id => future.id), :class=>"btn btn-success", :remote => true, :id => "edit_future" %></td> -->
                 <td><%= link_to "x", future_path(:project_id => future.project.id, :id => future.id), method: :delete, data: { confirm: 'Are you sure?'}, :class=>"delete btn btn-default btn-xs", :remote => true, :id => "delete_future" %></td>
               </tr>
               <%end%>
@@ -139,94 +123,73 @@
       <%= link_to 'Delete this project', @project, method: :delete, data: { confirm: 'Are you sure you want to delete the whole project?'}, :class=>"delete-project btn btn-default btn-sm col-md-2"%>
       </div>
   </div><!--  #inputBox -->
-    <script>
-      // show/hide the results box
-      $('#resultsBox').fadeOut(50);
-      $('#results').on('click', function(e){
-        e.preventDefault();
-        var forecastSize = ('<%= @project.forecasts.size %>');
-        var futureSize = ('<%= @project.futures.size %>');
-        if (forecastSize < 2 || futureSize < 1 ){
-          //$('#flash').html('<p>Oops! Forecasting requires at least two historical data points and one future data point.</p>');
-          //$('#flash').addClass('error').fadeIn();
-          sweetAlert({   title: "Alert!",   text: "Oops! Forecasting requires at least two historical data points and one future data point.",   timer: 2000 });
-        } else {
-        $('#InputBox').fadeOut();
-        $('#resultsBox').fadeIn();
-        } 
-      });
+<script>
+  // show/hide the results box
+  $('#resultsBox').fadeOut(50);
+  $('#results').on('click', function(e){
+    e.preventDefault();
+    var forecastSize = ('<%= @project.forecasts.size %>');
+    var futureSize = ('<%= @project.futures.size %>');
+    if (forecastSize < 2 || futureSize < 1 ){
+      sweetAlert({   title: "Alert!",   text: "Oops! Forecasting requires at least two historical data points and one future data point.",   timer: 2000 });
+    } else {
+    $('#InputBox').fadeOut();
+    $('#resultsBox').fadeIn();
+    } 
+  });
 
-      $('#hideResults').on('click', function(e){
-        e.preventDefault();
-        $('#resultsBox').fadeOut();
-        $('#InputBox').fadeIn();
-      });
+  $('#hideResults').on('click', function(e){
+    e.preventDefault();
+    $('#resultsBox').fadeOut();
+    $('#InputBox').fadeIn();
+  });
+</script>
 
-      // $('.more-future-data').on('click', function(e){
-      //   e.preventDefault();
-      //   $(this).hide(100);
-      // });
-    </script>
-   
-    <script>
-        var ctx = document.getElementById("myChart").getContext("2d");
-        var data = {
-              labels:  <%= @total_years.each {|i| i.inspect}  %>,
-              datasets: [
-              {
-                  label: "Regression",
-                  fillColor: "rgba(220,220,220,0)",
-                  strokeColor: "#219ab3", //change line color
-                  pointColor: "#7f8c8d",
-                  pointStrokeColor: "#fff",
-                  pointHighlightFill: "#fff",
-                  pointHighlightStroke: "rgba(220,220,220,1)",
-                  data: <%= @regression.each {|i| i.inspect} %>
-              },
-              {
-                  label: "Data",
-                  fillColor: "rgba(151,187,205,0.2)",
-                  strokeColor: "#ecf0f1",
-                  pointColor: "rgba(151,187,205,1)",
-                  pointStrokeColor: "#fff",
-                  pointHighlightFill: "#fff",
-                  pointHighlightStroke: "rgba(151,187,205,1)",
-                  data: <%= @total_values.each {|i| i.inspect} %>
-              },
-              ],
-            };
+<script>
+    var ctx = document.getElementById("myChart").getContext("2d");
+    var data = {
+          labels:  <%= @total_years.each {|i| i.inspect}  %>,
+          datasets: [
+          {
+              label: "Regression",
+              fillColor: "rgba(220,220,220,0)",
+              strokeColor: "#219ab3", //change line color
+              pointColor: "#7f8c8d",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(220,220,220,1)",
+              data: <%= @regression.each {|i| i.inspect} %>
+          },
+          {
+              label: "Data",
+              fillColor: "rgba(151,187,205,0.2)",
+              strokeColor: "#ecf0f1",
+              pointColor: "rgba(151,187,205,1)",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(151,187,205,1)",
+              data: <%= @total_values.each {|i| i.inspect} %>
+          },
+          ],
+        };
 
-        var myLineChart = new Chart(ctx).Line(data, {
-            responsive: true,
-            maintainAspectRatio: true
-        });
-
-    </script>
-    <script>
-    // reflect changes after updating data with best_in_place
-    $('.best_in_place')
-    .best_in_place()
-    .bind('ajax:success', function(e) {
-        location.reload();
+    var myLineChart = new Chart(ctx).Line(data, {
+        responsive: true,
+        maintainAspectRatio: true
     });
-    </script>
-    <script>
-      $('.underDelete').on('click', function(e){
-        e.preventDefault();
-        sweetAlert({   title: "Alert!",   text: "At least two historical data points are needed.",   timer: 2000 });
-      });
-    </script>
 
-    <script>
-
-      // $('body').on('click', function(){
-      //   $('#crud').fadeOut(100);
-      //   $(".more-historical-data").show();
-      // });
-
-
-    </script>
-
-
-
-
+</script>
+<script>
+  // reflect changes after updating data with best_in_place
+  $('.best_in_place')
+  .best_in_place()
+  .bind('ajax:success', function(e) {
+      location.reload();
+  });
+</script>
+<script>
+  $('.underDelete').on('click', function(e){
+    e.preventDefault();
+    sweetAlert({   title: "Alert!",   text: "At least two historical data points are needed.",   timer: 2000 });
+  });
+</script>

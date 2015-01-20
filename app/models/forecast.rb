@@ -6,7 +6,7 @@ class Forecast < ActiveRecord::Base
 	validates :value, :presence => true, :numericality => { only_integer: true }
 
 	def mean_all
-		# Mean of values in forecasts table]
+		# Mean of values in forecasts table
 		values = []
 		project.forecasts.each do |i|
 			values << i.value

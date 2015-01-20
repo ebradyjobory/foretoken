@@ -2,7 +2,6 @@ class ProjectApisController < ApplicationController
   
   before_action :confirm_logged_in
   before_action :set_user
-  # before_action :add_user_email
 
   def index
   	@project_apis = ProjectApi.all(:user_id => session[:user_id]).includes(:user)
@@ -18,7 +17,6 @@ class ProjectApisController < ApplicationController
     @project_api = @user.project_apis.new(project_params)
   	if @project_api.save
   		flash[:notice] = "Project was created successfully."
-      # redirect_to shared_index_path(:user_id => session[:user_id], :project_id => @project.id)
   	  redirect_to(:controller => 'forecast_apis', :action => 'index', 
                    :user_id => session[:user_id], :project_api_id => @project_api.id)
   	else
@@ -61,8 +59,6 @@ class ProjectApisController < ApplicationController
   def project_params
   	params.require(:project_api).permit(:project_api_name)	
   end
-
-
-
+  
 end
 

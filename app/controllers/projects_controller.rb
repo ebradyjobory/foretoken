@@ -5,8 +5,6 @@ class ProjectsController < ApplicationController
 	before_action :confirm_logged_in
   before_action :set_user
 
-  # before_action :add_user_email
-
   def index
   	@projects = Project.all(:user_id => session[:user_id]).includes(:user)
   end
@@ -20,11 +18,9 @@ class ProjectsController < ApplicationController
     @user = User.find(session[:user_id])
     @project = @user.projects.new(project_params)
   	if @project.save
-  		#flash[:notice] = "Project was created successfully."
   	  redirect_to(:controller => 'forecasts', :action => 'index', 
                   :user_id => session[:user_id], :project_id => @project.id)
   	else
-      #flash[:notice] = "Something's wrong!"
   		render('new')
   	end
   end
@@ -36,12 +32,8 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
     if @project.update_attributes(project_params)
-      #flash[:notice] = "Project updated successfully."
-      #redirect_to(:controller => 'access', :action => 'index', :user_id => session[:user_id])
       respond_with @project
     else
-      #flash[:notice] = "Not successful."
-      #render('edit')
     end
   end
 
@@ -51,7 +43,6 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project = Project.find(params[:id]).destroy
-    #flash[:notice] = "Project deleted successfully."
     redirect_to(:controller => 'access', :action => 'index', :user_id => session[:user_id])
   end
 
@@ -66,7 +57,5 @@ class ProjectsController < ApplicationController
   def project_params
   	params.require(:project).permit(:name)	
   end
-
-
 
 end

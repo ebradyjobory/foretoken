@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
 
   before_action :confirm_logged_in, :except => [:new, :create]
-  # before_action :add_user_email, :only => [:index, :edit, :update]
 
   def index
     @users = User.all.includes(:projects)
@@ -29,7 +28,6 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(params_user)
-      # flash[:notice] = "User information was updated successfully"
       redirect_to(:controller => 'access', :action => 'index')
     else
       render('edit')
@@ -38,7 +36,6 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    # respond_to do |format|
     @user.destroy
     NotificationMailer.terminate_notification(@user).deliver
     session[:user_id] = nil
@@ -51,9 +48,6 @@ class UsersController < ApplicationController
   def params_user
     params.require(:user).permit(:first_name, :last_name, :profile_name,
                                  :email, :password, :password_confirmation)
-    
   end
-
-
 
 end

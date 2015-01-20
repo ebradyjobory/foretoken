@@ -7,12 +7,6 @@
       </thead>
       <tbody>
         <% @forecasts.each do |forecast| %>
-         <!--  <tr>
-            <td><%= forecast.year %></td>
-            <td><%= forecast.value %></td>
-            <td><%= link_to "Edit", edit_user_project_forecast_path(:user_id => @current_user.id, :project_id => forecast.project.id, :id => forecast.id), :class => "btn btn-success", :id => "editAction" , :remote => true %></td>
-            <td><%= link_to "Delete", forecast_path(:project_id => forecast.project.id, :id => forecast.id), method: :delete, data: { confirm: 'Are you sure?'}, :class=>"btn btn-danger delete", :id => "delete", :remote => true %></td>
-          </tr> -->
         <% end %>
       </tbody>
 </table>

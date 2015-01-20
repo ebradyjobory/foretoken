@@ -7,9 +7,7 @@ class Project < ActiveRecord::Base
 	validates :name, :presence => true
 
 	def current_project
-		current_project = Project.where(:id => :project_id)
-		
+		current_project = Project.where(:id => :project_id)	
 	end
-
 
 end

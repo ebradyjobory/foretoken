@@ -1,14 +1,13 @@
 $('.delete').bind('ajax:success', function() {  
-        $(this).closest('tr').fadeOut();
-        $("#flash").removeClass('error');
-        //sweetAlert("Success", "Data deleted", "success")
-		$("#flash").html("<%= escape_javascript(flash[:notice])%>").addClass('success');
-		$("#flash").fadeIn();
-		$(function(){
-			setTimeout(function(){
-				$('#flash').fadeOut();
-			}, 3000);
-		});
-		location.reload();
+  $(this).closest('tr').fadeOut();
+  $("#flash").removeClass('error');
+	$("#flash").html("<%= escape_javascript(flash[:notice])%>").addClass('success');
+	$("#flash").fadeIn();
+	$(function(){
+		setTimeout(function(){
+			$('#flash').fadeOut();
+		}, 3000);
+	});
+	location.reload();
 });  
 

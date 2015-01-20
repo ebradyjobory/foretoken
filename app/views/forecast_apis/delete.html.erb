@@ -1,7 +1,5 @@
-
 <div>
   <h2>Delete Page</h2>
-
   <%= form_for(:forecast, :url => {:action => 'destroy', :id => @forecast.id, :project_id => @project.id }) do |f| %>
 
     <p>Are you sure you want to permanently delete this page?</p>
